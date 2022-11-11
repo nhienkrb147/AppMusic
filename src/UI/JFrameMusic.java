@@ -20,9 +20,14 @@ public class JFrameMusic extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 50, 50));
-
+        init();
     }
-
+    void init(){
+           playing.setVisible(false);
+        playing.setEnabled(false);
+        play.setVisible(true);
+        play.setEnabled(true);
+    }
     void showPanel(JPanel panel) {
         chiPanel = panel;
         pnMain.removeAll();
@@ -40,11 +45,18 @@ public class JFrameMusic extends javax.swing.JFrame {
         rSButtonHover5 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover6 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover7 = new rojeru_san.complementos.RSButtonHover();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         rSButtonHover8 = new rojeru_san.complementos.RSButtonHover();
         jLabel3 = new javax.swing.JLabel();
+        imageAvatar1 = new Utils_Pro.ImageAvatar();
         jPanel3 = new javax.swing.JPanel();
+        imageAvatar2 = new Utils_Pro.ImageAvatar();
+        jLabel4 = new javax.swing.JLabel();
+        thanhNhac = new Utils_Pro.ThanhNhac();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        playing = new javax.swing.JLabel();
+        play = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         rSButtonHover3 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover1 = new rojeru_san.complementos.RSButtonHover();
@@ -91,17 +103,13 @@ public class JFrameMusic extends javax.swing.JFrame {
         rSButtonHover7.setBackground(new java.awt.Color(38, 45, 71));
         rSButtonHover7.setForeground(new java.awt.Color(204, 204, 204));
         rSButtonHover7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/tym.png"))); // NOI18N
-        rSButtonHover7.setText("    Artist");
+        rSButtonHover7.setText("Playlist");
         rSButtonHover7.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         rSButtonHover7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonHover7ActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("PlayList");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
@@ -110,7 +118,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         rSButtonHover8.setBackground(new java.awt.Color(38, 45, 71));
         rSButtonHover8.setForeground(new java.awt.Color(204, 204, 204));
         rSButtonHover8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/user.png"))); // NOI18N
-        rSButtonHover8.setText("    Artist");
+        rSButtonHover8.setText("Biography");
         rSButtonHover8.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         rSButtonHover8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +130,10 @@ public class JFrameMusic extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("My Music");
 
+        imageAvatar1.setBorderSize(3);
+        imageAvatar1.setBorderSpace(3);
+        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,23 +142,26 @@ public class JFrameMusic extends javax.swing.JFrame {
             .addComponent(rSButtonHover4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(rSButtonHover6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(rSButtonHover7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(rSButtonHover8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(56, 56, 56)
+                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addComponent(rSButtonHover8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(19, 19, 19)
+                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonHover5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,27 +171,53 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addComponent(rSButtonHover6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(rSButtonHover8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(rSButtonHover7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(37, 44, 70));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 58, Short.MAX_VALUE)
-        );
+        imageAvatar2.setBorderSize(0);
+        imageAvatar2.setBorderSpace(0);
+        imageAvatar2.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
+        jPanel3.add(imageAvatar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 4, 34, 30));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Ten bai nhac");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 114, 20));
+        jPanel3.add(thanhNhac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 430, -1));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/back.png"))); // NOI18N
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 28, 28));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/next.png"))); // NOI18N
+        jButton3.setContentAreaFilled(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 28, 28));
+
+        playing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
+        playing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        playing.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                playingMouseClicked(evt);
+            }
+        });
+        jPanel3.add(playing, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
+        play.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        play.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                playMouseClicked(evt);
+            }
+        });
+        jPanel3.add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(29, 34, 56));
 
@@ -240,8 +281,8 @@ public class JFrameMusic extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
         );
 
         pack();
@@ -274,6 +315,20 @@ public class JFrameMusic extends javax.swing.JFrame {
     private void rSButtonHover8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rSButtonHover8ActionPerformed
+
+    private void playingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playingMouseClicked
+        playing.setVisible(false);
+        playing.setEnabled(false);
+        play.setVisible(true);
+        play.setEnabled(true);
+    }//GEN-LAST:event_playingMouseClicked
+
+    private void playMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseClicked
+        playing.setVisible(true);
+        playing.setEnabled(true);
+        play.setVisible(false);
+        play.setEnabled(false);
+    }//GEN-LAST:event_playMouseClicked
 
     /**
      * @param args the command line arguments
@@ -318,12 +373,18 @@ public class JFrameMusic extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private Utils_Pro.ImageAvatar imageAvatar1;
+    private Utils_Pro.ImageAvatar imageAvatar2;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel play;
+    private javax.swing.JLabel playing;
     private javax.swing.JPanel pnMain;
     private rojeru_san.complementos.RSButtonHover rSButtonHover1;
     private rojeru_san.complementos.RSButtonHover rSButtonHover3;
@@ -332,6 +393,7 @@ public class JFrameMusic extends javax.swing.JFrame {
     private rojeru_san.complementos.RSButtonHover rSButtonHover6;
     private rojeru_san.complementos.RSButtonHover rSButtonHover7;
     private rojeru_san.complementos.RSButtonHover rSButtonHover8;
+    private Utils_Pro.ThanhNhac thanhNhac;
     // End of variables declaration//GEN-END:variables
 
 }
