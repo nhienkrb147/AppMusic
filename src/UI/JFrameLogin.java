@@ -5,7 +5,10 @@
 package UI;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.font.TextAttribute;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Map;
 
 /**
  *
@@ -20,6 +23,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         initComponents();
          setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
+        gachChanText();
     }
 
     /**
@@ -369,4 +373,17 @@ public class JFrameLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void gachChanText() {
+        Font font = lblQuenPass.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblQuenPass.setFont(font.deriveFont(attributes));
+        
+        Font font2 = lblTaoAcc.getFont();
+        Map attributes2 = font2.getAttributes();
+        attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblTaoAcc.setFont(font.deriveFont(attributes));
+    }
+
 }
