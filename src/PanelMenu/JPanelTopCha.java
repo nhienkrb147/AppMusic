@@ -28,6 +28,7 @@ public class JPanelTopCha extends javax.swing.JPanel {
         initComponents();
         search();
         Test();
+        
     }
        public void Test() {
         tbl.fixTable(jScrollPane1);

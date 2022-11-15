@@ -101,7 +101,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbl);
 
-        lblBack.setIcon(new javax.swing.ImageIcon("F:\\AppMusic\\src\\Icon\\back.png")); // NOI18N
+        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/back.png"))); // NOI18N
         lblBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,7 +109,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             }
         });
 
-        lblNext.setIcon(new javax.swing.ImageIcon("F:\\AppMusic\\src\\Icon\\next.png")); // NOI18N
+        lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/next.png"))); // NOI18N
         lblNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
