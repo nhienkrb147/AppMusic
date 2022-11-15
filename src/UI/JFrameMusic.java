@@ -5,6 +5,7 @@
 package UI;
 
 import PanelMenu.JPanelExplor;
+import PanelMenu.JPanelPlayList;
 import PanelMenu.JPanelQLNhac;
 import PanelMenu.JPanelTopChart;
 import PanelMenu.JPanelQlyAccount;
@@ -328,7 +329,7 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTopActionPerformed
 
     private void btnPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistActionPerformed
-        // TODO add your handling code here:
+         showPanel(new JPanelPlayList());
     }//GEN-LAST:event_btnPlaylistActionPerformed
 
     private void playingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playingMouseClicked
