@@ -304,7 +304,7 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonHover3ActionPerformed
 
     private void btnDiscoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscoverActionPerformed
-        
+
     }//GEN-LAST:event_btnDiscoverActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
@@ -312,7 +312,7 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopActionPerformed
-      showPanel(new JPanelTopCha());
+        showPanel(new JPanelTopCha());
     }//GEN-LAST:event_btnTopActionPerformed
 
     private void btnPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistActionPerformed
@@ -375,6 +375,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrameMusic().setVisible(true);
+
             }
         });
     }
