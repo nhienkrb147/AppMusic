@@ -5,6 +5,8 @@
 package PanelMenu;
 
 import javax.swing.JLabel;
+import swing.EventCallBack;
+import swing.EventTextField;
 
 /**
  *
@@ -18,6 +20,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
     public JPanelQlyAccount() {
         initComponents();
         Test();
+        search();
     }
 
     public void Test() {
@@ -32,7 +35,28 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         tbl.setColumnWidth(2, 100);
 
     }
+     void search(){
+             txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 50; i++) {   
+                  
+                        Thread.sleep(10);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
 
+            @Override
+            public void onCancel() {
+
+            }
+        });
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,7 +86,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new CustomTable.TableDark();
-        textFieldAnimation1 = new swing.TextFieldAnimation();
+        txtSearch = new swing.TextFieldAnimation();
         rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -251,7 +275,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
@@ -267,7 +291,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(textFieldAnimation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -335,7 +359,6 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
     private CustomTable.TablePanel materialTabbed2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private CustomTable.TableDark tbl;
-    private swing.TextFieldAnimation textFieldAnimation1;
     private javax.swing.JTextField txtChucVu;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMaTK;
@@ -343,6 +366,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
     private javax.swing.JTextField txtMatkhau;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtNgayTao;
+    private swing.TextFieldAnimation txtSearch;
     private javax.swing.JTextField txtTenND;
     // End of variables declaration//GEN-END:variables
 }
