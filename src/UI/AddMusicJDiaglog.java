@@ -32,21 +32,21 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblAnhNhac = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTenBaiHat = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        rSComboMetro1 = new rojerusan.RSComboMetro();
-        jTextField2 = new javax.swing.JTextField();
+        cboTheLoai = new rojerusan.RSComboMetro();
+        txtDuongDan = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNguoiSangTac = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtNguoiTrinhBay = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
-        rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
+        txtNgayTao = new javax.swing.JTextField();
+        btnOK = new rojerusan.RSMaterialButtonRectangle();
+        btnCancel = new rojerusan.RSMaterialButtonRectangle();
         jLabel7 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -60,57 +60,62 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(37, 44, 70));
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        lblAnhNhac.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Tên bài hát");
 
-        jTextField1.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtTenBaiHat.setBackground(new java.awt.Color(37, 44, 70));
+        txtTenBaiHat.setForeground(new java.awt.Color(204, 204, 204));
+        txtTenBaiHat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Đường dẫn nhạc");
 
-        rSComboMetro1.setForeground(new java.awt.Color(204, 204, 204));
-        rSComboMetro1.setColorArrow(new java.awt.Color(37, 44, 70));
-        rSComboMetro1.setColorBorde(new java.awt.Color(37, 61, 120));
-        rSComboMetro1.setColorFondo(new java.awt.Color(37, 44, 70));
+        cboTheLoai.setForeground(new java.awt.Color(204, 204, 204));
+        cboTheLoai.setColorArrow(new java.awt.Color(37, 44, 70));
+        cboTheLoai.setColorBorde(new java.awt.Color(37, 61, 120));
+        cboTheLoai.setColorFondo(new java.awt.Color(37, 44, 70));
 
-        jTextField2.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 61, 120), 2));
-        jTextField2.setEnabled(false);
+        txtDuongDan.setBackground(new java.awt.Color(37, 44, 70));
+        txtDuongDan.setForeground(new java.awt.Color(204, 204, 204));
+        txtDuongDan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 61, 120), 2));
+        txtDuongDan.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Người sáng tác");
 
-        jTextField3.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField3.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtNguoiSangTac.setBackground(new java.awt.Color(37, 44, 70));
+        txtNguoiSangTac.setForeground(new java.awt.Color(204, 204, 204));
+        txtNguoiSangTac.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Người trình bày");
 
-        jTextField4.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField4.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtNguoiTrinhBay.setBackground(new java.awt.Color(37, 44, 70));
+        txtNguoiTrinhBay.setForeground(new java.awt.Color(204, 204, 204));
+        txtNguoiTrinhBay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Ngày tạo");
 
-        jTextField5.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField5.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtNgayTao.setBackground(new java.awt.Color(37, 44, 70));
+        txtNgayTao.setForeground(new java.awt.Color(204, 204, 204));
+        txtNgayTao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        rSMaterialButtonRectangle1.setText("OK");
+        btnOK.setText("OK");
 
-        rSMaterialButtonRectangle2.setText("Cancel");
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
@@ -132,22 +137,22 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAnhNhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator4)
                     .addComponent(jSeparator3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField2)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNguoiTrinhBay)
+                    .addComponent(txtNguoiSangTac)
+                    .addComponent(txtDuongDan)
                     .addComponent(jSeparator1)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField5)
+                    .addComponent(txtTenBaiHat)
+                    .addComponent(txtNgayTao)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2)
@@ -155,7 +160,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(rSComboMetro1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                    .addComponent(cboTheLoai, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,46 +182,46 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                         .addGap(35, 35, 35)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTenBaiHat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSComboMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDuongDan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNguoiSangTac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNguoiTrinhBay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33))
         );
 
@@ -233,6 +238,10 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,7 +286,9 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private rojerusan.RSMaterialButtonRectangle btnCancel;
+    private rojerusan.RSMaterialButtonRectangle btnOK;
+    private rojerusan.RSComboMetro cboTheLoai;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -290,15 +301,13 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel lblAnhNhac;
     private javax.swing.JLabel lblNameApp;
     private javax.swing.JLabel lblanh;
-    private rojerusan.RSComboMetro rSComboMetro1;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
+    private javax.swing.JTextField txtDuongDan;
+    private javax.swing.JTextField txtNgayTao;
+    private javax.swing.JTextField txtNguoiSangTac;
+    private javax.swing.JTextField txtNguoiTrinhBay;
+    private javax.swing.JTextField txtTenBaiHat;
     // End of variables declaration//GEN-END:variables
 }
