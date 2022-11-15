@@ -127,6 +127,11 @@ public class JFrameMusic extends javax.swing.JFrame {
         imageAvatar1.setBorderSize(3);
         imageAvatar1.setBorderSpace(3);
         imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
+        imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageAvatar1MouseClicked(evt);
+            }
+        });
 
         btnAccount.setBackground(new java.awt.Color(38, 45, 71));
         btnAccount.setForeground(new java.awt.Color(204, 204, 204));
@@ -334,8 +339,12 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_playMouseClicked
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
-        showPanel(new JPanelQlyAccount());
+            showPanel(new JPanelQlyAccount());
     }//GEN-LAST:event_btnAccountActionPerformed
+
+    private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
+      new HoSoJDialog(this, true).setVisible(true); 
+    }//GEN-LAST:event_imageAvatar1MouseClicked
 
     /**
      * @param args the command line arguments
