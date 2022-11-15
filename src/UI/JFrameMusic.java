@@ -4,9 +4,11 @@
  */
 package UI;
 
+import PanelMenu.JPanelPlayList;
 import PanelMenu.JPanelTopCha;
 import PanelMenu.JPanelQlyAccount;
 import PanelMenu.JPanelTrangChu;
+import PanelMenu.JPanelVideo;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 
@@ -315,10 +317,6 @@ public class JFrameMusic extends javax.swing.JFrame {
         showPanel(new JPanelTopCha());
     }//GEN-LAST:event_btnTopActionPerformed
 
-    private void btnPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPlaylistActionPerformed
-
     private void playingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playingMouseClicked
         playing.setVisible(false);
         playing.setEnabled(false);
@@ -336,6 +334,10 @@ public class JFrameMusic extends javax.swing.JFrame {
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         showPanel(new JPanelQlyAccount());
     }//GEN-LAST:event_btnAccountActionPerformed
+
+    private void btnPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistActionPerformed
+        showPanel(new JPanelPlayList());
+    }//GEN-LAST:event_btnPlaylistActionPerformed
 
     /**
      * @param args the command line arguments
