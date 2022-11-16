@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<<<<<<< HEAD
   <NonVisualComponents>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
@@ -83,6 +84,8 @@
       <Dimension value="[800, 520]"/>
     </Property>
   </Properties>
+=======
+>>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -98,6 +101,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -126,10 +130,14 @@
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
+=======
+          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+>>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -160,10 +168,14 @@
               </Group>
               <EmptySpace pref="69" max="32767" attributes="0"/>
           </Group>
+=======
+          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+>>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+<<<<<<< HEAD
     <Component class="javax.swing.JLabel" name="lbladd">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -364,5 +376,22 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl9MouseClicked"/>
       </Events>
     </Component>
+=======
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="482" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+>>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
   </SubComponents>
 </Form>

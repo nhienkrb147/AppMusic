@@ -19,12 +19,12 @@ import swing.EventTextField;
  *
  * @author MSII
  */
-public class JPanelTopCha extends javax.swing.JPanel {
+public class JPanelTopChart extends javax.swing.JPanel {
 
     /**
      * Creates new form Pn
      */
-    public JPanelTopCha() {
+    public JPanelTopChart() {
         initComponents();
         search();
         Test();
