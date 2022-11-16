@@ -35,7 +35,23 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         tbl.setColumnWidth(2, 100);
 
     }
+     void search(){
+             txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 50; i++) {   
+                  
+                        Thread.sleep(10);
+                    }
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
 
+<<<<<<< HEAD
     void search() {
         txtSearch.addEvent(new EventTextField() {
             @Override
@@ -52,13 +68,18 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
                 }
             }
 
+=======
+>>>>>>> master
             @Override
             public void onCancel() {
 
             }
         });
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
