@@ -4,18 +4,12 @@
  */
 package UI;
 
-<<<<<<< HEAD
-import PanelMenu.JPanelPlayList;
-import PanelMenu.JPanelTopCha;
-=======
 import PanelMenu.JPanelExplor;
 import PanelMenu.JPanelPlayList;
 import PanelMenu.JPanelQLNhac;
 import PanelMenu.JPanelTopChart;
->>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
 import PanelMenu.JPanelQlyAccount;
 import PanelMenu.JPanelTrangChu;
-import PanelMenu.JPanelVideo;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 
@@ -323,11 +317,7 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonHover3ActionPerformed
 
     private void btnDiscoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscoverActionPerformed
-<<<<<<< HEAD
-
-=======
         showPanel(new JPanelExplor());
->>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
     }//GEN-LAST:event_btnDiscoverActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
@@ -335,11 +325,6 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopActionPerformed
-<<<<<<< HEAD
-        showPanel(new JPanelTopCha());
-    }//GEN-LAST:event_btnTopActionPerformed
-
-=======
       showPanel(new JPanelTopChart());
     }//GEN-LAST:event_btnTopActionPerformed
 
@@ -347,7 +332,6 @@ public class JFrameMusic extends javax.swing.JFrame {
          showPanel(new JPanelPlayList());
     }//GEN-LAST:event_btnPlaylistActionPerformed
 
->>>>>>> fc4cf049c9fbcc0e9496f24e807b5abe2e113d43
     private void playingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playingMouseClicked
         playing.setVisible(false);
         playing.setEnabled(false);
@@ -366,15 +350,9 @@ public class JFrameMusic extends javax.swing.JFrame {
             showPanel(new JPanelQLNhac());
     }//GEN-LAST:event_btnAddMusicActionPerformed
 
-<<<<<<< HEAD
-    private void btnPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistActionPerformed
-        showPanel(new JPanelPlayList());
-    }//GEN-LAST:event_btnPlaylistActionPerformed
-=======
     private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
       new HoSoJDialog(this, true).setVisible(true); 
     }//GEN-LAST:event_imageAvatar1MouseClicked
->>>>>>> master
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         showPanel(new JPanelQlyAccount());
@@ -418,7 +396,6 @@ public class JFrameMusic extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrameMusic().setVisible(true);
-
             }
         });
     }
