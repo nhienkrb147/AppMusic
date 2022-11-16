@@ -61,7 +61,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         txtMaTK3 = new javax.swing.JTextField();
@@ -340,10 +340,10 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, Short.MAX_VALUE)
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -371,7 +371,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
     private javax.swing.JTextField txtNgayTao;
     private swing.TextFieldAnimation txtSearch;
     private javax.swing.JTextField txtTenND;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
 =======
 /*
@@ -746,4 +746,4 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenND;
     // End of variables declaration//GEN-END:variables
 }
->>>>>>> THEIRS
+
