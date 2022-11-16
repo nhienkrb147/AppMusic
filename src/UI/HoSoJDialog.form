@@ -50,9 +50,15 @@
                   <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="228" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+=======
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="rSLabelImage1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+>>>>>>> master
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="rSMaterialButtonRectangle1" min="-2" pref="92" max="-2" attributes="0"/>
@@ -79,6 +85,10 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                      <Component id="jLabel2" min="-2" pref="214" max="-2" attributes="0"/>
+=======
+>>>>>>> master
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -91,6 +101,15 @@
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+=======
                       </Group>
                       <Component id="rSLabelImage1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -99,6 +118,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+>>>>>>> master
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="rSMaterialButtonRectangle2" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="rSMaterialButtonRectangle1" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
@@ -120,6 +140,14 @@
             <Property name="text" type="java.lang.String" value="Profile"/>
           </Properties>
         </Component>
+<<<<<<< HEAD
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jLabel2"/>
+          </Properties>
+        </Component>
+=======
+>>>>>>> master
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -188,8 +216,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle2ActionPerformed"/>
           </Events>
         </Component>
+<<<<<<< HEAD
+=======
         <Component class="rojerusan.RSLabelImage" name="rSLabelImage1">
         </Component>
+>>>>>>> master
       </SubComponents>
     </Container>
   </SubComponents>
