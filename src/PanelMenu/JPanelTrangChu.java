@@ -4,13 +4,13 @@
  */
 package PanelMenu;
 
+
 import PanelSlideShow.Slide1;
 import PanelSlideShow.Slide2;
 import PanelSlideShow.Slide3;
-import jaco.mp3.player.MP3Player;
-import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -22,16 +22,14 @@ public class JPanelTrangChu extends javax.swing.JPanel {
      * Creates new form Pn
      */
     public JPanelTrangChu() {
-
         initComponents();
         slideshow1.initSlideshow(new Slide1(), new Slide2(), new Slide3());
         Test();
-        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
 
-        for (int i = 0; i <= 10; i++) {
-            model.addRow(new Object[]{i, "nhien", "fffff", "n001"});
+        for(int i =0 ; i<= 10;i++){
+            model.addRow(new Object[]{i,"nhien","fffff","n001"});
         }
-
     }
 
     public void Test() {
@@ -44,16 +42,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         tbl.setCellAlignment(4, JLabel.RIGHT);
         tbl.setColumnWidth(0, 50);
         tbl.setColumnWidth(2, 100);
-
-    }
-
-    public void initPlay() {
-        try {
-            new MP3Player(new File("D:\\laptrinh\\java\\test\\runVideo\\aka.mp3")).play();
-            Thread.sleep(10000);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+     
     }
 
     @SuppressWarnings("unchecked")
@@ -72,7 +61,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         tbl = new CustomTable.TableDark();
         lblBack = new javax.swing.JLabel();
         lblNext = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -129,8 +117,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Songs/aka.gif"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,7 +133,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                         .addGap(122, 122, 122))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(slideshow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(slideshow1, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
                             .addComponent(imageSlider1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -155,9 +141,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,9 +161,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -196,17 +178,16 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
-        slideshow1.back();
+      slideshow1.back();
     }//GEN-LAST:event_lblBackMouseClicked
 
     private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
-        slideshow1.next();
+       slideshow1.next();
     }//GEN-LAST:event_lblNextMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private PnSlider.ImageSlider imageSlider1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
