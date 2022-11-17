@@ -116,6 +116,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Thể loại");
 
+        lblanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Logo.png"))); // NOI18N
         lblanh.setVerifyInputWhenFocusTarget(false);
 
         lblNameApp.setFont(new java.awt.Font("Brush Script MT", 1, 60)); // NOI18N

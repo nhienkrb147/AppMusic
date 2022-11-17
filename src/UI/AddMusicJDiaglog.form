@@ -350,6 +350,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblanh">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/Logo.png"/>
+            </Property>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
         </Component>
