@@ -121,6 +121,9 @@ public class JFrameLogin extends javax.swing.JFrame {
         lblQuenPass.setText("Forgot password");
         lblQuenPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblQuenPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblQuenPassMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblQuenPassMouseEntered(evt);
             }
@@ -326,6 +329,10 @@ public class JFrameLogin extends javax.swing.JFrame {
         new SignUpJDialog(this,true).setVisible(true);
      
     }//GEN-LAST:event_lblTaoAccMouseClicked
+
+    private void lblQuenPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenPassMouseClicked
+        new ForgotPassJDialog(this,true).setVisible(true);
+    }//GEN-LAST:event_lblQuenPassMouseClicked
 
     /**
      * @param args the command line arguments
