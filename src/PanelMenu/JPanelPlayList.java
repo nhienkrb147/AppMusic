@@ -266,6 +266,7 @@ public class JPanelPlayList extends javax.swing.JPanel {
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
       if (evt.getClickCount() == 2){
            showPanel(new JPanelPlaylist2());
+           System.out.println("dasd");
       }
     }//GEN-LAST:event_lbl1MouseClicked
 
