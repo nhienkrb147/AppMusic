@@ -144,6 +144,9 @@ public class JFrameLogin extends javax.swing.JFrame {
         lblTaoAcc.setText("Create an account");
         lblTaoAcc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblTaoAcc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTaoAccMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblTaoAccMouseEntered(evt);
             }
@@ -317,6 +320,12 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void lblTaoAccMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaoAccMouseExited
         lblTaoAcc.setForeground(new Color(204, 204, 204));
     }//GEN-LAST:event_lblTaoAccMouseExited
+
+    private void lblTaoAccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaoAccMouseClicked
+      this.dispose();
+        new SignUpJDialog(this,true).setVisible(true);
+     
+    }//GEN-LAST:event_lblTaoAccMouseClicked
 
     /**
      * @param args the command line arguments

@@ -35,15 +35,14 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         tbl.setColumnWidth(2, 100);
 
     }
-
-    void search() {
-        txtSearch.addEvent(new EventTextField() {
+     void search(){
+             txtSearch.addEvent(new EventTextField() {
             @Override
             public void onPressed(EventCallBack call) {
                 //  Test
                 try {
-                    for (int i = 1; i <= 50; i++) {
-
+                    for (int i = 1; i <= 50; i++) {   
+                  
                         Thread.sleep(10);
                     }
                     call.done();
@@ -58,7 +57,6 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
             }
         });
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
