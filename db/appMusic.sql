@@ -64,11 +64,12 @@ create table PLAYLIST_SONG
 	constraint fk_playlistsong_song foreign key(mabh) references SONG(mabh) on delete cascade,
 );
 insert into USERS(tennd,matkhau,email,ngaysinh,chucvu,ngaytao) values 
-('nguyen van s','123','s@gmail.com','','0','2022-11-10'),
-('nguyen van g','123','g@gmail.com','2003-05-12','0','2022-11-10'),
-('nguyen van c','123','c@gmail.com','','0','2022-11-10'),
+('LilBao','123','bao@gmail.com','2003-11-13','0','2022-11-10'),
+('Nhienkbr','1234','nhien@gmail.com','2003-05-12','0','2022-11-10'),
+('nam25102003','12345','nam@gmail.com','2003-10-25','0','2022-11-10'),
 ('nguyen van b','123','b@gmail.com','2002-08-20','1','2022-11-10'),
 ('nguyen van a','123','a@gmail.com','','1','2022-11-10');
+
 
 insert into SONG(mabh,tenbh,theloai,khoangthoigian,nguoist,nguoitb,anh,ngaytao) values
 ('no1',N'tại vì sao','rap','2022-11-10 00:05:00', N'nô nố', N'á af','abc','2022-11-10'),
@@ -97,3 +98,4 @@ insert into PLAYLIST_SONG(maplaylist,mabh) values
 (4,'no5'),
 (5,'no1'),
 (2,'no4');
+select * from USERS where email like 'baonvps24728@fpt.edu.vn'
