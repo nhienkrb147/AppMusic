@@ -4,6 +4,10 @@
  */
 package UI;
 
+import DAO.UserDAO;
+import Entity.User;
+import Utils_Pro.Auth;
+import Utils_Pro.MsgBox;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
@@ -401,5 +405,20 @@ public class JFrameLogin extends javax.swing.JFrame {
         attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblTaoAcc.setFont(font.deriveFont(attributes));
     }
-
+    UserDAO dao = new UserDAO();
+    private void dangNhap(){
+        String tennd= txtUsername.getText();
+        String email= txtUsername.getText();
+        String pass = txtPassword.getText();
+        User us= dao.selectById2(tennd,email);
+        if(us ==null){
+            MsgBox.alert(this, "Sai tên đăng nhập hoặc email!");
+        }else if (!pass.equals(us.getMatkhau())) {
+            MsgBox.alert(this, "Sai mật khẩu!");
+        } else {
+            Auth.user = us;
+            this.dispose();
+            new JFrameMusic().setVisible(true);
+        }
+    }
 }

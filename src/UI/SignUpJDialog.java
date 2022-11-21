@@ -4,7 +4,16 @@
  */
 package UI;
 
+import DAO.UserDAO;
+import Entity.User;
+import Utils_Pro.MsgBox;
+import Utils_Pro.XDate;
+import java.awt.HeadlessException;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,16 +49,16 @@ public class SignUpJDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtNgaySinh = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtPass = new javax.swing.JPasswordField();
+        txtConfirm = new javax.swing.JPasswordField();
         rSButtonHover3 = new rojerusan.RSButtonHover();
         rSButtonHover1 = new rojeru_san.complementos.RSButtonHover();
 
@@ -97,28 +106,33 @@ public class SignUpJDialog extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Email:");
 
-        jTextField1.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtUsername.setBackground(new java.awt.Color(37, 44, 70));
+        txtUsername.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        jTextField4.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField4.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtEmail.setBackground(new java.awt.Color(37, 44, 70));
+        txtEmail.setForeground(new java.awt.Color(204, 204, 204));
+        txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        jTextField5.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField5.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtNgaySinh.setBackground(new java.awt.Color(37, 44, 70));
+        txtNgaySinh.setForeground(new java.awt.Color(204, 204, 204));
+        txtNgaySinh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        jPasswordField1.setBackground(new java.awt.Color(37, 44, 70));
-        jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtPass.setBackground(new java.awt.Color(37, 44, 70));
+        txtPass.setForeground(new java.awt.Color(204, 204, 204));
+        txtPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        jPasswordField2.setBackground(new java.awt.Color(37, 44, 70));
-        jPasswordField2.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtConfirm.setBackground(new java.awt.Color(37, 44, 70));
+        txtConfirm.setForeground(new java.awt.Color(204, 204, 204));
+        txtConfirm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
         rSButtonHover3.setBackground(new java.awt.Color(0, 102, 153));
         rSButtonHover3.setText("Sign up");
+        rSButtonHover3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonHover3ActionPerformed(evt);
+            }
+        });
 
         rSButtonHover1.setBackground(new java.awt.Color(37, 44, 70));
         rSButtonHover1.setText("x");
@@ -148,16 +162,16 @@ public class SignUpJDialog extends javax.swing.JDialog {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5)
+                    .addComponent(txtUsername)
+                    .addComponent(txtEmail)
+                    .addComponent(txtNgaySinh)
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator3)
                     .addComponent(jSeparator4)
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator5)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2))
+                    .addComponent(txtPass)
+                    .addComponent(txtConfirm))
                 .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -193,31 +207,31 @@ public class SignUpJDialog extends javax.swing.JDialog {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -244,13 +258,19 @@ public class SignUpJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rSButtonHover2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover2ActionPerformed
-    this.dispose();
-    new JFrameLogin().setVisible(true);
+        this.dispose();
+        new JFrameLogin().setVisible(true);
     }//GEN-LAST:event_rSButtonHover2ActionPerformed
 
     private void rSButtonHover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_rSButtonHover1ActionPerformed
+
+    private void rSButtonHover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover3ActionPerformed
+        if (validated()) {
+            SignUp();
+        }
+    }//GEN-LAST:event_rSButtonHover3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,20 +322,114 @@ public class SignUpJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblNameApp;
     private javax.swing.JLabel lblanh;
     private rojeru_san.complementos.RSButtonHover rSButtonHover1;
     private rojeru_san.complementos.RSButtonHover rSButtonHover2;
     private rojerusan.RSButtonHover rSButtonHover3;
+    private javax.swing.JPasswordField txtConfirm;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNgaySinh;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+    UserDAO dao = new UserDAO();
+    private static final String Chk_mail = "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,6}\\.[\\w]{2,6})$";
+    int i = -1;
+
+    private void SignUp() {
+        User us = getForm();
+        try {
+            dao.insert(us);
+            this.clearForm();
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (HeadlessException e) {
+            MsgBox.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    //lay du lieu
+    User getForm() {
+        User us = new User();
+        us.setTennd(txtUsername.getText());
+        us.setMatkhau(txtPass.getText());
+        us.setEmail(txtEmail.getText());
+        us.setNgaysinh(XDate.toDate(txtNgaySinh.getText(), "MM/dd/yyyy"));
+        us.setChucvu(false);
+        us.setNgaytao(new Date());
+        return us;
+    }
+
+    void clearForm() {
+        i = -1;
+        txtUsername.setText("");
+        txtPass.setText("");
+        txtConfirm.setText("");
+        txtEmail.setText("");
+        txtNgaySinh.setText("");
+    }
+
+    private boolean validated() {
+        if (txtUsername.getText().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập tên tài khoản");
+            txtUsername.requestFocus();
+            return false;
+        }
+        if (txtPass.getText().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập mật khẩu");
+            txtPass.requestFocus();
+            return false;
+        }
+        if (!txtConfirm.getText().equals(txtPass.getText())) {
+            txtConfirm.requestFocus();
+            MsgBox.alert(this, "Mật khẩu xác nhận không khớp!");
+        }
+        if (txtNgaySinh.getText().equals("")) {
+            MsgBox.alert(this, "Chưa Nhập NgaySinh");
+            txtNgaySinh.requestFocus();
+            return false;
+        }
+        // kiểm tra định dạng mail
+        Matcher matcher = Pattern.compile(Chk_mail).matcher(txtEmail.getText());
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(this, "Email sai định dạng");
+            return false;
+        }
+        if (txtEmail.getText().equals("")) {
+            MsgBox.alert(this, "Chưa Nhập Email");
+            txtEmail.requestFocus();
+            return false;
+        }
+        if (txtNgaySinh.getText().equals("")) {
+            MsgBox.alert(this, "Chưa Nhập NgaySinh");
+            txtNgaySinh.requestFocus();
+            return false;
+        }
+        //kiểm tra định dạng ngày tháng năm
+        if (!txtNgaySinh.getText().equals("")) {
+            try {
+                XDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Không Đúng Định Dạng Ngày Tháng Năm");
+                txtNgaySinh.requestFocus();
+                return false;
+
+            }
+        }
+        //Kiểm tra trùng tên người dùng
+        if (i == -1) {
+            for (User us : dao.selectAll()) {
+                if (us.getTennd().equals(txtUsername.getText())) {
+                    JOptionPane.showMessageDialog(this, "Trùng tên người dùng \n Vui lòng thử tên khác");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
