@@ -4,6 +4,7 @@
  */
 package PanelMenu;
 
+import UI.AddMusicJDiaglog;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import swing.EventCallBack;

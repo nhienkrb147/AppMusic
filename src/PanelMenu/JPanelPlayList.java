@@ -15,22 +15,23 @@ public class JPanelPlayList extends javax.swing.JPanel {
 
     int count = 0;
 
-     private JPanel chiPanel;
+    private JPanel chiPanel;
+
     public JPanelPlayList() {
         initComponents();
-//        lbladd.setVisible(true);
-//        lbl1.setVisible(false);
-//        lbl2.setVisible(false);
-//        lbl3.setVisible(false);
-//        lbl4.setVisible(false);
-//        lbl5.setVisible(false);
-//        lbl6.setVisible(false);
-//        lbl7.setVisible(false);
-//        lbl8.setVisible(false);
-//        lbl9.setVisible(false);
+        lbladd.setVisible(true);
+        lbl1.setVisible(false);
+        lbl2.setVisible(false);
+        lbl3.setVisible(false);
+        lbl4.setVisible(false);
+        lbl5.setVisible(false);
+        lbl6.setVisible(false);
+        lbl7.setVisible(false);
+        lbl8.setVisible(false);
+        lbl9.setVisible(false);
     }
 
-      void showPanel(JPanel panel) {
+    void showPanel(JPanel panel) {
         chiPanel = panel;
         pnMain.removeAll();
         pnMain.add(chiPanel);
@@ -54,8 +55,8 @@ public class JPanelPlayList extends javax.swing.JPanel {
         lbl5 = new javax.swing.JLabel();
         lbl6 = new javax.swing.JLabel();
         lbl7 = new javax.swing.JLabel();
-        lbl9 = new javax.swing.JLabel();
         lbl8 = new javax.swing.JLabel();
+        lbl9 = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(29, 34, 56));
 
@@ -115,6 +116,20 @@ public class JPanelPlayList extends javax.swing.JPanel {
         lbladd.setForeground(new java.awt.Color(255, 255, 255));
         lbladd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addPlaylist2.png"))); // NOI18N
         lbladd.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        lbladd.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                lbladdAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        lbladd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbladdMouseClicked(evt);
+            }
+        });
 
         lbl1.setForeground(new java.awt.Color(255, 255, 255));
         lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addPlaylist3.png"))); // NOI18N
@@ -149,13 +164,13 @@ public class JPanelPlayList extends javax.swing.JPanel {
         lbl7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addPlaylist3.png"))); // NOI18N
         lbl7.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
-        lbl9.setForeground(new java.awt.Color(255, 255, 255));
-        lbl9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addPlaylist3.png"))); // NOI18N
-        lbl9.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-
         lbl8.setForeground(new java.awt.Color(255, 255, 255));
         lbl8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addPlaylist3.png"))); // NOI18N
         lbl8.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+
+        lbl9.setForeground(new java.awt.Color(255, 255, 255));
+        lbl9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addPlaylist3.png"))); // NOI18N
+        lbl9.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
         pnMain.setLayout(pnMainLayout);
@@ -163,99 +178,52 @@ public class JPanelPlayList extends javax.swing.JPanel {
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbladd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(lbl7)
-                .addGap(139, 139, 139)
-                .addComponent(lbl8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl5)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl9)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl3)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbladd)
+                    .addComponent(lbl5))
+                .addGap(28, 28, 28)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl6)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl2)
+                    .addComponent(lbl7))
+                .addGap(40, 40, 40)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl8)
+                    .addComponent(lbl3))
+                .addGap(42, 42, 42)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl9, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(38, 38, 38))
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(lbladd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(lbl7)
-                .addContainerGap(184, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
-                        .addComponent(lbl8)
-                        .addGap(144, 144, 144))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
-                        .addComponent(lbl1)
-                        .addGap(113, 113, 113))))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl5)
-                    .addGap(0, 338, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl9)
-                    .addGap(0, 338, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lbl1)
+                    .addComponent(lbladd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl2)
-                    .addGap(0, 338, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lbl4)
-                    .addGap(0, 338, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(lbl3)
-                    .addGap(0, 338, Short.MAX_VALUE)))
-            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnMainLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lbl4))
+                .addGap(54, 54, 54)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl9)
+                    .addComponent(lbl5)
                     .addComponent(lbl6)
-                    .addGap(0, 338, Short.MAX_VALUE)))
+                    .addComponent(lbl7)
+                    .addComponent(lbl8))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,11 +232,48 @@ public class JPanelPlayList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
-      if (evt.getClickCount() == 2){
-           showPanel(new JPanelPlaylist2());
-           System.out.println("dasd");
-      }
+        if (evt.getClickCount() == 2) {           
+            pnMain.disable();
+            new JPanelPlaylist2().enable();
+            
+//            showPanel(new JPanelPlaylist2());
+            JOptionPane.showMessageDialog(this, "hiện playlist2");
+        }
     }//GEN-LAST:event_lbl1MouseClicked
+
+    private void lbladdAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lbladdAncestorAdded
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbladdAncestorAdded
+
+    private void lbladdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbladdMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 1) {
+            count += 1;
+            if (count == 1) {
+                lbl1.setVisible(true);
+            } else if (count == 2) {
+                lbl2.setVisible(true);
+            } else if (count == 3) {
+                lbl3.setVisible(true);
+            } else if (count == 4) {
+                lbl4.setVisible(true);
+            } else if (count == 5) {
+                lbl5.setVisible(true);
+            } else if (count == 6) {
+                lbl6.setVisible(true);
+            } else if (count == 7) {
+                lbl7.setVisible(true);
+            } else if (count == 8) {
+                lbl8.setVisible(true);
+            } else if (count == 9) {
+                lbl9.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Không thể tạo thêm Playlist !!!");
+            }
+        }
+    }//GEN-LAST:event_lbladdMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
