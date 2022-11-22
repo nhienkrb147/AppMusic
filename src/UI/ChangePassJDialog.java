@@ -4,6 +4,9 @@
  */
 package UI;
 
+import DAO.UserDAO;
+import Utils_Pro.Auth;
+import Utils_Pro.MsgBox;
 import java.awt.geom.RoundRectangle2D;
 
 /**
@@ -38,12 +41,12 @@ public class ChangePassJDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtoldpwd = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        pwdnew = new javax.swing.JPasswordField();
+        pwdconfirm = new javax.swing.JPasswordField();
         rSButtonHover3 = new rojerusan.RSButtonHover();
         rSButtonHover4 = new rojerusan.RSButtonHover();
 
@@ -83,25 +86,35 @@ public class ChangePassJDialog extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Mật khẩu hiện tại:");
 
-        jTextField1.setBackground(new java.awt.Color(37, 44, 70));
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        txtoldpwd.setBackground(new java.awt.Color(37, 44, 70));
+        txtoldpwd.setForeground(new java.awt.Color(204, 204, 204));
+        txtoldpwd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        jPasswordField1.setBackground(new java.awt.Color(37, 44, 70));
-        jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        pwdnew.setBackground(new java.awt.Color(37, 44, 70));
+        pwdnew.setForeground(new java.awt.Color(204, 204, 204));
+        pwdnew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
-        jPasswordField2.setBackground(new java.awt.Color(37, 44, 70));
-        jPasswordField2.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
+        pwdconfirm.setBackground(new java.awt.Color(37, 44, 70));
+        pwdconfirm.setForeground(new java.awt.Color(204, 204, 204));
+        pwdconfirm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
 
         rSButtonHover3.setBackground(new java.awt.Color(0, 102, 153));
         rSButtonHover3.setText("Cancel");
         rSButtonHover3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        rSButtonHover3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonHover3ActionPerformed(evt);
+            }
+        });
 
         rSButtonHover4.setBackground(new java.awt.Color(0, 102, 153));
         rSButtonHover4.setText("OK");
         rSButtonHover4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        rSButtonHover4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonHover4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,12 +146,12 @@ public class ChangePassJDialog extends javax.swing.JDialog {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(txtoldpwd, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator3)
                             .addComponent(jSeparator2)
-                            .addComponent(jPasswordField1)
-                            .addComponent(jPasswordField2))))
+                            .addComponent(pwdnew)
+                            .addComponent(pwdconfirm))))
                 .addGap(57, 57, 57))
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,19 +170,19 @@ public class ChangePassJDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtoldpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwdnew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwdconfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
@@ -200,6 +213,17 @@ public class ChangePassJDialog extends javax.swing.JDialog {
     private void rSButtonHover2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rSButtonHover2ActionPerformed
+
+    private void rSButtonHover4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover4ActionPerformed
+        // TODO add your handling code here:
+        changePass();
+
+    }//GEN-LAST:event_rSButtonHover4ActionPerformed
+
+    private void rSButtonHover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover3ActionPerformed
+        // TODO add your handling code here:
+        ChangePassJDialog.this.dispose();
+    }//GEN-LAST:event_rSButtonHover3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,16 +273,47 @@ public class ChangePassJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblNameApp;
     private javax.swing.JLabel lblanh;
+    private javax.swing.JPasswordField pwdconfirm;
+    private javax.swing.JPasswordField pwdnew;
     private rojeru_san.complementos.RSButtonHover rSButtonHover2;
     private rojerusan.RSButtonHover rSButtonHover3;
     private rojerusan.RSButtonHover rSButtonHover4;
+    private javax.swing.JTextField txtoldpwd;
     // End of variables declaration//GEN-END:variables
+
+    UserDAO userDAO = new UserDAO();
+
+    void changePass() {
+//        String manv = .getText();
+        String passold = txtoldpwd.getText();
+        String passnew = pwdnew.getText();
+        String passconfirm = pwdconfirm.getText();
+
+        if (!passold.equals(Auth.user.getMatkhau())) {
+            MsgBox.alert(this, "Sai tên đăng nhập");
+        } else if (!passnew.equals(passconfirm)) {
+            MsgBox.alert(this, "Sai mật khẩu xác nhận");
+        } else {
+            Auth.user.setMatkhau(passnew);
+            userDAO.update(Auth.user);
+            MsgBox.alert(this, "Đổi mật khẩu thành công");
+        }
+
+//        if (!manv.equalsIgnoreCase(Auth.user.getMaNV())) {
+//            MsgBox.alert(this, "Sai tên đăng nhập");
+//        } else if (!passold.equals(Auth.user.getMatkhau())) {
+//            MsgBox.alert(this, "Sai tên đăng nhập");
+//        } else if (!passnew.equals(passconfirm)) {
+//            MsgBox.alert(this, "Sai mật khẩu xác nhận");
+//        } else {
+//            Auth.user.setMatkhau(passnew);
+//            userDAO.update(Auth.user);
+//            MsgBox.alert(this, "Đổi mật khẩu thành công");
+//        }
+    }
 }

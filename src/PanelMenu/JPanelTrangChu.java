@@ -32,6 +32,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             model.addRow(new Object[]{i, "nhien", "fffff", "n001"});
         }
 
+ 
     }
 
     public void Test() {
@@ -72,7 +73,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         tbl = new CustomTable.TableDark();
         lblBack = new javax.swing.JLabel();
         lblNext = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblvideo = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -129,7 +130,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Songs/aka.gif"))); // NOI18N
+        lblvideo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Songs/aka.gif"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,7 +155,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblvideo, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(slideshow1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
@@ -175,7 +176,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblvideo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 39, Short.MAX_VALUE))
         );
@@ -203,7 +204,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private PnSlider.ImageSlider imageSlider1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
@@ -213,6 +213,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblNext;
+    private javax.swing.JLabel lblvideo;
     private ClassSlideShow.Slideshow slideshow1;
     private CustomTable.TableDark tbl;
     // End of variables declaration//GEN-END:variables

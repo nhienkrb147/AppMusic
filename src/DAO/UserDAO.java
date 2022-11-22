@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class UserDAO extends MusicDAO<User, String>{
     String INSERT_SQL = "INSERT INTO USERS (tennd, matkhau, email, ngaysinh, chucvu, ngaytao) VALUES (?, ?, ?, ?, ?, ?)";
-    String UPDATE_SQL = "UPDATE USERS SET anh=?, matkhau = ?, email = ?, ngaysinh = ?, ngaytao= ? WHERE tennd = ?";
+    String UPDATE_SQL = "UPDATE USERS SET matkhau = ?, email = ?, ngaysinh = ?, ngaytao= ? WHERE tennd = ?";
     String DELETE_SQL = "DELETE FROM USERS WHERE tennd= ?";
     String SELECT_ALL_SQL = "SELECT * FROM USERS";
     String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE tennd = ?";
