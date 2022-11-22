@@ -31,7 +31,7 @@
                   <Component id="pnMain" max="32767" attributes="0"/>
               </Group>
           </Group>
-          <Component id="jPanel3" alignment="0" pref="976" max="32767" attributes="0"/>
+          <Component id="jPanel3" alignment="0" pref="1017" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -46,7 +46,7 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="jPanel3" min="-2" pref="52" max="-2" attributes="0"/>
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -75,8 +75,8 @@
               <Component id="btnHome" alignment="1" pref="0" max="32767" attributes="0"/>
               <Component id="btnDiscover" alignment="1" pref="0" max="32767" attributes="0"/>
               <Component id="btnPlaylist" alignment="1" pref="0" max="32767" attributes="0"/>
-              <Component id="btnAccount1" alignment="0" pref="0" max="32767" attributes="0"/>
-              <Component id="btnAccount" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="btnManagerUser" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="btnManagerMusic" alignment="0" pref="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -90,7 +90,7 @@
                   </Group>
                   <EmptySpace pref="56" max="32767" attributes="0"/>
               </Group>
-              <Component id="btnTop" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="btnTopCharts" alignment="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -100,19 +100,19 @@
                   <Component id="imageAvatar1" min="-2" pref="77" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnHome" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnDiscover" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnTop" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                  <Component id="btnTopCharts" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Component id="btnPlaylist" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
-                  <Component id="btnAccount1" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="btnManagerUser" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnAccount" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                  <Component id="btnManagerMusic" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace pref="127" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -155,7 +155,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="rojeru_san.complementos.RSButtonHover" name="btnTop">
+        <Component class="rojeru_san.complementos.RSButtonHover" name="btnTopCharts">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="47" green="2d" red="26" type="rgb"/>
@@ -169,7 +169,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTopActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTopChartsActionPerformed"/>
           </Events>
         </Component>
         <Component class="rojeru_san.complementos.RSButtonHover" name="btnPlaylist">
@@ -219,7 +219,7 @@
             <Property name="useNullLayout" type="boolean" value="true"/>
           </Layout>
         </Container>
-        <Component class="rojeru_san.complementos.RSButtonHover" name="btnAccount">
+        <Component class="rojeru_san.complementos.RSButtonHover" name="btnManagerMusic">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="47" green="2d" red="26" type="rgb"/>
@@ -236,10 +236,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAccountActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManagerMusicActionPerformed"/>
           </Events>
         </Component>
-        <Component class="rojeru_san.complementos.RSButtonHover" name="btnAccount1">
+        <Component class="rojeru_san.complementos.RSButtonHover" name="btnManagerUser">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="47" green="2d" red="26" type="rgb"/>
@@ -256,7 +256,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAccount1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManagerUserActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

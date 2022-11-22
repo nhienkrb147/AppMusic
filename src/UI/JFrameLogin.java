@@ -25,9 +25,10 @@ public class JFrameLogin extends javax.swing.JFrame {
      */
     public JFrameLogin() {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
         gachChanText();
+        
     }
 
     /**
@@ -140,6 +141,11 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         rSButtonHover2.setBackground(new java.awt.Color(0, 102, 153));
         rSButtonHover2.setText("Sign in");
+        rSButtonHover2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonHover2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
@@ -281,16 +287,16 @@ public class JFrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonHover1ActionPerformed
 
     private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
-        if(txtUsername.getText().equals("Tên tài khoản hoặc email")){
+        if (txtUsername.getText().equals("Tên tài khoản hoặc email")) {
             txtUsername.setText("");
-            txtUsername.setForeground(new Color(204,204,204));
+            txtUsername.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtUsernameFocusGained
 
     private void txtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusLost
-        if(txtUsername.getText().equals("")){
+        if (txtUsername.getText().equals("")) {
             txtUsername.setText("Tên tài khoản hoặc email");
-            txtUsername.setForeground(new Color(204,204,204));
+            txtUsername.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtUsernameFocusLost
 
@@ -299,16 +305,16 @@ public class JFrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        if(txtPassword.getText().equals("Password")){
+        if (txtPassword.getText().equals("Password")) {
             txtPassword.setText("");
-            txtPassword.setForeground(new Color(204,204,204));
+            txtPassword.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtPasswordFocusGained
 
     private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
-        if(txtPassword.getText().equals("")){
+        if (txtPassword.getText().equals("")) {
             txtPassword.setText("Password");
-            txtPassword.setForeground(new Color(204,204,204));
+            txtPassword.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtPasswordFocusLost
 
@@ -329,14 +335,19 @@ public class JFrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblTaoAccMouseExited
 
     private void lblTaoAccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaoAccMouseClicked
-      this.dispose();
-        new SignUpJDialog(this,true).setVisible(true);
-     
+        this.dispose();
+        new SignUpJDialog(this, true).setVisible(true);
+
     }//GEN-LAST:event_lblTaoAccMouseClicked
 
     private void lblQuenPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenPassMouseClicked
-        new ForgotPassJDialog(this,true).setVisible(true);
+        new ForgotPassJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_lblQuenPassMouseClicked
+
+    private void rSButtonHover2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover2ActionPerformed
+        // TODO add your handling code here:
+        dangNhap();
+    }//GEN-LAST:event_rSButtonHover2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,21 +410,22 @@ public class JFrameLogin extends javax.swing.JFrame {
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblQuenPass.setFont(font.deriveFont(attributes));
-        
+
         Font font2 = lblTaoAcc.getFont();
         Map attributes2 = font2.getAttributes();
         attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblTaoAcc.setFont(font.deriveFont(attributes));
     }
     UserDAO dao = new UserDAO();
-    private void dangNhap(){
-        String tennd= txtUsername.getText();
-        String email= txtUsername.getText();
+
+    private void dangNhap() {
+        String tennd = txtUsername.getText();
+        String email = txtUsername.getText();
         String pass = txtPassword.getText();
-        User us= dao.selectById2(tennd,email);
-        if(us ==null){
+        User us = dao.selectById2(tennd, email);
+        if (us == null) {
             MsgBox.alert(this, "Sai tên đăng nhập hoặc email!");
-        }else if (!pass.equals(us.getMatkhau())) {
+        } else if (!pass.equals(us.getMatkhau())) {
             MsgBox.alert(this, "Sai mật khẩu!");
         } else {
             Auth.user = us;
