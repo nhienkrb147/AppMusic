@@ -145,8 +145,5 @@ public class ImageAvatar extends JComponent {
     private Image toImage(Icon icon) {
         return ((ImageIcon) icon).getImage();
     }
-
-    public void setIcon(ImageIcon read) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

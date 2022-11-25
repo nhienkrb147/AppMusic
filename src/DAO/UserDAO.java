@@ -95,6 +95,7 @@ public class UserDAO extends MusicDAO<User, String> {
                 entity.setNgaysinh(rs.getDate("ngaysinh"));
                 entity.setChucvu(rs.getBoolean("chucvu"));
                 entity.setNgaytao(rs.getDate("ngaytao"));
+                entity.setHinh(rs.getString("hinh"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

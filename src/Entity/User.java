@@ -21,6 +21,19 @@ public class User {
     private Date ngaytao;
     private String hinh;
 
+    public User() {
+    }
+
+    public User(int matk, String tennd, String matkhau, String email, Date ngaysinh, Date ngaytao, String hinh) {
+        this.matk = matk;
+        this.tennd = tennd;
+        this.matkhau = matkhau;
+        this.email = email;
+        this.ngaysinh = ngaysinh;
+        this.ngaytao = ngaytao;
+        this.hinh = hinh;
+    }
+
     public int getMatk() {
         return matk;
     }
@@ -85,17 +98,5 @@ public class User {
         this.hinh = hinh;
     }
 
-    public User() {
-    }
-
-    public User(int matk, String tennd, String matkhau, String email, Date ngaysinh, boolean chucvu, Date ngaytao) {
-        this.matk = matk;
-        this.tennd = tennd;
-        this.matkhau = matkhau;
-        this.email = email;
-        this.ngaysinh = ngaysinh;
-        this.chucvu = chucvu;
-        this.ngaytao = ngaytao;
-    }
-
+    
 }

@@ -33,7 +33,7 @@ public class ProfileJDialog extends javax.swing.JDialog {
         isEditTable(false);
 
         setForm();
-        load();
+
     }
 
     /**
@@ -487,31 +487,18 @@ public class ProfileJDialog extends javax.swing.JDialog {
     }
 
     void setForm() {
-        User user = new User();
+
         txttentk.setText(Auth.user.getTennd());
         txtemail.setText(Auth.user.getEmail());
-        if (user.getHinh() != null) {
-            lblhinh.setToolTipText(user.getHinh());
-            lblhinh.setIcon(XImage.read(user.getHinh()));
 
+        if (Auth.user.getHinh() != null) {
+            lblhinh.setToolTipText(Auth.user.getHinh());
+            lblhinh.setIcon(XImage.read(Auth.user.getHinh()));
         }
+
         txtngaysinh.setText(Xdate2.toString(Auth.user.getNgaysinh(), "dd/MM/yyyy"));
         txtngaydangky.setText(Xdate2.toString(Auth.user.getNgaytao(), "dd/MM/yyyy"));
 
-    }
-
-    void load() {
-        try {
-            List<User> list = userDAO.selectAll();
-            for (User user : list) {
-                System.out.println(user.getMatk());
-                System.out.println(user.getHinh());
-                System.out.println(user.getTennd());
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     void changePass() {

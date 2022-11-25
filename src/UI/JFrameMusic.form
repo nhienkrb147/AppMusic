@@ -85,7 +85,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="imageAvatar1" min="-2" pref="77" max="-2" attributes="0"/>
+                          <Component id="lblAvatar" min="-2" pref="77" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="56" max="32767" attributes="0"/>
@@ -97,7 +97,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="imageAvatar1" min="-2" pref="77" max="-2" attributes="0"/>
+                  <Component id="lblAvatar" min="-2" pref="77" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -206,7 +206,7 @@
             <Property name="text" type="java.lang.String" value="Browse"/>
           </Properties>
         </Component>
-        <Container class="Utils_Pro.ImageAvatar" name="imageAvatar1">
+        <Container class="Utils_Pro.ImageAvatar" name="lblAvatar">
           <Properties>
             <Property name="borderSize" type="int" value="3"/>
             <Property name="borderSpace" type="int" value="3"/>
@@ -215,7 +215,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imageAvatar1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAvatarMouseClicked"/>
           </Events>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
