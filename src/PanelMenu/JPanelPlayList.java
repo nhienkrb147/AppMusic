@@ -4,8 +4,10 @@
  */
 package PanelMenu;
 
+import UI.JFrameMusic;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import rojeru_san.complementos.RSButtonHover;
 
 /**
  *
@@ -203,20 +205,26 @@ public class JPanelPlayList extends javax.swing.JPanel {
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl1)
-                    .addComponent(lbladd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl2)
-                    .addComponent(lbl3)
-                    .addComponent(lbl4))
-                .addGap(54, 54, 54)
-                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl9)
-                    .addComponent(lbl5)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl6)
-                    .addComponent(lbl7)
-                    .addComponent(lbl8))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl1)
+                            .addComponent(lbladd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl2)
+                            .addComponent(lbl3)
+                            .addComponent(lbl4))
+                        .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnMainLayout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(lbl5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl9, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -232,11 +240,7 @@ public class JPanelPlayList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
-        if (evt.getClickCount() == 2) {           
-            pnMain.disable();
-            new JPanelPlaylist2().enable();
-            
-//            showPanel(new JPanelPlaylist2());
+        if (evt.getClickCount() == 2) {                      
             JOptionPane.showMessageDialog(this, "hiện playlist2");
         }
     }//GEN-LAST:event_lbl1MouseClicked
