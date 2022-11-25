@@ -10,9 +10,10 @@ create table USERS
 	email varchar(50) not null,
 	ngaysinh date ,
 	chucvu bit,
+	hinh nvarchar(50),
 	ngaytao date
 	
-	constraint pk_user primary key(matk),
+	constraint pk_user primary key(matk) ,
 );
 
 create table SONG
@@ -23,11 +24,11 @@ create table SONG
 	khoangthoigian datetime,
 	nguoist nvarchar(100),
 	nguoitb nvarchar(100) not null,
-		anh nvarchar(50),
-		ngaytao date
+	anh nvarchar(50),
+	ngaytao date
 	
-		constraint pk_song primary key(mabh),
-	);
+	constraint pk_song primary key(mabh),
+);
 
 create table USER_SONG
 (
@@ -38,7 +39,7 @@ create table USER_SONG
 	ngaytao date
 	
 	constraint pk_usersong primary key(id),
-	constraint fk_usersong_user foreign key (matk) references USERS(matk),
+	constraint fk_usersong_user foreign key (matk) references USERS(matk) on delete cascade,
 	constraint fk_usersong_song foreign key (mabh) references SONG(mabh),
 );
 
@@ -47,10 +48,11 @@ create table PLAYLIST
 	maplaylist int identity(1,1),
 	matk int,
 	tieude nvarchar(50),
+	counts int,
 	ngaytao date
 	
 	constraint pk_playlist primary key(maplaylist),
-	constraint fk_palylist_users foreign key(matk) references USERS(matk),
+	constraint fk_palylist_users foreign key(matk) references USERS(matk) on delete cascade,
 );
 
 create table PLAYLIST_SONG
@@ -60,16 +62,15 @@ create table PLAYLIST_SONG
 	mabh varchar(8)
 
 	constraint pk_playlistsong primary key(trackno),
-	constraint fk_playlistsong_playlist foreign key(maplaylist) references PLAYLIST(maplaylist) ,
+	constraint fk_playlistsong_playlist foreign key(maplaylist) references PLAYLIST(maplaylist) on delete cascade,
 	constraint fk_playlistsong_song foreign key(mabh) references SONG(mabh) on delete cascade,
 );
 insert into USERS(tennd,matkhau,email,ngaysinh,chucvu,ngaytao) values 
-('LilBao','123','bao@gmail.com','2003-11-13','0','2022-11-10'),
-('Nhienkbr','1234','nhien@gmail.com','2003-05-12','0','2022-11-10'),
-('nam25102003','12345','nam@gmail.com','2003-10-25','0','2022-11-10'),
-('nguyen van b','123','b@gmail.com','2002-08-20','1','2022-11-10'),
-('nguyen van a','123','a@gmail.com','','1','2022-11-10');
-
+('nam','123','s@gmail.com','','1','2022-11-10'),
+('bao','123','g@gmail.com','2003-05-12','1','2022-11-10'),
+('nhien','123','c@gmail.com','','1','2022-11-10'),
+('nguyen van b','123','b@gmail.com','2002-08-20','0','2022-11-10'),
+('nguyen van a','123','a@gmail.com','','0','2022-11-10');
 
 insert into SONG(mabh,tenbh,theloai,khoangthoigian,nguoist,nguoitb,anh,ngaytao) values
 ('no1',N'tại vì sao','rap','2022-11-10 00:05:00', N'nô nố', N'á af','abc','2022-11-10'),
@@ -98,4 +99,4 @@ insert into PLAYLIST_SONG(maplaylist,mabh) values
 (4,'no5'),
 (5,'no1'),
 (2,'no4');
-select * from USERS where email like 'baonvps24728@fpt.edu.vn'
+

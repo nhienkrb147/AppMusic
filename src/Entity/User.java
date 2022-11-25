@@ -11,13 +11,15 @@ import java.util.Date;
  * @author DELL
  */
 public class User {
+
     private int matk;
     private String tennd;
     private String matkhau;
     private String email;
     private Date ngaysinh;
-    private boolean chucvu ;
-    private Date ngaytao ;
+    private boolean chucvu = false;
+    private Date ngaytao;
+    private String hinh;
 
     public int getMatk() {
         return matk;
@@ -75,6 +77,14 @@ public class User {
         this.ngaytao = ngaytao;
     }
 
+    public String getHinh() {
+        return hinh;
+    }
+
+    public void setHinh(String hinh) {
+        this.hinh = hinh;
+    }
+
     public User() {
     }
 
@@ -87,6 +97,5 @@ public class User {
         this.chucvu = chucvu;
         this.ngaytao = ngaytao;
     }
-    
 
 }

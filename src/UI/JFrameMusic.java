@@ -26,9 +26,13 @@ public class JFrameMusic extends javax.swing.JFrame {
     
     public JFrameMusic() {
         initComponents();
+        
+//        new JFrameLogin(this, true).setVisible(true);
+        
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 50, 50));
         init();
+        
     }
     
     void init() {
@@ -195,9 +199,9 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addComponent(btnDiscover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(btnPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(btnManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnManagerMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,7 +420,7 @@ public class JFrameMusic extends javax.swing.JFrame {
     private rojeru_san.complementos.RSButtonHover btnHome;
     private rojeru_san.complementos.RSButtonHover btnManagerMusic;
     private rojeru_san.complementos.RSButtonHover btnManagerUser;
-    private rojeru_san.complementos.RSButtonHover btnPlaylist;
+    public rojeru_san.complementos.RSButtonHover btnPlaylist;
     private rojeru_san.complementos.RSButtonHover btnTopCharts;
     private javax.swing.JButton btnnextP;
     private Utils_Pro.ImageAvatar imageAvatar1;

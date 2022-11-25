@@ -28,7 +28,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
         gachChanText();
-        
+
     }
 
     /**
@@ -84,6 +84,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         txtUsername.setBackground(new java.awt.Color(37, 44, 70));
         txtUsername.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsername.setText("nam");
         txtUsername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
         txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -103,6 +104,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         txtPassword.setBackground(new java.awt.Color(37, 44, 70));
         txtPassword.setForeground(new java.awt.Color(204, 204, 204));
+        txtPassword.setText("123");
         txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -337,7 +339,6 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void lblTaoAccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaoAccMouseClicked
         this.dispose();
         new SignUpJDialog(this, true).setVisible(true);
-
     }//GEN-LAST:event_lblTaoAccMouseClicked
 
     private void lblQuenPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenPassMouseClicked
