@@ -11,13 +11,14 @@ import java.util.Date;
  * @author DELL
  */
 public class Song {
+
     private String mabh;
     private String tenbh;
     private String theloai;
-    private Date khoangthoigian;
     private String nguoist;
     private String nguoitb;
     private String anh;
+    private String musicpath;
     private Date ngaytao;
 
     public String getMabh() {
@@ -42,14 +43,6 @@ public class Song {
 
     public void setTheloai(String theloai) {
         this.theloai = theloai;
-    }
-
-    public Date getKhoangthoigian() {
-        return khoangthoigian;
-    }
-
-    public void setKhoangthoigian(Date khoangthoigian) {
-        this.khoangthoigian = khoangthoigian;
     }
 
     public String getNguoist() {
@@ -84,18 +77,26 @@ public class Song {
         this.ngaytao = ngaytao;
     }
 
+    public String getMusicpath() {
+        return musicpath;
+    }
+
+    public void setMusicpath(String musicpath) {
+        this.musicpath = musicpath;
+    }
+
     public Song() {
     }
 
-    public Song(String mabh, String tenbh, String theloai, Date khoangthoigian, String nguoist, String nguoitb, String anh, Date ngaytao) {
+    public Song(String mabh, String tenbh, String theloai, String nguoist, String nguoitb, String anh, String musicpath, Date ngaytao) {
         this.mabh = mabh;
         this.tenbh = tenbh;
         this.theloai = theloai;
-        this.khoangthoigian = khoangthoigian;
         this.nguoist = nguoist;
         this.nguoitb = nguoitb;
         this.anh = anh;
+        this.musicpath = musicpath;
         this.ngaytao = ngaytao;
     }
-    
+
 }

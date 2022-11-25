@@ -9,7 +9,7 @@ import Entity.User;
 import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XDate;
-import Utils_Pro.Xdate2;
+
 
 /**
  *
@@ -470,8 +470,8 @@ public class ProfileJDialog extends javax.swing.JDialog {
 //        User user = new User();
         txttentk.setText(Auth.user.getTennd());
         txtemail.setText(Auth.user.getEmail());
-        txtngaysinh.setText(Xdate2.toString(Auth.user.getNgaysinh(), "dd/MM/yyyy"));
-        txtngaydangky.setText(Xdate2.toString(Auth.user.getNgaytao(), "dd/MM/yyyy"));
+        txtngaysinh.setText(XDate.toString(Auth.user.getNgaysinh(), "dd/MM/yyyy"));
+        txtngaydangky.setText(XDate.toString(Auth.user.getNgaytao(), "dd/MM/yyyy"));
 
     }
 
