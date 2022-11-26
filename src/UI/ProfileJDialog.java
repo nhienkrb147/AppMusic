@@ -9,7 +9,10 @@ import Entity.User;
 import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XDate;
-
+import Utils_Pro.XImage;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -25,7 +28,8 @@ public class ProfileJDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         isEditnable(false);
-        fillProfile();
+        
+        setForm();
     }
 
     /**
@@ -52,7 +56,7 @@ public class ProfileJDialog extends javax.swing.JDialog {
         txtngaydangky = new javax.swing.JTextField();
         rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
-        rSLabelImage1 = new rojerusan.RSLabelImage();
+        lblhinh = new rojerusan.RSLabelImage();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lblanh = new javax.swing.JLabel();
@@ -113,10 +117,16 @@ public class ProfileJDialog extends javax.swing.JDialog {
             }
         });
 
-        rSMaterialButtonRectangle2.setText("OK");
+        rSMaterialButtonRectangle2.setText("cập nhật");
         rSMaterialButtonRectangle2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSMaterialButtonRectangle2ActionPerformed(evt);
+            }
+        });
+
+        lblhinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblhinhMouseClicked(evt);
             }
         });
 
@@ -130,7 +140,7 @@ public class ProfileJDialog extends javax.swing.JDialog {
                 .addGap(196, 196, 196))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(rSLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblhinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -166,7 +176,7 @@ public class ProfileJDialog extends javax.swing.JDialog {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(rSLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblhinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,6 +368,7 @@ public class ProfileJDialog extends javax.swing.JDialog {
 
     private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
         // TODO add your handling code here:
+        update();
     }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
 
     private void rSButtonHover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover3ActionPerformed
@@ -373,6 +384,11 @@ public class ProfileJDialog extends javax.swing.JDialog {
     private void txttentkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttentkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttentkActionPerformed
+
+    private void lblhinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblhinhMouseClicked
+        // TODO add your handling code here:
+        chonAnh();
+    }//GEN-LAST:event_lblhinhMouseClicked
 
     /**
      * @param args the command line arguments
@@ -435,11 +451,11 @@ public class ProfileJDialog extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblNameApp;
     private javax.swing.JLabel lblanh;
+    private rojerusan.RSLabelImage lblhinh;
     private javax.swing.JPasswordField pwdconfirm;
     private javax.swing.JPasswordField pwdnew;
     private rojerusan.RSButtonHover rSButtonHover3;
     private rojerusan.RSButtonHover rSButtonHover4;
-    private rojerusan.RSLabelImage rSLabelImage1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private CustomTable.TablePanel tablePanel1;
@@ -450,12 +466,13 @@ public class ProfileJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txttentk;
     // End of variables declaration//GEN-END:variables
 
+    JFileChooser fileChooser = new JFileChooser();
     UserDAO userDAO = new UserDAO();
 
     public boolean isEditnable(boolean method) {
         txttentk.setEditable(method);
-        txtemail.setEditable(method);
-        txtngaysinh.setEditable(method);
+//        txtemail.setEditable(method);
+//        txtngaysinh.setEditable(method);
         txtngaydangky.setEditable(method);
         return method;
     }
@@ -466,10 +483,16 @@ public class ProfileJDialog extends javax.swing.JDialog {
         pwdconfirm.setText("");
     }
 
-    void fillProfile() {
-//        User user = new User();
+    void setForm() {
+
         txttentk.setText(Auth.user.getTennd());
         txtemail.setText(Auth.user.getEmail());
+
+        if (Auth.user.getHinh() != null) {
+            lblhinh.setToolTipText(Auth.user.getHinh());
+            lblhinh.setIcon(XImage.read(Auth.user.getHinh()));
+        }
+
         txtngaysinh.setText(XDate.toString(Auth.user.getNgaysinh(), "dd/MM/yyyy"));
         txtngaydangky.setText(XDate.toString(Auth.user.getNgaytao(), "dd/MM/yyyy"));
 
@@ -500,4 +523,36 @@ public class ProfileJDialog extends javax.swing.JDialog {
 
     }
 
+    User getForm() {
+        User user = new User();
+
+        user.setTennd(txttentk.getText());
+        user.setEmail(txtemail.getText());
+        user.setNgaysinh(XDate.toDate(txtngaysinh.getText(), "dd/MM/yyyy"));
+        user.setHinh(lblhinh.getToolTipText());
+
+        return user;
+    }
+
+    void update() {
+        User user = getForm();
+        try {
+            userDAO.update2(user);
+
+            MsgBox.alert(this, "Cập nhật thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật thất bại");
+            e.printStackTrace();
+        }
+    }
+
+    void chonAnh() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            XImage.save(file);
+            ImageIcon icon = XImage.read(file.getName());
+            lblhinh.setIcon(icon);
+            lblhinh.setToolTipText(file.getName());
+        }
+    }
 }
