@@ -28,7 +28,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
         gachChanText();
-        
+
     }
 
     /**

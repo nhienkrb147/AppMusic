@@ -14,6 +14,7 @@ import PanelMenu.JPanelQlyAccount;
 import PanelMenu.JPanelQlyNhac;
 import PanelMenu.JPanelTrangChu;
 import Utils_Pro.Auth;
+import Utils_Pro.XImage;
 import Utils_Pro.XMusic;
 import static Utils_Pro.XMusic.read;
 import jaco.mp3.player.MP3Player;
@@ -40,6 +41,8 @@ public class JFrameMusic extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 50, 50));
         init();
+        
+        loadImg();
     }
 
     void init() {
@@ -75,7 +78,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         btnTopCharts = new rojeru_san.complementos.RSButtonHover();
         btnPlaylist = new rojeru_san.complementos.RSButtonHover();
         jLabel2 = new javax.swing.JLabel();
-        imageAvatar1 = new Utils_Pro.ImageAvatar();
+        lblAvatar = new Utils_Pro.ImageAvatar();
         btnManagerMusic = new rojeru_san.complementos.RSButtonHover();
         btnManagerUser = new rojeru_san.complementos.RSButtonHover();
         jPanel3 = new javax.swing.JPanel();
@@ -144,12 +147,12 @@ public class JFrameMusic extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Browse");
 
-        imageAvatar1.setBorderSize(3);
-        imageAvatar1.setBorderSpace(3);
-        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
-        imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAvatar.setBorderSize(3);
+        lblAvatar.setBorderSpace(3);
+        lblAvatar.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
+        lblAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageAvatar1MouseClicked(evt);
+                lblAvatarMouseClicked(evt);
             }
         });
 
@@ -191,7 +194,7 @@ public class JFrameMusic extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -199,7 +202,7 @@ public class JFrameMusic extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -379,9 +382,9 @@ public class JFrameMusic extends javax.swing.JFrame {
         showPanel(new JPanelPlayList());
     }//GEN-LAST:event_btnPlaylistActionPerformed
 
-    private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
+    private void lblAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAvatarMouseClicked
         new ProfileJDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_imageAvatar1MouseClicked
+    }//GEN-LAST:event_lblAvatarMouseClicked
 
     private void btnManagerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerUserActionPerformed
         showPanel(new JPanelQlyAccount());
@@ -443,13 +446,13 @@ public class JFrameMusic extends javax.swing.JFrame {
     private rojeru_san.complementos.RSButtonHover btnPlaylist;
     private rojeru_san.complementos.RSButtonHover btnTopCharts;
     private javax.swing.JButton btnnextP;
-    private Utils_Pro.ImageAvatar imageAvatar1;
     private Utils_Pro.ImageAvatar imageAvatar2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private Utils_Pro.ImageAvatar lblAvatar;
     private javax.swing.JLabel lblpause;
     private javax.swing.JLabel lblplay;
     private javax.swing.JPanel pnMain;
@@ -503,4 +506,10 @@ public class JFrameMusic extends javax.swing.JFrame {
         }
     }
 
+    void loadImg() {
+        if (Auth.user.getHinh() != null) {
+            lblAvatar.setToolTipText(Auth.user.getHinh());
+            lblAvatar.setImage(XImage.read(Auth.user.getHinh()));
+        }
+    }
 }

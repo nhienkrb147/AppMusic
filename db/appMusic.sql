@@ -24,7 +24,10 @@ create table SONG
 	khoangthoigian datetime,
 	nguoist nvarchar(100),
 	nguoitb nvarchar(100) not null,
+<<<<<<< HEAD
+=======
 	musicpath nvarchar(100) not null,
+>>>>>>> origin
 	anh nvarchar(50),
 	ngaytao date
 	
@@ -72,9 +75,12 @@ insert into USERS(tennd,matkhau,email,ngaysinh,chucvu,ngaytao) values
 ('nhien','123','c@gmail.com','','1','2022-11-10'),
 ('nguyen van b','123','b@gmail.com','2002-08-20','0','2022-11-10'),
 ('nguyen van a','123','a@gmail.com','','0','2022-11-10');
+<<<<<<< HEAD
+=======
 
 insert into SONG(mabh,tenbh,theloai,khoangthoigian,nguoist,nguoitb,anh,musicpath,ngaytao) values
 ('MM01',N'Mặt mộc','v-pop','2022-11-10 00:05:00', N'Phạm Nguyên Ngọc', N'Phạm Nguyên Ngọc ft VAnh','abc','matmoc.mp3','2022-11-10');
+>>>>>>> origin
 
 
 insert into USER_SONG(matk,mabh,playcount,ngaytao) values
@@ -98,6 +104,8 @@ insert into PLAYLIST_SONG(maplaylist,mabh) values
 (5,'no1'),
 (2,'no4');
 
+<<<<<<< HEAD
+=======
 insert into SONG(mabh,tenbh,theloai,nguoist,nguoitb,anh,musicpath,ngaytao) values
 ('RAP1',N'Anh thèm được ngủ','RAP', N'Khói', N'Khói','abc',N'RAP Khói - anh thèm được ngủ.mp3','2022-11-10');
 ('RAP2',N'Chỉ còn ta và ta giữa trời','RAP', N'Killic x DBlue', N'Killic x DBlue','abc',N'RAP Chỉ Còn Ta Và Ta Giữa Trời.mp3','2022-11-10');
@@ -126,3 +134,4 @@ insert into SONG(mabh,tenbh,theloai,nguoist,nguoitb,anh,musicpath,ngaytao) value
 
 
 select * from Song
+>>>>>>> origin

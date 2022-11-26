@@ -108,8 +108,8 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="rSLabelImage1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                              <Component id="lblhinh" min="-2" pref="181" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="rSMaterialButtonRectangle1" min="-2" pref="92" max="-2" attributes="0"/>
@@ -135,8 +135,8 @@
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txttentk" min="-2" max="-2" attributes="0"/>
@@ -148,19 +148,19 @@
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtngaysinh" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtngaydangky" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="rSLabelImage1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblhinh" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtngaydangky" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="rSMaterialButtonRectangle2" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                   <Component id="rSMaterialButtonRectangle1" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="26" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -242,13 +242,16 @@
                     </Component>
                     <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="OK"/>
+                        <Property name="text" type="java.lang.String" value="c&#x1ead;p nh&#x1ead;t"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle2ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="rojerusan.RSLabelImage" name="rSLabelImage1">
+                    <Component class="rojerusan.RSLabelImage" name="lblhinh">
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblhinhMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
