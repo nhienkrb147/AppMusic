@@ -4,9 +4,6 @@
  */
 package PanelMenu;
 
-import swing.EventCallBack;
-import swing.EventTextField;
-
 /**
  *
  * @author NAM PC
@@ -18,7 +15,7 @@ public class JPanelPlaylist2 extends javax.swing.JPanel {
      */
     public JPanelPlaylist2() {
         initComponents();
-
+        
     }
 
     /**
@@ -142,7 +139,7 @@ public class JPanelPlaylist2 extends javax.swing.JPanel {
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
         // TODO add your handling code here:
-
+        
     }//GEN-LAST:event_btnbackActionPerformed
 
 
@@ -157,32 +154,4 @@ public class JPanelPlaylist2 extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private swing.TextFieldAnimation txtSearch;
     // End of variables declaration//GEN-END:variables
-
-    void search() {
-        txtSearch.addEvent(new EventTextField() {
-            @Override
-            public void onPressed(EventCallBack call) {
-                //  Test
-                try {
-                    for (int i = 1; i <= 50; i++) {
-
-                        Thread.sleep(10);
-                    }
-                    timKiem();
-                    call.done();
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-        });
-    }
-
-    void timKiem() {
-
-    }
 }

@@ -4,6 +4,8 @@
  */
 package UI;
 
+import DAO.SongDAO;
+import Entity.Song;
 import PanelMenu.JPanelExplor;
 import PanelMenu.JPanelPlayList;
 import PanelMenu.JPanelPlaylist2;
@@ -12,10 +14,18 @@ import PanelMenu.JPanelQlyAccount;
 import PanelMenu.JPanelQlyNhac;
 import PanelMenu.JPanelTrangChu;
 import Utils_Pro.Auth;
-import Utils_Pro.XImage;
+import Utils_Pro.XMusic;
+import static Utils_Pro.XMusic.read;
+import jaco.mp3.player.MP3Player;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.FileInputStream;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.Timer;
 
 /**
  *
@@ -27,29 +37,24 @@ public class JFrameMusic extends javax.swing.JFrame {
 
     public JFrameMusic() {
         initComponents();
-//        new JFrameLogin(this, true).setVisible(true);
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 50, 50));
         init();
-
-        if (Auth.user.getHinh() != null) {
-            lblAvatar.setToolTipText(Auth.user.getHinh());
-            lblAvatar.setImage(XImage.read(Auth.user.getHinh()));
-        }
-
     }
 
     void init() {
-        playing.setVisible(false);
-        playing.setEnabled(false);
-        play.setVisible(true);
-        play.setEnabled(true);
+
+        lblpause.setVisible(false);
+        lblpause.setEnabled(false);
+        lblplay.setVisible(true);
+        lblplay.setEnabled(true);
         showPanel(new JPanelTrangChu());
 
         if (!Auth.isManager()) {
             btnManagerMusic.setVisible(false);
             btnManagerUser.setVisible(false);
         }
+
     }
 
     void showPanel(JPanel panel) {
@@ -70,7 +75,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         btnTopCharts = new rojeru_san.complementos.RSButtonHover();
         btnPlaylist = new rojeru_san.complementos.RSButtonHover();
         jLabel2 = new javax.swing.JLabel();
-        lblAvatar = new Utils_Pro.ImageAvatar();
+        imageAvatar1 = new Utils_Pro.ImageAvatar();
         btnManagerMusic = new rojeru_san.complementos.RSButtonHover();
         btnManagerUser = new rojeru_san.complementos.RSButtonHover();
         jPanel3 = new javax.swing.JPanel();
@@ -79,8 +84,8 @@ public class JFrameMusic extends javax.swing.JFrame {
         thanhNhac = new Utils_Pro.ThanhNhac();
         btnBackP = new javax.swing.JButton();
         btnnextP = new javax.swing.JButton();
-        playing = new javax.swing.JLabel();
-        play = new javax.swing.JLabel();
+        lblpause = new javax.swing.JLabel();
+        lblplay = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         rSButtonHover3 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover1 = new rojeru_san.complementos.RSButtonHover();
@@ -139,12 +144,12 @@ public class JFrameMusic extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Browse");
 
-        lblAvatar.setBorderSize(3);
-        lblAvatar.setBorderSpace(3);
-        lblAvatar.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
-        lblAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
+        imageAvatar1.setBorderSize(3);
+        imageAvatar1.setBorderSpace(3);
+        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
+        imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAvatarMouseClicked(evt);
+                imageAvatar1MouseClicked(evt);
             }
         });
 
@@ -186,7 +191,7 @@ public class JFrameMusic extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -194,7 +199,7 @@ public class JFrameMusic extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -203,9 +208,9 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addComponent(btnDiscover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnManagerMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,8 +229,8 @@ public class JFrameMusic extends javax.swing.JFrame {
         jLabel4.setText("Ten bai nhac");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 114, 20));
 
-        thanhNhac.setValue(20);
-        jPanel3.add(thanhNhac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 430, -1));
+        thanhNhac.setValue(0);
+        jPanel3.add(thanhNhac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 460, -1));
 
         btnBackP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/backP.png"))); // NOI18N
         btnBackP.setContentAreaFilled(false);
@@ -235,25 +240,30 @@ public class JFrameMusic extends javax.swing.JFrame {
         btnnextP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/NextP.png"))); // NOI18N
         btnnextP.setContentAreaFilled(false);
         btnnextP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnnextP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnnextPMouseClicked(evt);
+            }
+        });
         jPanel3.add(btnnextP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 28, 28));
 
-        playing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
-        playing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        playing.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblpause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
+        lblpause.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblpause.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                playingMouseClicked(evt);
+                lblpauseMouseClicked(evt);
             }
         });
-        jPanel3.add(playing, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+        jPanel3.add(lblpause, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
-        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
-        play.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        play.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
+        lblplay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblplay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                playMouseClicked(evt);
+                lblplayMouseClicked(evt);
             }
         });
-        jPanel3.add(play, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+        jPanel3.add(lblplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(29, 34, 56));
 
@@ -345,19 +355,21 @@ public class JFrameMusic extends javax.swing.JFrame {
         showPanel(new JPanelTopChart());
     }//GEN-LAST:event_btnTopChartsActionPerformed
 
-    private void playingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playingMouseClicked
-        playing.setVisible(false);
-        playing.setEnabled(false);
-        play.setVisible(true);
-        play.setEnabled(true);
-    }//GEN-LAST:event_playingMouseClicked
+    private void lblpauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseClicked
+        lblpause.setVisible(false);
+        lblpause.setEnabled(false);
+        lblplay.setVisible(true);
+        lblplay.setEnabled(true);
+        pauseMusic();
+    }//GEN-LAST:event_lblpauseMouseClicked
 
-    private void playMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playMouseClicked
-        playing.setVisible(true);
-        playing.setEnabled(true);
-        play.setVisible(false);
-        play.setEnabled(false);
-    }//GEN-LAST:event_playMouseClicked
+    private void lblplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblplayMouseClicked
+//        playMusic();
+        lblpause.setVisible(true);
+        lblpause.setEnabled(true);
+        lblplay.setVisible(false);
+        lblplay.setEnabled(false);
+    }//GEN-LAST:event_lblplayMouseClicked
 
     private void btnManagerMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerMusicActionPerformed
         showPanel(new JPanelQlyNhac());
@@ -367,13 +379,17 @@ public class JFrameMusic extends javax.swing.JFrame {
         showPanel(new JPanelPlayList());
     }//GEN-LAST:event_btnPlaylistActionPerformed
 
-    private void lblAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAvatarMouseClicked
+    private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
         new ProfileJDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_lblAvatarMouseClicked
+    }//GEN-LAST:event_imageAvatar1MouseClicked
 
     private void btnManagerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerUserActionPerformed
         showPanel(new JPanelQlyAccount());
     }//GEN-LAST:event_btnManagerUserActionPerformed
+
+    private void btnnextPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnextPMouseClicked
+
+    }//GEN-LAST:event_btnnextPMouseClicked
 
     /**
      * @param args the command line arguments
@@ -424,22 +440,67 @@ public class JFrameMusic extends javax.swing.JFrame {
     private rojeru_san.complementos.RSButtonHover btnHome;
     private rojeru_san.complementos.RSButtonHover btnManagerMusic;
     private rojeru_san.complementos.RSButtonHover btnManagerUser;
-    public rojeru_san.complementos.RSButtonHover btnPlaylist;
+    private rojeru_san.complementos.RSButtonHover btnPlaylist;
     private rojeru_san.complementos.RSButtonHover btnTopCharts;
     private javax.swing.JButton btnnextP;
+    private Utils_Pro.ImageAvatar imageAvatar1;
     private Utils_Pro.ImageAvatar imageAvatar2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private Utils_Pro.ImageAvatar lblAvatar;
-    private javax.swing.JLabel play;
-    private javax.swing.JLabel playing;
+    private javax.swing.JLabel lblpause;
+    private javax.swing.JLabel lblplay;
     private javax.swing.JPanel pnMain;
     private rojeru_san.complementos.RSButtonHover rSButtonHover1;
     private rojeru_san.complementos.RSButtonHover rSButtonHover3;
     private Utils_Pro.ThanhNhac thanhNhac;
     // End of variables declaration//GEN-END:variables
+
+    SongDAO songDAO = new SongDAO();
+    JPanelQlyNhac qln = new JPanelQlyNhac();
+    
+    public void playMusic(int i, JTable tbl) {
+        i=tbl.getSelectedRow();
+        String mabh = (String) tbl.getValueAt(i, 0);
+        Song s = songDAO.selectById(mabh);
+        MP3Player mp3 = read(s.getMusicpath());
+        mp3.play();
+//        duration();
+    }
+
+    void pauseMusic() {
+        MP3Player mp3 = read("matmoc.mp3");
+        mp3.stop();
+
+    }
+
+    void duration() {
+        //128kps birate cơ bản của file mp3
+        try ( FileInputStream fis = new FileInputStream(XMusic.readPath("matmoc.mp3"))) {
+            // lấy kích thước file
+            long size = fis.getChannel().size();
+            //công thức tính tốc độ truyền
+            long bitrate = 128 * 1024;
+            //tính ra tổng thời gian
+            long duration = (size * 8) / bitrate;
+            //chạy thanh processbar
+            new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int value = thanhNhac.getValue();
+                    thanhNhac.setMaximum((int) duration);
+                    if (value <= thanhNhac.getMaximum()) {
+                        thanhNhac.setValue(value + 1);
+                    } else {
+
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

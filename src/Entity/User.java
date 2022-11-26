@@ -11,28 +11,13 @@ import java.util.Date;
  * @author DELL
  */
 public class User {
-
     private int matk;
     private String tennd;
     private String matkhau;
     private String email;
     private Date ngaysinh;
-    private boolean chucvu = false;
-    private Date ngaytao;
-    private String hinh;
-
-    public User() {
-    }
-
-    public User(int matk, String tennd, String matkhau, String email, Date ngaysinh, Date ngaytao, String hinh) {
-        this.matk = matk;
-        this.tennd = tennd;
-        this.matkhau = matkhau;
-        this.email = email;
-        this.ngaysinh = ngaysinh;
-        this.ngaytao = ngaytao;
-        this.hinh = hinh;
-    }
+    private boolean chucvu ;
+    private Date ngaytao ;
 
     public int getMatk() {
         return matk;
@@ -90,13 +75,18 @@ public class User {
         this.ngaytao = ngaytao;
     }
 
-    public String getHinh() {
-        return hinh;
+    public User() {
     }
 
-    public void setHinh(String hinh) {
-        this.hinh = hinh;
+    public User(int matk, String tennd, String matkhau, String email, Date ngaysinh, boolean chucvu, Date ngaytao) {
+        this.matk = matk;
+        this.tennd = tennd;
+        this.matkhau = matkhau;
+        this.email = email;
+        this.ngaysinh = ngaysinh;
+        this.chucvu = chucvu;
+        this.ngaytao = ngaytao;
     }
-
     
+
 }
