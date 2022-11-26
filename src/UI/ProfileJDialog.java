@@ -10,7 +10,7 @@ import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XDate;
 import Utils_Pro.XImage;
-import Utils_Pro.Xdate2;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -496,8 +496,8 @@ public class ProfileJDialog extends javax.swing.JDialog {
             lblhinh.setIcon(XImage.read(Auth.user.getHinh()));
         }
 
-        txtngaysinh.setText(Xdate2.toString(Auth.user.getNgaysinh(), "dd/MM/yyyy"));
-        txtngaydangky.setText(Xdate2.toString(Auth.user.getNgaytao(), "dd/MM/yyyy"));
+        txtngaysinh.setText(XDate.toString(Auth.user.getNgaysinh(), "dd/MM/yyyy"));
+        txtngaydangky.setText(XDate.toString(Auth.user.getNgaytao(), "dd/MM/yyyy"));
 
     }
 
@@ -531,7 +531,7 @@ public class ProfileJDialog extends javax.swing.JDialog {
 
         user.setTennd(txttentk.getText());
         user.setEmail(txtemail.getText());
-        user.setNgaysinh(Xdate2.toDate(txtngaysinh.getText(), "dd/MM/yyyy"));
+        user.setNgaysinh(XDate.toDate(txtngaysinh.getText(), "dd/MM/yyyy"));
         user.setHinh(lblhinh.getToolTipText());
 
         return user;

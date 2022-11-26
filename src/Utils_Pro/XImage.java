@@ -18,7 +18,7 @@ public class XImage {
     }
 
     public static void save(File src) {
-        File dst = new File("Images", src.getName());
+        File dst = new File("Logos", src.getName());
         if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdirs();
         }
@@ -32,7 +32,7 @@ public class XImage {
     }
 
     public static ImageIcon read(String fileName) {
-        File path = new File("Images", fileName);
+        File path = new File("Logos", fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
 

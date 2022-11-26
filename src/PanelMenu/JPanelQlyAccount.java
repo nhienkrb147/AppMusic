@@ -8,8 +8,8 @@ import DAO.UserDAO;
 import Entity.User;
 import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
+import Utils_Pro.XDate;
 import Utils_Pro.XImage;
-import Utils_Pro.Xdate2;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -450,7 +450,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
             String keyWord = txtSearch.getText();
             List<User> list = userDAO.selectByKeyword(keyWord);
             for (User user : list) {
-                tableModel.addRow(new Object[]{user.getTennd(), user.getMatkhau(), user.getEmail(), Xdate2.toString(user.getNgaysinh(), "dd/MM/yyy")});
+                tableModel.addRow(new Object[]{user.getTennd(), user.getMatkhau(), user.getEmail(), XDate.toString(user.getNgaysinh(), "dd/MM/yyy")});
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy xuất dữ liệu");
@@ -469,11 +469,11 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         txtTenND.setText(user.getTennd());
         txtMatkhau.setText(user.getMatkhau());
         txtEmail.setText(user.getEmail());
-        txtNgaySinh.setText(Xdate2.toString(user.getNgaysinh(), "dd/MM/yyyy"));
+        txtNgaySinh.setText(XDate.toString(user.getNgaysinh(), "dd/MM/yyyy"));
 //        txtChucVu.setText(String.valueOf(user.isChucvu()));
         rdoadmin.setSelected(user.isChucvu());
         rdonguoinghe.setSelected(!user.isChucvu());
-        txtNgayTao.setText(Xdate2.toString(user.getNgaytao(), "dd/MM/yyyy"));
+        txtNgayTao.setText(XDate.toString(user.getNgaytao(), "dd/MM/yyyy"));
 
         if (user.getHinh() != null) {
             lblhinh.setToolTipText(user.getHinh());
