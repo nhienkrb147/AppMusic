@@ -24,6 +24,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,7 +55,6 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
 
         fileChooser = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
-        lblAnh = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTenBH = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -75,18 +76,12 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         txtMaBH = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
+        lblAnh = new rojerusan.RSLabelImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(37, 44, 70));
-
-        lblAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAnhMouseClicked(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
@@ -180,21 +175,9 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                         .addComponent(lblNameApp))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaBH, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenBH, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtLink, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +190,17 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMaBH, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTenBH, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -219,13 +212,11 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(lblNameApp)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(7, 7, 7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMaBH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,8 +231,9 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                         .addGap(7, 7, 7)
                         .addComponent(cboTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
-                        .addComponent(jLabel3)))
-                .addGap(7, 7, 7)
+                        .addComponent(jLabel3))
+                    .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -264,7 +256,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -289,10 +281,6 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
     private void txtLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLinkMouseClicked
         chonNhac();
     }//GEN-LAST:event_txtLinkMouseClicked
-
-    private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
-        chonAnh();
-    }//GEN-LAST:event_lblAnhMouseClicked
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         if (isValidate()) {
@@ -351,7 +339,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator5;
-    public javax.swing.JLabel lblAnh;
+    private rojerusan.RSLabelImage lblAnh;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblNameApp;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
@@ -363,11 +351,10 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     SongDAO dao = new SongDAO();
     public int count = -1;
-
     void init() {
         fillComboBoxNhac();
     }
-
+    
     void chonAnh() {
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
@@ -377,7 +364,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             lblAnh.setToolTipText(file.getName());
         }
     }
-
+    
     private void chonNhac() {
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
@@ -386,7 +373,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             txtLink.setText(file.getName());
         }
     }
-
+    
     void fillComboBoxNhac() {
         DefaultComboBoxModel cbomodel = (DefaultComboBoxModel) cboTheLoai.getModel();
         cbomodel.removeAllElements();
@@ -395,14 +382,14 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             cbomodel.addElement(s);
         }
     }
-
+    
     private void OK() {
         Song s = getform();
+        JPanelQlyNhac qln =new JPanelQlyNhac();
         if (count == -1) {
             try {
                 dao.insert(s);
                 MsgBox.alert(this, "Thêm mới thành công!");
-                new JPanelQlyNhac().fillTable();
                 clearForm();
             } catch (Exception e) {
                 MsgBox.alert(this, "Thêm mới thất bại!");
@@ -411,8 +398,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             try {
                 dao.update(s);
                 count = -1;
-                new JPanelQlyNhac().fillTable();
-                MsgBox.alert(this, "Cập nhật thành công!");
+                MsgBox.alert(this, "Cập nhật thành công!");   
                 this.dispose();
             } catch (Exception e) {
                 this.dispose();
@@ -420,7 +406,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             }
         }
     }
-
+    
     public void clearForm() {
         Song s = new Song();
         this.setForm(s);
@@ -429,7 +415,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             lblAnh.setIcon(null);
         }
     }
-
+    
     public Song getform() {
         Song s = new Song();
         s.setMabh(txtMaBH.getText());
@@ -442,7 +428,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
         s.setNgaytao(new Date());
         return s;
     }
-
+    
     public void setForm(Song s) {
         txtMaBH.setText(s.getMabh());
         txtTenBH.setText(s.getTenbh());
@@ -456,7 +442,7 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             lblAnh.setIcon(XImage.read(s.getAnh()));
         }
     }
-
+    
     boolean isValidate() {
         if (txtMaBH.getText().equals("")) {
             MsgBox.alert(this, "Vui lòng nhập mã bài hát");
@@ -468,15 +454,15 @@ public class AddMusicJDiaglog extends javax.swing.JDialog {
             txtTenBH.requestFocus();
             return false;
         }
-        if (cboTheLoai.getSelectedItem()==null) {          
+        if (cboTheLoai.getSelectedItem() == null) {
             MsgBox.alert(this, "Chọn thể loại!");
             return false;
-        } 
-        if (txtLink.getText().equals("")) {          
+        }
+        if (txtLink.getText().equals("")) {
             MsgBox.alert(this, "Chọn đường dẫn nhạc!");
             chonNhac();
             return false;
-        }          
+        }
         if (txtNguoiTB.getText().equals("")) {
             MsgBox.alert(this, "Điền tên người thể hiện ca khúc");
             txtNguoiTB.requestFocus();

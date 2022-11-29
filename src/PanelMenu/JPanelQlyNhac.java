@@ -10,13 +10,21 @@ import UI.AddMusicJDiaglog;
 import UI.JFrameMusic;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XImage;
+import Utils_Pro.XMusic;
+import jaco.mp3.player.MP3Player;
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javazoom.jl.decoder.JavaLayerException;
 import swing.EventCallBack;
 import swing.EventTextField;
 
@@ -33,7 +41,6 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         initComponents();
         Test();
         init();
-
     }
 
     public void Test() {
@@ -56,7 +63,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                 //  Test
                 try {
                     for (int i = 1; i <= 50; i++) {
-                        
+
                         Thread.sleep(10);
                     }
                     fillTable();
@@ -211,7 +218,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -222,7 +229,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,8 +242,23 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void tblQLNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLNMouseClicked
+        JFrameMusic fms = new JFrameMusic();
         tblQLN.setDefaultEditor(Object.class, null);
-        i = tblQLN.getSelectedRow();
+        if (evt.getClickCount() == 1) {
+            i = tblQLN.getSelectedRow();
+            edit();
+        } else {
+            try {
+                i = tblQLN.getSelectedRow();
+                fms.playNhac(tblQLN);
+//                fms.setVisible(true);
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
     }//GEN-LAST:event_tblQLNMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -248,7 +270,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-       this.fillTable();
+        this.fillTable();
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
@@ -283,6 +305,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         String[] cols = new String[]{"Mã bài hát", "Tên bài hát", "Thể loại", "Người sáng tác", "Người trình bày", "Đường dẫn nhạc", "Ảnh", "Ngày tạo"};
         tblmodel.setColumnIdentifiers(cols);
     }
+
     public void fillTable() {
         DefaultTableModel tblModel = (DefaultTableModel) tblQLN.getModel();
         tblModel.setRowCount(0);
@@ -302,18 +325,18 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         addMusic.count = -1;
         addMusic.clearForm();
         addMusic.txtMaBH.setEditable(true);
-        addMusic.setVisible(true);       
+        addMusic.setVisible(true);
     }
 
-    public void update() {    
-        if(i!=-1){
+    public void update() {
+        if (i != -1) {
             edit();
             addMusic.count++;
             addMusic.txtMaBH.setEditable(false);
             addMusic.setVisible(true);
-        }else{
+        } else {
             MsgBox.alert(this, "Vui lòng chọn hàng");
-        }     
+        }
     }
 
     void delete() {
@@ -322,7 +345,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
             try {
                 dao.delete(mabh);
                 this.fillTable();
-                i=-1;
+                i = -1;
                 MsgBox.alert(this, "Xóa thành công");
             } catch (Exception e) {
                 MsgBox.alert(this, "Xóa thất bại");
