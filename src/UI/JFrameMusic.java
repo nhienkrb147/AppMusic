@@ -4,16 +4,20 @@
  */
 package UI;
 
+import DAO.PlaylistDAO;
 import DAO.SongDAO;
+import Entity.PlayList;
 import Entity.Song;
+import Entity.User;
 import PanelMenu.JPanelExplor;
-import PanelMenu.JPanelPlayList;
 import PanelMenu.JPanelPlaylist2;
 import PanelMenu.JPanelTopChart;
 import PanelMenu.JPanelQlyAccount;
 import PanelMenu.JPanelQlyNhac;
 import PanelMenu.JPanelTrangChu;
 import Utils_Pro.Auth;
+import Utils_Pro.MsgBox;
+import Utils_Pro.XDate;
 import Utils_Pro.XImage;
 import Utils_Pro.XMusic;
 import static Utils_Pro.XMusic.read;
@@ -24,6 +28,9 @@ import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -35,14 +42,22 @@ import javax.swing.Timer;
 public class JFrameMusic extends javax.swing.JFrame {
 
     private JPanel chiPanel;
+    PlayList playList = new PlayList();
+    User user = new User();
+    PlaylistDAO playlistDAO = new PlaylistDAO();
+    int countClick = playList.getCounts();
 
     public JFrameMusic() {
         initComponents();
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 50, 50));
         init();
-        
+
         loadImg();
+        showPlaylist();
+        btnPlaylist1.setVisible(false);
+        btnPlaylist2.setVisible(false);
+
     }
 
     void init() {
@@ -76,11 +91,13 @@ public class JFrameMusic extends javax.swing.JFrame {
         btnDiscover = new rojeru_san.complementos.RSButtonHover();
         btnHome = new rojeru_san.complementos.RSButtonHover();
         btnTopCharts = new rojeru_san.complementos.RSButtonHover();
-        btnPlaylist = new rojeru_san.complementos.RSButtonHover();
+        btnCreatePlaylist = new rojeru_san.complementos.RSButtonHover();
         jLabel2 = new javax.swing.JLabel();
         lblAvatar = new Utils_Pro.ImageAvatar();
         btnManagerMusic = new rojeru_san.complementos.RSButtonHover();
         btnManagerUser = new rojeru_san.complementos.RSButtonHover();
+        btnPlaylist1 = new rojeru_san.complementos.RSButtonHover();
+        btnPlaylist2 = new rojeru_san.complementos.RSButtonHover();
         jPanel3 = new javax.swing.JPanel();
         imageAvatar2 = new Utils_Pro.ImageAvatar();
         jLabel4 = new javax.swing.JLabel();
@@ -132,14 +149,14 @@ public class JFrameMusic extends javax.swing.JFrame {
             }
         });
 
-        btnPlaylist.setBackground(new java.awt.Color(38, 45, 71));
-        btnPlaylist.setForeground(new java.awt.Color(204, 204, 204));
-        btnPlaylist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/tym.png"))); // NOI18N
-        btnPlaylist.setText("Playlist");
-        btnPlaylist.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnPlaylist.addActionListener(new java.awt.event.ActionListener() {
+        btnCreatePlaylist.setBackground(new java.awt.Color(38, 45, 71));
+        btnCreatePlaylist.setForeground(new java.awt.Color(204, 204, 204));
+        btnCreatePlaylist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/tym.png"))); // NOI18N
+        btnCreatePlaylist.setText("Create Playlist");
+        btnCreatePlaylist.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnCreatePlaylist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlaylistActionPerformed(evt);
+                btnCreatePlaylistActionPerformed(evt);
             }
         });
 
@@ -178,13 +195,35 @@ public class JFrameMusic extends javax.swing.JFrame {
             }
         });
 
+        btnPlaylist1.setBackground(new java.awt.Color(38, 45, 71));
+        btnPlaylist1.setForeground(new java.awt.Color(204, 204, 204));
+        btnPlaylist1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/tym.png"))); // NOI18N
+        btnPlaylist1.setText("Playlist #1");
+        btnPlaylist1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnPlaylist1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaylist1ActionPerformed(evt);
+            }
+        });
+
+        btnPlaylist2.setBackground(new java.awt.Color(38, 45, 71));
+        btnPlaylist2.setForeground(new java.awt.Color(204, 204, 204));
+        btnPlaylist2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/tym.png"))); // NOI18N
+        btnPlaylist2.setText("Playlist #2");
+        btnPlaylist2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnPlaylist2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaylist2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnDiscover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(btnPlaylist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnCreatePlaylist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnManagerMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -197,6 +236,8 @@ public class JFrameMusic extends javax.swing.JFrame {
                         .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnPlaylist1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnPlaylist2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,13 +252,17 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addComponent(btnDiscover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(btnManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnManagerMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(btnCreatePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btnPlaylist1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btnPlaylist2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(37, 44, 70));
@@ -378,9 +423,27 @@ public class JFrameMusic extends javax.swing.JFrame {
         showPanel(new JPanelQlyNhac());
     }//GEN-LAST:event_btnManagerMusicActionPerformed
 
-    private void btnPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistActionPerformed
-        showPanel(new JPanelPlayList());
-    }//GEN-LAST:event_btnPlaylistActionPerformed
+    private void btnCreatePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePlaylistActionPerformed
+
+//        countClick = playList.getCounts();
+        System.out.println(countClick);
+        countClick += 1;
+
+        if (countClick == 1) {
+            btnPlaylist1.requestFocus();
+            btnPlaylist1.setVisible(true);
+            insert();
+        } else if (countClick == 2) {
+            btnPlaylist2.requestFocus();
+            btnPlaylist2.setVisible(true);
+        } else if (countClick == 3) {
+            MsgBox.alert(this, "chỉ được phép tạo 2 playlist");
+            countClick -= 1;
+        }
+        {
+
+        }
+    }//GEN-LAST:event_btnCreatePlaylistActionPerformed
 
     private void lblAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAvatarMouseClicked
         new ProfileJDialog(this, true).setVisible(true);
@@ -393,6 +456,20 @@ public class JFrameMusic extends javax.swing.JFrame {
     private void btnnextPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnextPMouseClicked
 
     }//GEN-LAST:event_btnnextPMouseClicked
+
+    private void btnPlaylist1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylist1ActionPerformed
+        // TODO add your handling code here:
+        if (countClick == 1 || countClick == (countClick -= 1)) {
+            showPanel(new JPanelPlaylist2());
+        }
+    }//GEN-LAST:event_btnPlaylist1ActionPerformed
+
+    private void btnPlaylist2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylist2ActionPerformed
+        // TODO add your handling code here:
+        if (countClick == 2 || countClick == (countClick += 1)) {
+            showPanel(new JPanelPlaylist2());
+        }
+    }//GEN-LAST:event_btnPlaylist2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,11 +516,13 @@ public class JFrameMusic extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackP;
+    private rojeru_san.complementos.RSButtonHover btnCreatePlaylist;
     private rojeru_san.complementos.RSButtonHover btnDiscover;
     private rojeru_san.complementos.RSButtonHover btnHome;
     private rojeru_san.complementos.RSButtonHover btnManagerMusic;
     private rojeru_san.complementos.RSButtonHover btnManagerUser;
-    private rojeru_san.complementos.RSButtonHover btnPlaylist;
+    private rojeru_san.complementos.RSButtonHover btnPlaylist1;
+    private rojeru_san.complementos.RSButtonHover btnPlaylist2;
     private rojeru_san.complementos.RSButtonHover btnTopCharts;
     private javax.swing.JButton btnnextP;
     private Utils_Pro.ImageAvatar imageAvatar2;
@@ -463,9 +542,9 @@ public class JFrameMusic extends javax.swing.JFrame {
 
     SongDAO songDAO = new SongDAO();
     JPanelQlyNhac qln = new JPanelQlyNhac();
-    
+
     public void playMusic(int i, JTable tbl) {
-        i=tbl.getSelectedRow();
+        i = tbl.getSelectedRow();
         String mabh = (String) tbl.getValueAt(i, 0);
         Song s = songDAO.selectById(mabh);
         MP3Player mp3 = read(s.getMusicpath());
@@ -511,5 +590,46 @@ public class JFrameMusic extends javax.swing.JFrame {
             lblAvatar.setToolTipText(Auth.user.getHinh());
             lblAvatar.setImage(XImage.read(Auth.user.getHinh()));
         }
+    }
+
+    PlayList getForm() {
+        PlayList playList = new PlayList();
+        playList.setMatk(Auth.user.getMatk());
+        playList.setTieude("Playlist #" + countClick);
+        playList.setCounts(countClick);
+        playList.setHinh("null");
+        playList.setDescriptions("");
+        playList.setNgaytao(new Date());
+        return playList;
+    }
+
+    void insert() {
+        PlayList playList = getForm();
+        try {
+            playlistDAO.insert(playList);
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void showPlaylist() {
+//        try {
+//            PlayList playList = playlistDAO.selectById2(Auth.user.getMatk());
+//
+//            if (Auth.user.getMatk() == playList.getMatk() && playList.getCounts() == 1) {
+//                btnPlaylist1.setVisible(true);
+//            } else {
+//                btnPlaylist1.setVisible(false);
+//            }
+//            if (Auth.user.getMatk() == playList.getMatk() && playList.getCounts() == 2) {
+//                btnPlaylist2.setVisible(true);
+//            } else {
+//                btnPlaylist2.setVisible(false);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
     }
 }
