@@ -4,13 +4,22 @@
  */
 package PanelMenu;
 
+import DAO.SongDAO;
+import Entity.Song;
 import PanelSlideShow.Slide1;
 import PanelSlideShow.Slide2;
 import PanelSlideShow.Slide3;
+import UI.JFrameMusic;
+import Utils_Pro.MsgBox;
 import jaco.mp3.player.MP3Player;
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import javazoom.jl.decoder.JavaLayerException;
 
 /**
  *
@@ -31,7 +40,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         for (int i = 0; i <= 10; i++) {
             model.addRow(new Object[]{i, "nhien", "fffff", "n001"});
         }
-
+        init();
  
     }
 
@@ -110,6 +119,11 @@ public class JPanelTrangChu extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbl);
@@ -201,6 +215,20 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         slideshow1.next();
     }//GEN-LAST:event_lblNextMouseClicked
 
+    private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
+        JFrameMusic fms = new JFrameMusic();
+        if (evt.getClickCount() == 2) {
+            i = tbl.getSelectedRow();
+            try {
+                fms.playNhac(tbl);
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(JPanelTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tblMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private PnSlider.ImageSlider imageSlider1;
@@ -217,4 +245,31 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     private ClassSlideShow.Slideshow slideshow1;
     private CustomTable.TableDark tbl;
     // End of variables declaration//GEN-END:variables
+    int i=-1;
+    SongDAO dao = new SongDAO();
+    private void init() {
+        initTable();
+        fillTable();
+        
+    }
+    void initTable() {
+        DefaultTableModel tblmodel = (DefaultTableModel) tbl.getModel();
+        String[] cols = new String[]{"Mã bài hát", "Tên bài hát", "Người trình bày","Ngày tạo"};
+        tblmodel.setColumnIdentifiers(cols);
+    }
+    public void fillTable() {
+        DefaultTableModel tblModel = (DefaultTableModel) tbl.getModel();
+        tblModel.setRowCount(0);
+        try {
+            List<Song> list = dao.selectAll(); //Đọc dữ liệu từ csdl
+            for (Song s : list) {
+                Object[] rows = {s.getMabh(), s.getTenbh(),s.getNguoitb(), s.getNgaytao()};
+                tblModel.addRow(rows);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    
 }
