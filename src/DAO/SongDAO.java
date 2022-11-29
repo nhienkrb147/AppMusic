@@ -96,4 +96,8 @@ public class SongDAO extends MusicDAO<Song, String> {
             throw new RuntimeException(e);
         }
     }
+    public List<Song> selectByTheLoai(String TheLoai,String search) {
+        String sql = "SELECT * FROM Song WHERE theloai LIKE ? and  tenbh LIKE ? ";
+        return this.selectBySql(sql,  "%" + TheLoai + "%" , "%" + search + "%");
+    }
 }
