@@ -49,8 +49,6 @@ create table PLAYLIST
 	matk int,
 	tieude nvarchar(50),
 	counts int,
-	hinh nvarchar(50),
-	descriptions nvarchar(255),
 	ngaytao date
 	
 	constraint pk_playlist primary key(maplaylist),
@@ -240,3 +238,20 @@ insert into PLAYLIST_SONG(maplaylist,mabh) values
 (5,'USUK6'),
 (2,'USUK7'),
 (5,'USUK8');
+
+select top 10 b.mabh,tenbh,nguoitb, playcount, b.ngaytao
+from USER_SONG a inner join SONG b on a.mabh=b.mabh order by playcount desc
+
+select * from USER_SONG
+
+go
+create proc sp_Top10Nhac
+as begin
+	select top 10 b.mabh,
+	tenbh,
+	nguoitb, 
+	playcount, 
+	b.ngaytao
+	from USER_SONG a inner join SONG b 
+	on a.mabh=b.mabh order by playcount desc
+end
