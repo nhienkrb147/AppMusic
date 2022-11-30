@@ -27,7 +27,7 @@ public class SongDAO extends MusicDAO<Song, String> {
     @Override
     public void insert(Song entity) {
         XJdbc.update(INSERT_SQL, entity.getMabh(), entity.getTenbh(), entity.getTheloai(),
-                entity.getNguoist(), entity.getNguoitb(), entity.getMusicpath(),entity.getAnh(), entity.getNgaytao());
+                entity.getNguoist(), entity.getNguoitb(), entity.getMusicpath(), entity.getAnh(), entity.getNgaytao());
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SongDAO extends MusicDAO<Song, String> {
                 entity.setTenbh(rs.getString("tenbh"));
                 entity.setTheloai(rs.getString("theloai"));
                 entity.setNguoist(rs.getString("nguoist"));
-                entity.setNguoitb(rs.getString("nguoitb"));              
+                entity.setNguoitb(rs.getString("nguoitb"));
                 entity.setMusicpath(rs.getString("musicpath"));
                 entity.setAnh(rs.getString("anh"));
                 entity.setNgaytao(rs.getDate("ngaytao"));
@@ -78,16 +78,17 @@ public class SongDAO extends MusicDAO<Song, String> {
             throw new RuntimeException(e);
         }
     }
+
     public List<Song> selectByKeyword(String keyword) {
         String sql = "SELECT * FROM Song WHERE tenbh LIKE ?";
         return this.selectBySql(sql, "%" + keyword + "%");
     }
-    
+
     public List<String> selectTheloai() {
         List<String> list = new ArrayList<>();
         try {
             ResultSet rs = XJdbc.query(SELECT_THELOAI);
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(rs.getString("theloai"));
             }
             rs.getStatement().getConnection().close();
@@ -96,8 +97,9 @@ public class SongDAO extends MusicDAO<Song, String> {
             throw new RuntimeException(e);
         }
     }
-    public List<Song> selectByTheLoai(String TheLoai,String search) {
+
+    public List<Song> selectByTheLoai(String TheLoai, String search) {
         String sql = "SELECT * FROM Song WHERE theloai LIKE ? and  tenbh LIKE ? ";
-        return this.selectBySql(sql,  "%" + TheLoai + "%" , "%" + search + "%");
+        return this.selectBySql(sql, "%" + TheLoai + "%", "%" + search + "%");
     }
 }

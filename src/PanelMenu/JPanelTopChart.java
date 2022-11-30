@@ -5,7 +5,9 @@
 package PanelMenu;
 
 import DAO.SongDAO;
+import DAO.UserSongDAO;
 import Entity.Song;
+import Entity.UserSong;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JTable;
@@ -22,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioSystem;
@@ -32,6 +35,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import swing.EventCallBack;
@@ -57,10 +61,10 @@ public class JPanelTopChart extends javax.swing.JPanel {
         tbl.fixTable(jScrollPane1);
         tbl.setColumnAlignment(0, JLabel.CENTER);
         tbl.setCellAlignment(0, JLabel.CENTER);
-        tbl.setColumnAlignment(2, JLabel.CENTER);
-        tbl.setCellAlignment(2, JLabel.CENTER);
-        tbl.setColumnAlignment(4, JLabel.RIGHT);
-        tbl.setCellAlignment(4, JLabel.RIGHT);
+        tbl.setColumnAlignment(2, JLabel.LEFT);
+        tbl.setCellAlignment(2, JLabel.LEFT);
+        tbl.setColumnAlignment(4, JLabel.LEFT);
+        tbl.setCellAlignment(4, JLabel.LEFT);
         tbl.setColumnWidth(0, 50);
         tbl.setColumnWidth(2, 100);
 
@@ -143,6 +147,11 @@ public class JPanelTopChart extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbl);
@@ -394,7 +403,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoopMouseReleased
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-        
+
     }//GEN-LAST:event_btnShuffleMouseClicked
 
     private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
@@ -475,6 +484,19 @@ public class JPanelTopChart extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolumeUpActionPerformed
 
+    private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
+        tbl.setDefaultEditor(Object.class, null);
+        if (evt.getClickCount() == 2) {
+            try {
+                playNhac();
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tblMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel LPThanhNhac;
@@ -503,9 +525,13 @@ public class JPanelTopChart extends javax.swing.JPanel {
         lblpause.setEnabled(false);
         lblresume.setVisible(true);
         lblresume.setEnabled(true);
+        initTable();
+        fillTableTopChart();      
     }
+
     int i = -1;
     SongDAO dao = new SongDAO();
+    UserSongDAO usdao = new UserSongDAO();
     public int dung;
     public Player player;
     public long pause;
@@ -514,6 +540,22 @@ public class JPanelTopChart extends javax.swing.JPanel {
     public BufferedInputStream bis;
     File musicPath = null;
     int play = 0;
+    Timer time;
+
+    void initTable() {
+        DefaultTableModel tblmodel = (DefaultTableModel) tbl.getModel();
+        String[] cols = new String[]{"Mã bài hát", "Tên bài hát", "Người trình bày", "Lượt nghe", "Ngày đăng"};
+        tblmodel.setColumnIdentifiers(cols);
+    }
+
+    void fillTableTopChart() {
+        DefaultTableModel tblmodel = (DefaultTableModel) tbl.getModel();
+        tblmodel.setRowCount(0);
+        List<Object[]> list = usdao.getTop10();
+        for (Object[] row : list) {
+            tblmodel.addRow(row);
+        }
+    }
 
     void playNhac() throws FileNotFoundException, JavaLayerException, IOException {
         if (play == 0) {
@@ -534,6 +576,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
             lblNguoiHat.setText(s.getNguoitb());
             //Tốc độ nhạc
             duration(s);
+            time.start();
             play = 1;
             new Thread() {
                 @Override
@@ -562,27 +605,31 @@ public class JPanelTopChart extends javax.swing.JPanel {
             //tính ra tổng thời gian
             long duration = (size * 8) / bitrate;
             //chạy thanh processbar
-            new Timer(1000, new ActionListener() {
+            time =new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = thanhNhac.getValue();
-                    thanhNhac.setMaximum((int) duration);
+                    thanhNhac.setMaximum((int) duration + 5);
                     if (value <= thanhNhac.getMaximum()) {
                         thanhNhac.setValue(value + 1);
-                    } if (value == thanhNhac.getMaximum()) {
+                    }                    
+                    if (value == thanhNhac.getMaximum()) {
                         next();
+                        
                     }
                 }
-            }).start();
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void pause() {
+    public void pause() {        
         if (player != null) {
-            try {
-                pause = fis.available();
+            try { 
+                time.stop();            
+                pause = fis.available();              
+                thanhNhac.setValue((int)((total_length-pause)*8)/(128*1024));
                 player.close();
             } catch (Exception e) {
             }
@@ -595,6 +642,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
             bis = new BufferedInputStream(fis);
             player = new Player(bis);
             fis.skip(total_length - pause);
+            time.start();
             new Thread() {
                 @Override
                 public void run() {

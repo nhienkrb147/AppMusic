@@ -622,6 +622,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     public BufferedInputStream bis;
     File musicPath = null;
     int play = 0;
+    Timer time;
 
     void playNhac() throws FileNotFoundException, JavaLayerException, IOException {
         if (play == 0) {
@@ -641,6 +642,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             lblNguoiHat.setText(s.getNguoitb());
             lblNameMusic.setText(s.getTenbh());
             //Tốc độ nhạc
+            time.start();
             duration(s);
             play = 1;
             new Thread() {
@@ -670,7 +672,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             //tính ra tổng thời gian
             long duration = (size * 8) / bitrate;
             //chạy thanh processbar
-            new Timer(1000, new ActionListener() {
+            time =new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = thanhNhac.getValue();
@@ -681,7 +683,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                         next();
                     }
                 }
-            }).start();
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -690,6 +692,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     public void pause() {
         if (player != null) {
             try {
+                time.stop();
                 pause = fis.available();
                 player.close();
             } catch (Exception e) {
@@ -703,6 +706,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             bis = new BufferedInputStream(fis);
             player = new Player(bis);
             fis.skip(total_length - pause);
+            time.start();
             new Thread() {
                 @Override
                 public void run() {
