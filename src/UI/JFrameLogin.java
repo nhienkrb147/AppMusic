@@ -84,7 +84,11 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         txtUsername.setBackground(new java.awt.Color(37, 44, 70));
         txtUsername.setForeground(new java.awt.Color(204, 204, 204));
+<<<<<<< HEAD
         txtUsername.setText("nhien");
+=======
+        txtUsername.setText("nam");
+>>>>>>> nam
         txtUsername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
         txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
