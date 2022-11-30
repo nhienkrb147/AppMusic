@@ -8,10 +8,29 @@ import DAO.SongDAO;
 import Entity.Song;
 import UI.AddMusicJDiaglog;
 import Utils_Pro.MsgBox;
+import Utils_Pro.XImage;
+import Utils_Pro.XMusic;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import swing.EventCallBack;
 import swing.EventTextField;
 
@@ -21,10 +40,11 @@ import swing.EventTextField;
  */
 public class JPanelExplor extends javax.swing.JPanel {
 
-   private String  TL;
-    public JPanelExplor() {
+    private String TL;
+
+    public JPanelExplor() throws InterruptedException {
         initComponents();
-       cosTomTable();
+        cosTomTable();
         search();
         init();
 
@@ -47,7 +67,7 @@ public class JPanelExplor extends javax.swing.JPanel {
         txtSearch.addEvent(new EventTextField() {
             @Override
             public void onPressed(EventCallBack call) {
-               String key;
+                String key;
                 try {
                     for (int i = 1; i <= 50; i++) {
 
@@ -100,6 +120,19 @@ public class JPanelExplor extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblExplor = new CustomTable.TableDark();
         txtSearch = new swing.TextFieldAnimation();
+        LPThanhNhac = new javax.swing.JPanel();
+        lblAnhNhac = new Utils_Pro.ImageAvatar();
+        lblNameMusic = new javax.swing.JLabel();
+        thanhNhac = new Utils_Pro.ThanhNhac();
+        btnLoop = new javax.swing.JButton();
+        btnShuffle = new javax.swing.JButton();
+        lblpause = new javax.swing.JLabel();
+        lblresume = new javax.swing.JLabel();
+        lblNguoiHat = new javax.swing.JLabel();
+        btnBackP = new javax.swing.JButton();
+        btnnextP = new javax.swing.JButton();
+        btnVolumeDown = new javax.swing.JButton();
+        btnVolumeUp = new javax.swing.JButton();
 
         MnSieuTo.setBackground(new java.awt.Color(0, 153, 255));
         MnSieuTo.setPreferredSize(new java.awt.Dimension(150, 52));
@@ -338,11 +371,11 @@ public class JPanelExplor extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,7 +388,7 @@ public class JPanelExplor extends javax.swing.JPanel {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRound2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -374,13 +407,15 @@ public class JPanelExplor extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 99, Short.MAX_VALUE))
         );
 
         Tabs.addTab("Thể Loại", jPanel6);
@@ -427,7 +462,7 @@ public class JPanelExplor extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
                 .addGap(4, 4, 4))
         );
         jPanel9Layout.setVerticalGroup(
@@ -437,20 +472,227 @@ public class JPanelExplor extends javax.swing.JPanel {
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
+                .addContainerGap())
+        );
+
+        LPThanhNhac.setBackground(new java.awt.Color(37, 44, 70));
+        LPThanhNhac.setEnabled(false);
+
+        lblAnhNhac.setBorderSize(0);
+        lblAnhNhac.setBorderSpace(0);
+        lblAnhNhac.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
+
+        lblNameMusic.setForeground(new java.awt.Color(255, 255, 255));
+        lblNameMusic.setText("Ten bai nhac");
+
+        thanhNhac.setValue(0);
+
+        btnLoop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/infiniti.png"))); // NOI18N
+        btnLoop.setContentAreaFilled(false);
+        btnLoop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLoop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnLoopMouseReleased(evt);
+            }
+        });
+
+        btnShuffle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/random.png"))); // NOI18N
+        btnShuffle.setContentAreaFilled(false);
+        btnShuffle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnShuffle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnShuffleMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnShuffleMouseReleased(evt);
+            }
+        });
+        btnShuffle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShuffleActionPerformed(evt);
+            }
+        });
+
+        lblpause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
+        lblpause.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblpause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblpauseMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblpauseMouseReleased(evt);
+            }
+        });
+        lblpause.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                lblpausePropertyChange(evt);
+            }
+        });
+
+        lblresume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
+        lblresume.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblresume.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblresumeMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblresumeMouseReleased(evt);
+            }
+        });
+
+        lblNguoiHat.setForeground(new java.awt.Color(204, 204, 204));
+        lblNguoiHat.setText("Người hát");
+
+        btnBackP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/backP.png"))); // NOI18N
+        btnBackP.setContentAreaFilled(false);
+        btnBackP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnBackPMouseReleased(evt);
+            }
+        });
+
+        btnnextP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/NextP.png"))); // NOI18N
+        btnnextP.setContentAreaFilled(false);
+        btnnextP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnnextP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnnextPMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnnextPMouseReleased(evt);
+            }
+        });
+        btnnextP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnextPActionPerformed(evt);
+            }
+        });
+
+        btnVolumeDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/volumedown.png"))); // NOI18N
+        btnVolumeDown.setContentAreaFilled(false);
+        btnVolumeDown.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolumeDown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolumeDownMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnVolumeDownMouseReleased(evt);
+            }
+        });
+        btnVolumeDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolumeDownActionPerformed(evt);
+            }
+        });
+
+        btnVolumeUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/volumeup.png"))); // NOI18N
+        btnVolumeUp.setContentAreaFilled(false);
+        btnVolumeUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolumeUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolumeUpMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnVolumeUpMouseReleased(evt);
+            }
+        });
+        btnVolumeUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolumeUpActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LPThanhNhacLayout = new javax.swing.GroupLayout(LPThanhNhac);
+        LPThanhNhac.setLayout(LPThanhNhacLayout);
+        LPThanhNhacLayout.setHorizontalGroup(
+            LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNameMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNguoiHat, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnBackP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblresume, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblpause))
+                        .addGap(7, 7, 7)
+                        .addComponent(btnnextP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShuffle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(thanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVolumeDown, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVolumeUp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+        LPThanhNhacLayout.setVerticalGroup(
+            LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblNameMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNguoiHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                        .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LPThanhNhacLayout.createSequentialGroup()
+                                        .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                                                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblresume, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lblpause)
+                                                    .addComponent(btnBackP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(btnShuffle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnnextP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(8, 8, 8))
+                                            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                                                .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addComponent(thanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LPThanhNhacLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnVolumeDown, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnVolumeUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(8, 8, 8))
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(LPThanhNhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                .addComponent(LPThanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Tabs.addTab("Nhạc", jPanel8);
@@ -463,7 +705,9 @@ public class JPanelExplor extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -485,60 +729,159 @@ public class JPanelExplor extends javax.swing.JPanel {
     }//GEN-LAST:event_V_PopMouseClicked
 
     private void UsUkAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_UsUkAncestorAdded
-          
+
     }//GEN-LAST:event_UsUkAncestorAdded
 
     private void UsUkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsUkMouseClicked
-      TL = "USUK";
+        TL = "USUK";
         fillTableExplor(TL);
         Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_UsUkMouseClicked
 
     private void RBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RBMouseClicked
-       TL = "R&B";
-        fillTableExplor(TL );
+        TL = "R&B";
+        fillTableExplor(TL);
         Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_RBMouseClicked
 
     private void RapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RapMouseClicked
-      TL = "RAP";
-        fillTableExplor(TL );
+        TL = "RAP";
+        fillTableExplor(TL);
         Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_RapMouseClicked
 
     private void HipHopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HipHopMouseClicked
-      TL = "HipHop";
-        fillTableExplor(TL );
+        TL = "HipHop";
+        fillTableExplor(TL);
         Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_HipHopMouseClicked
 
     private void JazzMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JazzMouseClicked
-      TL = "jazz";
-        fillTableExplor(TL );
+        TL = "jazz";
+        fillTableExplor(TL);
         Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_JazzMouseClicked
 
     private void SleepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SleepMouseClicked
         TL = "sleep";
-        fillTableExplor(TL );
-        Tabs.setSelectedIndex(1);   
+        fillTableExplor(TL);
+        Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_SleepMouseClicked
 
     private void GamingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GamingMouseClicked
-          TL = "Gaming";
-        fillTableExplor(TL );
+        TL = "Gaming";
+        fillTableExplor(TL);
         Tabs.setSelectedIndex(1);
     }//GEN-LAST:event_GamingMouseClicked
 
     private void tblExplorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExplorMouseClicked
-       tblExplor.setComponentPopupMenu(MnSieuTo);
+        tblExplor.setComponentPopupMenu(MnSieuTo);
+        if (evt.getClickCount() == 1) {
+            i = tblExplor.getSelectedRow();
+        } else {
+            try {
+                playNhac();
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_tblExplorMouseClicked
+
+    private void btnLoopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoopMouseReleased
+
+    }//GEN-LAST:event_btnLoopMouseReleased
+
+    private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
+        
+    }//GEN-LAST:event_btnShuffleMouseClicked
+
+    private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
+
+    }//GEN-LAST:event_btnShuffleMouseReleased
+
+    private void btnShuffleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShuffleActionPerformed
+
+    }//GEN-LAST:event_btnShuffleActionPerformed
+
+    private void lblpauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseClicked
+        lblpause.setVisible(false);
+        lblpause.setEnabled(false);
+        lblresume.setVisible(true);
+        lblresume.setEnabled(true);
+    }//GEN-LAST:event_lblpauseMouseClicked
+
+    private void lblpauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseReleased
+        resume();
+    }//GEN-LAST:event_lblpauseMouseReleased
+
+    private void lblpausePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblpausePropertyChange
+
+    }//GEN-LAST:event_lblpausePropertyChange
+
+    private void lblresumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseClicked
+        lblpause.setVisible(true);
+        lblpause.setEnabled(true);
+        lblresume.setVisible(false);
+        lblresume.setEnabled(false);
+    }//GEN-LAST:event_lblresumeMouseClicked
+
+    private void lblresumeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseReleased
+        pause();
+    }//GEN-LAST:event_lblresumeMouseReleased
+
+    private void btnBackPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackPMouseReleased
+        try {
+            previous();
+        } catch (JavaLayerException ex) {
+            Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBackPMouseReleased
+
+    private void btnnextPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnextPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnnextPMouseClicked
+
+    private void btnnextPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnextPMouseReleased
+        next();
+    }//GEN-LAST:event_btnnextPMouseReleased
+
+    private void btnnextPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnnextPActionPerformed
+
+    private void btnVolumeDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeDownMouseClicked
+        VolumeDown(0.1);
+    }//GEN-LAST:event_btnVolumeDownMouseClicked
+
+    private void btnVolumeDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeDownMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolumeDownMouseReleased
+
+    private void btnVolumeDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolumeDownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolumeDownActionPerformed
+
+    private void btnVolumeUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeUpMouseClicked
+        VolumeUp(0.1);
+    }//GEN-LAST:event_btnVolumeUpMouseClicked
+
+    private void btnVolumeUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeUpMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolumeUpMouseReleased
+
+    private void btnVolumeUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolumeUpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolumeUpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Gaming;
     private javax.swing.JLabel HipHop;
     private javax.swing.JLabel Jazz;
+    public javax.swing.JPanel LPThanhNhac;
     private javax.swing.JMenu MnAddPlayList;
     private javax.swing.JMenuItem MnPlay;
     private javax.swing.JPopupMenu MnSieuTo;
@@ -548,6 +891,12 @@ public class JPanelExplor extends javax.swing.JPanel {
     private CustomTable.TablePanel Tabs;
     private javax.swing.JLabel UsUk;
     private javax.swing.JLabel V_Pop;
+    private javax.swing.JButton btnBackP;
+    private javax.swing.JButton btnLoop;
+    private javax.swing.JButton btnShuffle;
+    private javax.swing.JButton btnVolumeDown;
+    private javax.swing.JButton btnVolumeUp;
+    private javax.swing.JButton btnnextP;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
@@ -555,6 +904,11 @@ public class JPanelExplor extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    public Utils_Pro.ImageAvatar lblAnhNhac;
+    public javax.swing.JLabel lblNameMusic;
+    private javax.swing.JLabel lblNguoiHat;
+    public javax.swing.JLabel lblpause;
+    public javax.swing.JLabel lblresume;
     private Utils_Pro.PanelRound panelRound2;
     private Utils_Pro.PanelRound panelRound3;
     private Utils_Pro.PanelRound panelRound4;
@@ -564,15 +918,24 @@ public class JPanelExplor extends javax.swing.JPanel {
     private Utils_Pro.PanelRound panelRound8;
     private Utils_Pro.PanelRound panelRound9;
     private CustomTable.TableDark tblExplor;
+    public Utils_Pro.ThanhNhac thanhNhac;
     private swing.TextFieldAnimation txtSearch;
     // End of variables declaration//GEN-END:variables
 
     SongDAO dao = new SongDAO();
 
-    void init() {
+    void init() throws InterruptedException {
         initTable();
         fillTableExplor(TL);
-
+        lblpause.setVisible(false);
+        lblpause.setEnabled(false);
+        lblresume.setVisible(true);
+        lblresume.setEnabled(true);
+        if (player != null) {
+            if (Tabs.getSelectedIndex() == 0) {
+                player.wait();
+            }
+        }
     }
 
     void initTable() {
@@ -598,5 +961,283 @@ public class JPanelExplor extends javax.swing.JPanel {
         }
 
     }
+    int i = -1;
+    public int dung;
+    public Player player;
+    public long pause;
+    public long total_length;
+    public FileInputStream fis;
+    public BufferedInputStream bis;
+    File musicPath = null;
+    int play = 0;
 
+    void playNhac() throws FileNotFoundException, JavaLayerException, IOException {
+        if (play == 0) {
+            i = tblExplor.getSelectedRow();
+            String mabh = (String) tblExplor.getValueAt(i, 0);
+            Song s = dao.selectById(mabh);
+            fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
+            bis = new BufferedInputStream(fis);
+            player = new javazoom.jl.player.Player(bis);
+            musicPath = XMusic.readPath(s.getMusicpath());
+            total_length = fis.available();
+            //lấy ảnh nhạc
+            if (s.getAnh() != null) {
+                lblAnhNhac.setImage(XImage.read(s.getAnh()));
+            }
+            //tên bài nhạc
+            lblNameMusic.setText(s.getTenbh());
+            //Tốc độ nhạc
+            duration(s);
+            play = 1;
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+
+                    } catch (Exception e) {
+                    }
+                }
+            }.start();
+        } else {
+            player.close();
+            play = 0;
+            playNhac();
+        }
+    }
+
+    void duration(Song s) {
+        //128kps birate cơ bản của file mp3
+        try ( FileInputStream fis = new FileInputStream(XMusic.readPath(s.getMusicpath()))) {
+            // lấy kích thước file
+            long size = fis.getChannel().size();
+            //công thức tính tốc độ truyền
+            long bitrate = 128 * 1024;
+            //tính ra tổng thời gian
+            long duration = (size * 8) / bitrate;
+            //chạy thanh processbar
+            new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int value = thanhNhac.getValue();
+                    thanhNhac.setMaximum((int) duration);
+                    if (value <= thanhNhac.getMaximum()) {
+                        thanhNhac.setValue(value + 1);
+                    } 
+                    if (value == thanhNhac.getMaximum()) {
+                        next();
+                    }
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void pause() {
+        if (player != null) {
+            try {
+                pause = fis.available();
+                player.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public void resume() {
+        try {
+            fis = new FileInputStream(musicPath);
+            bis = new BufferedInputStream(fis);
+            player = new Player(bis);
+            fis.skip(total_length - pause);
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+
+                    } catch (Exception e) {
+                    }
+                }
+            }.start();
+        } catch (Exception e) {
+        }
+    }
+
+    private void previous() throws JavaLayerException {
+        thanhNhac.setValue(0);
+        if (play == 0) {
+            try {
+                int s1 = tblExplor.getSelectedRow() - 1;
+                String mabh = (String) tblExplor.getValueAt(s1, 0);
+                Song s = dao.selectById(mabh);
+                fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
+                bis = new BufferedInputStream(fis);
+                player = new javazoom.jl.player.Player(bis);
+                play = 1;
+                //lấy ảnh nhạc
+                if (s.getAnh() != null) {
+                    lblAnhNhac.setImage(XImage.read(s.getAnh()));
+                }
+                //tên bài nhạc
+                lblNameMusic.setText(s.getTenbh());
+                //Tốc độ nhạc
+                tblExplor.setRowSelectionInterval(s1, s1);
+            } catch (Exception e) {
+                System.out.println("Problem playing file");
+                System.out.println(e);
+            }
+
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+
+                    } catch (Exception e) {
+                    }
+                }
+            }.start();
+
+        } else {
+            player.close();
+            play = 0;
+            previous();
+        }
+    }
+
+    private void next() {
+        thanhNhac.setValue(0);
+        if (play == 0) {
+            try {
+                int s1 = tblExplor.getSelectedRow() + 1;
+                String mabh = (String) tblExplor.getValueAt(s1, 0);
+                Song s = dao.selectById(mabh);
+                fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
+                bis = new BufferedInputStream(fis);
+                player = new javazoom.jl.player.Player(bis);
+                play = 1;
+                //lấy ảnh nhạc
+                if (s.getAnh() != null) {
+                    lblAnhNhac.setImage(XImage.read(s.getAnh()));
+                }
+                //tên bài nhạc
+                lblNameMusic.setText(s.getTenbh());
+                //Tốc độ nhạc
+                tblExplor.setRowSelectionInterval(s1, s1);
+            } catch (Exception e) {
+                System.out.println("Problem playing file");
+                System.out.println(e);
+            }
+
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+
+                    } catch (Exception e) {
+                    }
+                }
+            }.start();
+
+        } else {
+            player.close();
+            play = 0;
+            next();
+        }
+    }
+    private void VolumeDown(Double valueToPlusMinus) {
+        // lấy Mixer Information từ hệ thống âm thanh
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        // Dùng vòng lặp để liệt kê tất cả mixers
+        for (Mixer.Info mixerInfo : mixers) {
+            // lấy Mixer
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            // Bây giờ nhận dòng Target Line
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            // Ở đây một lần nữa sử dụng vòng lặp for để liệt kê các dòng
+            for (Line.Info lineInfo : lineInfos) {
+                // Tạo line rỗng
+                Line line = null;
+                // Make a boolean as opened
+                boolean opened = true;
+                // Now use try exception for opening a line
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    // Now Check If Line Is not Opened
+                    if (!opened) {
+                        // Open Line
+                        line.open();
+                    }
+                    // Make a float control
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    // Get Current Volume Now
+                    float currentVolume = volControl.getValue();
+                    // Make a temp double variable and store valuePlusMinus
+                    Double volumeToCut = valueToPlusMinus;
+                    // Make a float and calculate the addition or subtraction in volume
+                    float changedCalc = (float) ((float) currentVolume - (double) volumeToCut);
+                    // Now Set This Changed Value Into Volume Line.
+                    volControl.setValue(changedCalc);
+
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    // Close Line If it opened
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
+    }
+
+    private void VolumeUp(Double valueToPlusMinus) {
+        // Get Mixer Information From AudioSystem
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        // Now use a for loop to list all mixers
+        for (Mixer.Info mixerInfo : mixers) {
+            // Get Mixer
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            // Now Get Target Line
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            // Here again use for loop to list lines
+            for (Line.Info lineInfo : lineInfos) {
+                // Make a null line
+                Line line = null;
+                // Make a boolean as opened
+                boolean opened = true;
+                // Now use try exception for opening a line
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    // Now Check If Line Is not Opened
+                    if (!opened) {
+                        // Open Line
+                        line.open();
+                    }
+                    // Make a float control
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    // Get Current Volume Now
+                    float currentVolume = volControl.getValue();
+                    // Make a temp double variable and store valuePlusMinus
+                    Double volumeToCut = valueToPlusMinus;
+                    // Make a float and calculate the addition or subtraction in volume
+                    float changedCalc = (float) ((float) currentVolume + (double) volumeToCut);
+                    // Now Set This Changed Value Into Volume Line.
+                    volControl.setValue(changedCalc);
+
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    // Close Line If it opened
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
+    }
 }

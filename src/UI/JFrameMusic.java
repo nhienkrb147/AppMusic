@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -51,11 +53,6 @@ public class JFrameMusic extends javax.swing.JFrame {
     }
 
     void init() {
-
-        lblpause.setVisible(false);
-        lblpause.setEnabled(false);
-        lblresume.setVisible(true);
-        lblresume.setEnabled(true);
         showPanel(new JPanelTrangChu());
 
         if (!Auth.isManager()) {
@@ -69,8 +66,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         chiPanel = panel;
         pnMain.removeAll();
         pnMain.add(chiPanel);
-        pnMain.repaint();
-        pnMain.revalidate();
+        pnMain.validate();       
     }
 
     @SuppressWarnings("unchecked")
@@ -87,14 +83,6 @@ public class JFrameMusic extends javax.swing.JFrame {
         lblAvatar = new Utils_Pro.ImageAvatar();
         btnManagerMusic = new rojeru_san.complementos.RSButtonHover();
         btnManagerUser = new rojeru_san.complementos.RSButtonHover();
-        JPanelThanhNhac = new javax.swing.JPanel();
-        lblAnhNhac = new Utils_Pro.ImageAvatar();
-        lblNameMusic = new javax.swing.JLabel();
-        thanhNhac = new Utils_Pro.ThanhNhac();
-        btnBackP = new javax.swing.JButton();
-        btnnextP = new javax.swing.JButton();
-        lblpause = new javax.swing.JLabel();
-        lblresume = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         rSButtonHover3 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover1 = new rojeru_san.complementos.RSButtonHover();
@@ -218,122 +206,13 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addComponent(btnDiscover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(btnPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(btnManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnManagerMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
-
-        JPanelThanhNhac.setBackground(new java.awt.Color(37, 44, 70));
-        JPanelThanhNhac.setEnabled(false);
-
-        lblAnhNhac.setBorderSize(0);
-        lblAnhNhac.setBorderSpace(0);
-        lblAnhNhac.setImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))); // NOI18N
-
-        lblNameMusic.setForeground(new java.awt.Color(255, 255, 255));
-        lblNameMusic.setText("Ten bai nhac");
-
-        thanhNhac.setValue(0);
-
-        btnBackP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/backP.png"))); // NOI18N
-        btnBackP.setContentAreaFilled(false);
-        btnBackP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBackP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnBackPMouseReleased(evt);
-            }
-        });
-
-        btnnextP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/NextP.png"))); // NOI18N
-        btnnextP.setContentAreaFilled(false);
-        btnnextP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnnextP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnnextPMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnnextPMouseReleased(evt);
-            }
-        });
-        btnnextP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnextPActionPerformed(evt);
-            }
-        });
-
-        lblpause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
-        lblpause.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblpause.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblpauseMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblpauseMouseReleased(evt);
-            }
-        });
-        lblpause.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                lblpausePropertyChange(evt);
-            }
-        });
-
-        lblresume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
-        lblresume.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblresume.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblresumeMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblresumeMouseReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout JPanelThanhNhacLayout = new javax.swing.GroupLayout(JPanelThanhNhac);
-        JPanelThanhNhac.setLayout(JPanelThanhNhacLayout);
-        JPanelThanhNhacLayout.setHorizontalGroup(
-            JPanelThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(lblNameMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnBackP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(JPanelThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblpause)
-                    .addComponent(lblresume))
-                .addGap(10, 10, 10)
-                .addComponent(btnnextP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(thanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        JPanelThanhNhacLayout.setVerticalGroup(
-            JPanelThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblNameMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnBackP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(JPanelThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblpause)
-                    .addComponent(lblresume)))
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnnextP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(JPanelThanhNhacLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(thanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(29, 34, 56));
@@ -370,20 +249,14 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addComponent(JPanelThanhNhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(JPanelThanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -398,7 +271,11 @@ public class JFrameMusic extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonHover3ActionPerformed
 
     private void btnDiscoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscoverActionPerformed
-        showPanel(new JPanelExplor());
+        try {
+            showPanel(new JPanelExplor());
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JFrameMusic.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDiscoverActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
@@ -408,20 +285,6 @@ public class JFrameMusic extends javax.swing.JFrame {
     private void btnTopChartsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopChartsActionPerformed
         showPanel(new JPanelTopChart());
     }//GEN-LAST:event_btnTopChartsActionPerformed
-
-    private void lblpauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseClicked
-        lblpause.setVisible(false);
-        lblpause.setEnabled(false);
-        lblresume.setVisible(true);
-        lblresume.setEnabled(true);
-    }//GEN-LAST:event_lblpauseMouseClicked
-
-    private void lblresumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseClicked
-        lblpause.setVisible(true);
-        lblpause.setEnabled(true);
-        lblresume.setVisible(false);
-        lblresume.setEnabled(false);
-    }//GEN-LAST:event_lblresumeMouseClicked
 
     private void btnManagerMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerMusicActionPerformed
         showPanel(new JPanelQlyNhac());
@@ -438,34 +301,6 @@ public class JFrameMusic extends javax.swing.JFrame {
     private void btnManagerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerUserActionPerformed
         showPanel(new JPanelQlyAccount());
     }//GEN-LAST:event_btnManagerUserActionPerformed
-
-    private void btnnextPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnextPMouseClicked
-
-    }//GEN-LAST:event_btnnextPMouseClicked
-
-    private void lblpauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseReleased
-        resume();
-    }//GEN-LAST:event_lblpauseMouseReleased
-
-    private void lblresumeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseReleased
-        pause();
-    }//GEN-LAST:event_lblresumeMouseReleased
-
-    private void btnnextPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextPActionPerformed
-
-    }//GEN-LAST:event_btnnextPActionPerformed
-
-    private void btnBackPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackPMouseReleased
-        previous();
-    }//GEN-LAST:event_btnBackPMouseReleased
-
-    private void btnnextPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnnextPMouseReleased
-        next();
-    }//GEN-LAST:event_btnnextPMouseReleased
-
-    private void lblpausePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblpausePropertyChange
-
-    }//GEN-LAST:event_lblpausePropertyChange
 
     /**
      * @param args the command line arguments
@@ -511,117 +346,20 @@ public class JFrameMusic extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel JPanelThanhNhac;
-    private javax.swing.JButton btnBackP;
     private rojeru_san.complementos.RSButtonHover btnDiscover;
     private rojeru_san.complementos.RSButtonHover btnHome;
     private rojeru_san.complementos.RSButtonHover btnManagerMusic;
     private rojeru_san.complementos.RSButtonHover btnManagerUser;
     private rojeru_san.complementos.RSButtonHover btnPlaylist;
     private rojeru_san.complementos.RSButtonHover btnTopCharts;
-    private javax.swing.JButton btnnextP;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    public Utils_Pro.ImageAvatar lblAnhNhac;
     private Utils_Pro.ImageAvatar lblAvatar;
-    private javax.swing.JLabel lblNameMusic;
-    public javax.swing.JLabel lblpause;
-    public javax.swing.JLabel lblresume;
     private javax.swing.JPanel pnMain;
     private rojeru_san.complementos.RSButtonHover rSButtonHover1;
     private rojeru_san.complementos.RSButtonHover rSButtonHover3;
-    public Utils_Pro.ThanhNhac thanhNhac;
     // End of variables declaration//GEN-END:variables
-
-    SongDAO songDAO = new SongDAO();
-    JPanelQlyNhac qln = new JPanelQlyNhac();
-    public Player player;
-    public long pause;
-    int i = -1;
-    public long total_length;
-    FileInputStream fis;
-    BufferedInputStream bis;
-    File musicPath = null;
-
-    public void playNhac(JTable tbl) throws FileNotFoundException, JavaLayerException, IOException {
-        i = tbl.getSelectedRow();
-        String mabh = (String) tbl.getValueAt(i, 0);
-        Song s = songDAO.selectById(mabh);
-        fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
-        bis = new BufferedInputStream(fis);
-        player = new javazoom.jl.player.Player(bis);
-        musicPath = XMusic.readPath(s.getMusicpath());
-        total_length = fis.available();
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    player.play();
-
-                } catch (Exception e) {
-                }
-            }
-        }.start();
-
-        //lấy ảnh nhạc
-        if (s.getAnh() != null) {
-            lblAnhNhac.setToolTipText(Auth.user.getHinh());
-            lblAnhNhac.setImage(XImage.read(s.getAnh()));
-        }
-        //tên bài nhạc
-        lblNameMusic.setText(s.getTenbh());
-        //Tốc độ nhạc
-        duration(s);
-
-    }
-
-    //trả về đường dẫn nhạc cũ khi nhạc thay đổi
-    public String layDiaChiCu(int i, JTable tbl) {
-        i = tbl.getSelectedRow();
-        String mabh = (String) tbl.getValueAt(i, 0);
-        Song s = songDAO.selectById(mabh);
-        return s.getMusicpath();
-    }
-
-    //Dừng nhạc ở đường dẫn
-    public void Stop(String path) throws FileNotFoundException, JavaLayerException {
-        fis = new FileInputStream(XMusic.readPath(path));
-        bis = new BufferedInputStream(fis);
-        Player players = new javazoom.jl.player.Player(bis);
-        players.close();
-    }
-
-    //duration
-    void duration(Song s) {
-        //128kps birate cơ bản của file mp3
-        try ( FileInputStream fis = new FileInputStream(XMusic.readPath(s.getMusicpath()))) {
-            // lấy kích thước file
-            long size = fis.getChannel().size();
-            //công thức tính tốc độ truyền
-            long bitrate = 128 * 1024;
-            //tính ra tổng thời gian
-            long duration = (size * 8) / bitrate;
-            //chạy thanh processbar
-            new Timer(1000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int value = thanhNhac.getValue();
-                    thanhNhac.setMaximum((int) duration);
-                    if (value <= thanhNhac.getMaximum()) {
-                        thanhNhac.setValue(value + 1);
-                    } else {
-
-                    }
-                    if (value == thanhNhac.getMaximum()) {
-
-                    }
-                }
-            }).start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     void loadImg() {
         if (Auth.user.getHinh() != null) {
@@ -630,45 +368,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         }
     }
 
-    public void pause() {
-        if (player != null) {
-            try {
-                pause = fis.available();
-                player.close();
-            } catch (Exception e) {
-            }
-        }
-    }
+    
 
-    public void resume() {
-        try {
-            fis = new FileInputStream(musicPath);
-            bis = new BufferedInputStream(fis);
-            player = new Player(bis);
-            fis.skip(total_length - pause);
-            new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        player.play();
-
-                    } catch (Exception e) {
-                    }
-                }
-            }.start();
-        } catch (Exception e) {
-        }
-    }
-
-    private void previous() {
-
-    }
-
-    private void next() {
-        try {
-            int s = i + 1;
-
-        } catch (Exception e) {
-        }
-    }
+    
 }
