@@ -67,7 +67,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="btnHome" alignment="1" pref="0" max="32767" attributes="0"/>
               <Component id="btnDiscover" alignment="1" pref="0" max="32767" attributes="0"/>
-              <Component id="btnCreatePlaylist" alignment="1" pref="0" max="32767" attributes="0"/>
+              <Component id="btnPlaylist" alignment="1" pref="0" max="32767" attributes="0"/>
               <Component id="btnManagerUser" alignment="0" pref="0" max="32767" attributes="0"/>
               <Component id="btnManagerMusic" alignment="0" pref="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
@@ -84,8 +84,6 @@
                   <EmptySpace pref="56" max="32767" attributes="0"/>
               </Group>
               <Component id="btnTopCharts" alignment="0" pref="0" max="32767" attributes="0"/>
-              <Component id="btnPlaylist1" alignment="1" pref="0" max="32767" attributes="0"/>
-              <Component id="btnPlaylist2" alignment="1" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -102,25 +100,12 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnTopCharts" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <Component id="btnPlaylist" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnManagerUser" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnManagerMusic" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-=======
-                  <Component id="btnManagerUser" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnManagerMusic" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnCreatePlaylist" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnPlaylist1" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnPlaylist2" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
->>>>>>> nam
               </Group>
           </Group>
         </DimensionLayout>
@@ -180,7 +165,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTopChartsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="rojeru_san.complementos.RSButtonHover" name="btnCreatePlaylist">
+        <Component class="rojeru_san.complementos.RSButtonHover" name="btnPlaylist">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="47" green="2d" red="26" type="rgb"/>
@@ -191,13 +176,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Icon/tym.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Create Playlist"/>
+            <Property name="text" type="java.lang.String" value="Playlist"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial Black" size="12" style="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreatePlaylistActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlaylistActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -265,46 +250,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManagerUserActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="rojeru_san.complementos.RSButtonHover" name="btnPlaylist1">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="47" green="2d" red="26" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Icon/tym.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Playlist #1"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial Black" size="12" style="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlaylist1ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="rojeru_san.complementos.RSButtonHover" name="btnPlaylist2">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="47" green="2d" red="26" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Icon/tym.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Playlist #2"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial Black" size="12" style="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlaylist2ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
