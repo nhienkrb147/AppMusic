@@ -80,7 +80,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="imageSlider1" max="32767" attributes="0"/>
+                          <Component id="newSong" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -110,7 +110,7 @@
                           <Component id="lblBack" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="imageSlider1" min="-2" pref="119" max="-2" attributes="0"/>
+                  <Component id="newSong" min="-2" pref="119" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -125,7 +125,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="PnSlider.ImageSlider" name="imageSlider1">
+        <Component class="PnSlider.ImageSlider" name="newSong">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="38" green="22" red="1d" type="rgb"/>
