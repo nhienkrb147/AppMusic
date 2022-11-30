@@ -42,10 +42,11 @@ import javax.swing.Timer;
 public class JFrameMusic extends javax.swing.JFrame {
 
     private JPanel chiPanel;
-    PlayList playList = new PlayList();
     User user = new User();
+    PlayList playList = new PlayList();
     PlaylistDAO playlistDAO = new PlaylistDAO();
-    int countClick = playList.getCounts();
+    PlayList playList_matk = playlistDAO.selectById2(Auth.user.getMatk());
+    int countClick = playList_matk.getCounts();
 
     public JFrameMusic() {
         initComponents();
@@ -55,8 +56,8 @@ public class JFrameMusic extends javax.swing.JFrame {
 
         loadImg();
         showPlaylist();
-        btnPlaylist1.setVisible(false);
-        btnPlaylist2.setVisible(false);
+//        btnPlaylist1.setVisible(false);
+//        btnPlaylist2.setVisible(false);
 
     }
 
@@ -426,23 +427,22 @@ public class JFrameMusic extends javax.swing.JFrame {
     private void btnCreatePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePlaylistActionPerformed
 
 //        countClick = playList.getCounts();
-        System.out.println(countClick);
         countClick += 1;
+        System.out.println(countClick);
 
-        if (countClick == 1) {
-            btnPlaylist1.requestFocus();
-            btnPlaylist1.setVisible(true);
-            insert();
+        if (countClick == 0) {
+//            btnPlaylist1.requestFocus();
+//            btnPlaylist1.setVisible(true);
+//            insert();
+        } else if (countClick == 1) {
+//            btnPlaylist2.requestFocus();
+//            btnPlaylist2.setVisible(true);
+//            insert();
         } else if (countClick == 2) {
-            btnPlaylist2.requestFocus();
-            btnPlaylist2.setVisible(true);
-        } else if (countClick == 3) {
             MsgBox.alert(this, "chỉ được phép tạo 2 playlist");
             countClick -= 1;
         }
-        {
 
-        }
     }//GEN-LAST:event_btnCreatePlaylistActionPerformed
 
     private void lblAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAvatarMouseClicked
@@ -614,22 +614,31 @@ public class JFrameMusic extends javax.swing.JFrame {
     }
 
     void showPlaylist() {
-//        try {
-//            PlayList playList = playlistDAO.selectById2(Auth.user.getMatk());
-//
-//            if (Auth.user.getMatk() == playList.getMatk() && playList.getCounts() == 1) {
-//                btnPlaylist1.setVisible(true);
-//            } else {
-//                btnPlaylist1.setVisible(false);
-//            }
-//            if (Auth.user.getMatk() == playList.getMatk() && playList.getCounts() == 2) {
-//                btnPlaylist2.setVisible(true);
-//            } else {
-//                btnPlaylist2.setVisible(false);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+//            System.out.println(playList_matk.getMatk());
+//            System.out.println(playList_matk.getCounts());
+            System.out.println(countClick);
+            List<PlayList> list = playlistDAO.selectById_matk(Auth.user.getMatk());
+
+            if (Auth.user.getMatk() == playList_matk.getMatk()) {
+                for (PlayList pl : list) {
+                    System.out.println(pl.getCounts());
+                    if (pl.getCounts() == 1) {
+                        btnPlaylist1.setVisible(true);
+                    } else {
+                        btnPlaylist1.setVisible(false);
+                    }
+
+                    if (pl.getCounts() == 2) {
+                        btnPlaylist2.setVisible(true);
+                    } else {
+                        btnPlaylist2.setVisible(false);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -11,6 +11,7 @@ import Entity.Song;
 import UI.PlaylistJDialog;
 import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
+import Utils_Pro.XImage;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -31,8 +32,8 @@ public class JPanelPlaylist2 extends javax.swing.JPanel {
 
         tblPlaylist.setDefaultEditor(Object.class, null);
         tblSearch.setDefaultEditor(Object.class, null);
-        
-        setForm();
+
+        setForm(playList_matk);
         search();
 
     }
@@ -232,11 +233,17 @@ public class JPanelPlaylist2 extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     PlaylistDAO playlistDAO = new PlaylistDAO();
+    PlayList playList_matk = playlistDAO.selectById2(Auth.user.getMatk());
     SongDAO songDAO = new SongDAO();
     PlaylistJDialog playlistJDialog = new PlaylistJDialog();
 
-    void setForm() {
-        lblTenPlaylist.setText("My Playlist #1");
+    void setForm(PlayList playList) {
+        lblTenPlaylist.setText(playList.getTieude());
+        lbldescription.setText(playList.getDescriptions());
+        if (playList.getHinh() != null) {
+            lblhinh.setToolTipText(playList.getHinh());
+            lblhinh.setIcon(XImage.read(playList.getHinh()));
+        }
         lbltaoboi.setText(Auth.user.getTennd());
     }
 

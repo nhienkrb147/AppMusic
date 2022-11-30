@@ -64,6 +64,16 @@ public class PlaylistDAO extends MusicDAO<PlayList, String> {
         return list.get(0);
     }
 
+    public List<PlayList> select_count() {
+        String sql = "SELECT * FROM PLAYLIST";
+        return this.selectBySql(sql);
+    }
+
+    public List<PlayList> selectById_matk(Integer key) {
+        String sql = "SELECT * FROM PLAYLIST WHERE matk = ?";
+        return this.selectBySql(sql, key);      
+    }
+
     public PlayList selectById2(Integer key) {
         String sql = "SELECT * FROM PLAYLIST WHERE matk = ?";
         List<PlayList> list = this.selectBySql(sql, key);
