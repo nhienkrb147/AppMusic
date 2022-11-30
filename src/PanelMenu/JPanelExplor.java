@@ -987,6 +987,7 @@ public class JPanelExplor extends javax.swing.JPanel {
             }
             //tên bài nhạc
             lblNameMusic.setText(s.getTenbh());
+            lblNguoiHat.setText(s.getNguoitb());
             //Tốc độ nhạc
             duration(s);
             play = 1;
@@ -1080,6 +1081,7 @@ public class JPanelExplor extends javax.swing.JPanel {
                     lblAnhNhac.setImage(XImage.read(s.getAnh()));
                 }
                 //tên bài nhạc
+                lblNguoiHat.setText(s.getNguoitb());
                 lblNameMusic.setText(s.getTenbh());
                 //Tốc độ nhạc
                 tblExplor.setRowSelectionInterval(s1, s1);
@@ -1122,6 +1124,7 @@ public class JPanelExplor extends javax.swing.JPanel {
                     lblAnhNhac.setImage(XImage.read(s.getAnh()));
                 }
                 //tên bài nhạc
+                lblNguoiHat.setText(s.getNguoitb());
                 lblNameMusic.setText(s.getTenbh());
                 //Tốc độ nhạc
                 tblExplor.setRowSelectionInterval(s1, s1);

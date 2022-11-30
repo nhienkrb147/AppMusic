@@ -638,6 +638,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 lblAnhNhac.setImage(XImage.read(s.getAnh()));
             }
             //tên bài nhạc
+            lblNguoiHat.setText(s.getNguoitb());
             lblNameMusic.setText(s.getTenbh());
             //Tốc độ nhạc
             duration(s);
@@ -728,6 +729,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 player = new javazoom.jl.player.Player(bis);
                 play = 1;
                 //lấy ảnh nhạc
+                lblNguoiHat.setText(s.getNguoitb());
                 if (s.getAnh() != null) {
                     lblAnhNhac.setImage(XImage.read(s.getAnh()));
                 }
@@ -770,6 +772,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 player = new javazoom.jl.player.Player(bis);
                 play = 1;
                 //lấy ảnh nhạc
+                lblNguoiHat.setText(s.getNguoitb());
                 if (s.getAnh() != null) {
                     lblAnhNhac.setImage(XImage.read(s.getAnh()));
                 }
