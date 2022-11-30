@@ -21,13 +21,14 @@ public class SongDAO extends MusicDAO<Song, String> {
     String UPDATE_SQL = "UPDATE SONG SET tenbh = ?, theloai = ?, nguoist = ?, nguoitb =?,musicpath = ?, anh = ? WHERE mabh = ?";
     String DELETE_SQL = "DELETE FROM SONG WHERE mabh = ?";
     String SELECT_ALL_SQL = "SELECT * FROM SONG";
+    String SELECT_TOP5 = "select top 5 * from song order by ngaytao desc";
     String SELECT_THELOAI = "SELECT DISTINCT theloai FROM SONG";//câu lệnh lọc thể loại
     String SELECT_BY_ID_SQL = "SELECT * FROM SONG WHERE mabh = ?";
 
     @Override
     public void insert(Song entity) {
         XJdbc.update(INSERT_SQL, entity.getMabh(), entity.getTenbh(), entity.getTheloai(),
-                entity.getNguoist(), entity.getNguoitb(), entity.getMusicpath(),entity.getAnh(), entity.getNgaytao());
+                entity.getNguoist(), entity.getNguoitb(), entity.getMusicpath(), entity.getAnh(), entity.getNgaytao());
     }
 
     @Override
@@ -44,6 +45,10 @@ public class SongDAO extends MusicDAO<Song, String> {
     @Override
     public List<Song> selectAll() {
         return this.selectBySql(SELECT_ALL_SQL);
+    }
+
+    public List<Song> select_top5() {
+        return this.selectBySql(SELECT_TOP5);
     }
 
     @Override
@@ -66,7 +71,7 @@ public class SongDAO extends MusicDAO<Song, String> {
                 entity.setTenbh(rs.getString("tenbh"));
                 entity.setTheloai(rs.getString("theloai"));
                 entity.setNguoist(rs.getString("nguoist"));
-                entity.setNguoitb(rs.getString("nguoitb"));              
+                entity.setNguoitb(rs.getString("nguoitb"));
                 entity.setMusicpath(rs.getString("musicpath"));
                 entity.setAnh(rs.getString("anh"));
                 entity.setNgaytao(rs.getDate("ngaytao"));
@@ -78,16 +83,17 @@ public class SongDAO extends MusicDAO<Song, String> {
             throw new RuntimeException(e);
         }
     }
+
     public List<Song> selectByKeyword(String keyword) {
         String sql = "SELECT * FROM Song WHERE tenbh LIKE ?";
         return this.selectBySql(sql, "%" + keyword + "%");
     }
-    
+
     public List<String> selectTheloai() {
         List<String> list = new ArrayList<>();
         try {
             ResultSet rs = XJdbc.query(SELECT_THELOAI);
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(rs.getString("theloai"));
             }
             rs.getStatement().getConnection().close();
@@ -96,8 +102,9 @@ public class SongDAO extends MusicDAO<Song, String> {
             throw new RuntimeException(e);
         }
     }
-    public List<Song> selectByTheLoai(String TheLoai,String search) {
+
+    public List<Song> selectByTheLoai(String TheLoai, String search) {
         String sql = "SELECT * FROM Song WHERE theloai LIKE ? and  tenbh LIKE ? ";
-        return this.selectBySql(sql,  "%" + TheLoai + "%" , "%" + search + "%");
+        return this.selectBySql(sql, "%" + TheLoai + "%", "%" + search + "%");
     }
 }

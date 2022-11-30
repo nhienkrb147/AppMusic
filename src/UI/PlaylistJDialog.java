@@ -6,8 +6,10 @@ package UI;
 
 import DAO.PlaylistDAO;
 import Entity.PlayList;
+import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XImage;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -65,10 +67,26 @@ public class PlaylistJDialog extends javax.swing.JDialog {
         });
 
         txtTenPlaylist.setBackground(new java.awt.Color(204, 204, 204));
+        txtTenPlaylist.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTenPlaylistFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTenPlaylistFocusLost(evt);
+            }
+        });
 
         txa.setBackground(new java.awt.Color(204, 204, 204));
         txa.setColumns(20);
         txa.setRows(5);
+        txa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txaFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(txa);
 
         btnsave.setBackground(new java.awt.Color(255, 255, 255));
@@ -181,6 +199,38 @@ public class PlaylistJDialog extends javax.swing.JDialog {
         PlaylistJDialog.this.dispose();
     }//GEN-LAST:event_rSButtonHover1ActionPerformed
 
+    private void txtTenPlaylistFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenPlaylistFocusGained
+        // TODO add your handling code here:
+        if (txtTenPlaylist.getText().equals("Playlist #" + playList_matk.getCounts())) {
+            txtTenPlaylist.setText("");
+            txtTenPlaylist.setForeground(new Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_txtTenPlaylistFocusGained
+
+    private void txtTenPlaylistFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenPlaylistFocusLost
+        // TODO add your handling code here:
+        if (txtTenPlaylist.getText().equals("")) {
+            txtTenPlaylist.setText("Playlist #" + playList_matk.getCounts());
+            txtTenPlaylist.setForeground(new Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_txtTenPlaylistFocusLost
+
+    private void txaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaFocusGained
+        // TODO add your handling code here:
+        if (txa.getText().equals("Description")) {
+            txa.setText("");
+            txa.setForeground(new Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_txaFocusGained
+
+    private void txaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaFocusLost
+        // TODO add your handling code here:
+        if (txa.getText().equals("")) {
+            txa.setText("Description");
+            txa.setForeground(new Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_txaFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -231,6 +281,7 @@ public class PlaylistJDialog extends javax.swing.JDialog {
 
     JFileChooser fileChooser = new JFileChooser();
     PlaylistDAO dao = new PlaylistDAO();
+    PlayList playList_matk = dao.selectById2(Auth.user.getMatk());
 
     void setForm() {
         PlayList playList = new PlayList();
