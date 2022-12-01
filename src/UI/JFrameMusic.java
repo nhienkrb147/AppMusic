@@ -58,7 +58,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 50, 50));
-        
+
         init();
         loadImg();
         showPlaylist();
@@ -97,8 +97,8 @@ public class JFrameMusic extends javax.swing.JFrame {
         btnCreatePlaylist = new rojeru_san.complementos.RSButtonHover();
         btnPlaylist1 = new rojeru_san.complementos.RSButtonHover();
         btnPlaylist2 = new rojeru_san.complementos.RSButtonHover();
+        rSButtonHover5 = new rojeru_san.complementos.RSButtonHover();
         jPanel4 = new javax.swing.JPanel();
-        rSButtonHover3 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover1 = new rojeru_san.complementos.RSButtonHover();
         rSButtonHover4 = new rojeru_san.complementos.RSButtonHover();
 
@@ -210,6 +210,16 @@ public class JFrameMusic extends javax.swing.JFrame {
             }
         });
 
+        rSButtonHover5.setBackground(new java.awt.Color(37, 44, 70));
+        rSButtonHover5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
+        rSButtonHover5.setColorHover(new java.awt.Color(255, 0, 51));
+        rSButtonHover5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        rSButtonHover5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonHover5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -221,6 +231,7 @@ public class JFrameMusic extends javax.swing.JFrame {
             .addComponent(btnTopCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnCreatePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnPlaylist1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnPlaylist2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -228,9 +239,11 @@ public class JFrameMusic extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(rSButtonHover5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(56, Short.MAX_VALUE))
-            .addComponent(btnPlaylist2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,22 +268,13 @@ public class JFrameMusic extends javax.swing.JFrame {
                 .addComponent(btnPlaylist1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnPlaylist2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rSButtonHover5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(29, 34, 56));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        rSButtonHover3.setBackground(new java.awt.Color(29, 34, 56));
-        rSButtonHover3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
-        rSButtonHover3.setColorHover(new java.awt.Color(255, 0, 51));
-        rSButtonHover3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        rSButtonHover3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonHover3ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(rSButtonHover3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 41, -1));
 
         rSButtonHover1.setBackground(new java.awt.Color(29, 34, 56));
         rSButtonHover1.setText("x");
@@ -320,12 +324,6 @@ public class JFrameMusic extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_rSButtonHover1ActionPerformed
 
-    private void rSButtonHover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover3ActionPerformed
-        Auth.clear();
-        JFrameMusic.this.dispose();
-        new JFrameLogin().setVisible(true);
-    }//GEN-LAST:event_rSButtonHover3ActionPerformed
-
     private void btnDiscoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscoverActionPerformed
         try {
             showPanel(new JPanelExplor());
@@ -356,7 +354,7 @@ public class JFrameMusic extends javax.swing.JFrame {
 
     private void btnCreatePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePlaylistActionPerformed
 
-        //        countClick = playList.getCounts();
+//        countClick = playList.getCounts();
         System.out.println(countClick);
         countClick += 1;
 
@@ -367,6 +365,7 @@ public class JFrameMusic extends javax.swing.JFrame {
         } else if (countClick == 2) {
             btnPlaylist2.requestFocus();
             btnPlaylist2.setVisible(true);
+            insert();
         } else if (countClick == 3) {
             MsgBox.alert(this, "chỉ được phép tạo 2 playlist");
             countClick -= 1;
@@ -378,22 +377,34 @@ public class JFrameMusic extends javax.swing.JFrame {
 
     private void btnPlaylist1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylist1ActionPerformed
         // TODO add your handling code here:
-        if (countClick == 1 || countClick == (countClick -= 1)) {
+        if (Auth.user.getMatk() == playList_matk.getMatk() && playList_matk.getCounts() == 1) {
             showPanel(new JPanelPlaylist2());
         }
     }//GEN-LAST:event_btnPlaylist1ActionPerformed
 
     private void btnPlaylist2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylist2ActionPerformed
         // TODO add your handling code here:
-        if (countClick == 2 || countClick == (countClick += 1)) {
-            showPanel(new JPanelPlaylist2());
+        if (Auth.user.getMatk() == playList_matk.getMatk()) {
+            for (PlayList pl : list) {
+                if (pl.getCounts() == 2) {
+                    showPanel(new JPanelPlaylist2());
+                }
+            }
         }
+
+
     }//GEN-LAST:event_btnPlaylist2ActionPerformed
 
     private void rSButtonHover4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover4ActionPerformed
         // TODO add your handling code here:
         this.setExtendedState(JFrameMusic.ICONIFIED);
     }//GEN-LAST:event_rSButtonHover4ActionPerformed
+
+    private void rSButtonHover5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover5ActionPerformed
+        Auth.clear();
+        JFrameMusic.this.dispose();
+        new JFrameLogin().setVisible(true);
+    }//GEN-LAST:event_rSButtonHover5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,8 +472,8 @@ public class JFrameMusic extends javax.swing.JFrame {
     private Utils_Pro.ImageAvatar lblAvatar;
     private javax.swing.JPanel pnMain;
     private rojeru_san.complementos.RSButtonHover rSButtonHover1;
-    private rojeru_san.complementos.RSButtonHover rSButtonHover3;
     private rojeru_san.complementos.RSButtonHover rSButtonHover4;
+    private rojeru_san.complementos.RSButtonHover rSButtonHover5;
     // End of variables declaration//GEN-END:variables
 
     void loadImg() {
@@ -493,29 +504,28 @@ public class JFrameMusic extends javax.swing.JFrame {
         }
     }
 
+    List<PlayList> list = playlistDAO.selectById_matk(Auth.user.getMatk());
+
     void showPlaylist() {
         try {
-            System.out.println(playList_matk.getMatk());
-            System.out.println(playList_matk.getCounts());
-            System.out.println(countClick);
-            
-            List<PlayList> list = playlistDAO.selectById_matk(Auth.user.getMatk());
+//            System.out.println(playList_matk.getMatk());
+//            System.out.println(playList_matk.getCounts());
+//            System.out.println(countClick);
 
             if (Auth.user.getMatk() == playList_matk.getMatk()) {
-//                for (PlayList pl : list) {
-                    System.out.println(playList_matk.getCounts());
-                    if (playList_matk.getCounts() == 1) {
-                        btnPlaylist1.setVisible(true);
-                    } else {
-                        btnPlaylist1.setVisible(false);
-                    }
-
-                    if (playList_matk.getCounts() == 2) {
+                for (PlayList pl : list) {
+                    System.out.println(pl.getCounts());
+                    if (pl.getCounts() == 2) {
                         btnPlaylist2.setVisible(true);
                     } else {
                         btnPlaylist2.setVisible(false);
                     }
-//                }
+                }
+                if (playList_matk.getCounts() == 1) {
+                    btnPlaylist1.setVisible(true);
+                } else {
+                    btnPlaylist1.setVisible(false);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

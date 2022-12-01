@@ -2,14 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
+            <file>file:/D:/fPTPolytechnic/FALL22_KY4/DuAn1/AppMusic/src/UI/ChangePassJDialog.java</file>
             <file>file:/D:/fPTPolytechnic/FALL22_KY4/DuAn1/AppMusic/src/UI/JFrameMusic.java</file>
-            <file>file:/D:/fPTPolytechnic/FALL22_KY4/DuAn1/AppMusic/src/PanelMenu/JPanelPlaylist2.java</file>
             <file>file:/D:/fPTPolytechnic/FALL22_KY4/DuAn1/AppMusic/src/UI/JFrameLogin.java</file>
+            <file>file:/D:/fPTPolytechnic/FALL22_KY4/DuAn1/AppMusic/src/PanelMenu/JPanelTopChart.java</file>
+            <file>file:/D:/fPTPolytechnic/FALL22_KY4/DuAn1/AppMusic/src/UI/ForgotPassJDialog.java</file>
         </group>
->>>>>>> nam
     </open-files>
 </project-private>

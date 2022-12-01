@@ -57,26 +57,20 @@ public class ImageSlider extends javax.swing.JPanel {
     private void initComponents() {
 
         sp = new javax.swing.JScrollPane();
-        panelItem = new javax.swing.JPanel();
+        panelItem = new Utils_Pro.PanelRound();
 
         sp.setBorder(null);
         sp.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        panelItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelItemMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelItemLayout = new javax.swing.GroupLayout(panelItem);
         panelItem.setLayout(panelItemLayout);
         panelItemLayout.setHorizontalGroup(
             panelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1171, Short.MAX_VALUE)
+            .addGap(0, 724, Short.MAX_VALUE)
         );
         panelItemLayout.setVerticalGroup(
             panelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
+            .addGap(0, 238, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panelItem);
@@ -87,22 +81,17 @@ public class ImageSlider extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                .addComponent(sp)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addComponent(sp)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void panelItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelItemMouseClicked
-        JOptionPane.showMessageDialog(this, "ád");
-
-    }//GEN-LAST:event_panelItemMouseClicked
 
     @Override
     public void setBackground(Color color) {
@@ -114,7 +103,7 @@ public class ImageSlider extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel panelItem;
+    private Utils_Pro.PanelRound panelItem;
     private javax.swing.JScrollPane sp;
     // End of variables declaration//GEN-END:variables
 }
