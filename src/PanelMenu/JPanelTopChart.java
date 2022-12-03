@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioSystem;
@@ -399,11 +400,11 @@ public class JPanelTopChart extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoopMouseReleased
-
+        loop = 1;
     }//GEN-LAST:event_btnLoopMouseReleased
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-
+        sf = 1;
     }//GEN-LAST:event_btnShuffleMouseClicked
 
     private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
@@ -488,6 +489,8 @@ public class JPanelTopChart extends javax.swing.JPanel {
         tbl.setDefaultEditor(Object.class, null);
         if (evt.getClickCount() == 2) {
             try {
+                loop = 0;
+                sf = 0;
                 playNhac();
             } catch (JavaLayerException ex) {
                 Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
@@ -495,6 +498,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
     }//GEN-LAST:event_tblMouseClicked
 
 
@@ -526,7 +530,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
         lblresume.setVisible(true);
         lblresume.setEnabled(true);
         initTable();
-        fillTableTopChart();      
+        fillTableTopChart();
     }
 
     int i = -1;
@@ -540,6 +544,8 @@ public class JPanelTopChart extends javax.swing.JPanel {
     public BufferedInputStream bis;
     File musicPath = null;
     int play = 0;
+    int loop = 0;
+    int sf = 0;
     Timer time;
 
     void initTable() {
@@ -583,7 +589,6 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 public void run() {
                     try {
                         player.play();
-
                     } catch (Exception e) {
                     }
                 }
@@ -591,6 +596,8 @@ public class JPanelTopChart extends javax.swing.JPanel {
         } else {
             player.close();
             play = 0;
+            time.stop();
+            thanhNhac.setValue(0);
             playNhac();
         }
     }
@@ -605,17 +612,36 @@ public class JPanelTopChart extends javax.swing.JPanel {
             //tính ra tổng thời gian
             long duration = (size * 8) / bitrate;
             //chạy thanh processbar
-            time =new Timer(1000, new ActionListener() {
+            time = new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = thanhNhac.getValue();
                     thanhNhac.setMaximum((int) duration + 5);
                     if (value <= thanhNhac.getMaximum()) {
                         thanhNhac.setValue(value + 1);
-                    }                    
+                    }
                     if (value == thanhNhac.getMaximum()) {
-                        next();
-                        
+                        if (loop == 1) {
+                            try {
+                                sf = 0;
+                                playNhac();
+                            } catch (JavaLayerException ex) {
+                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else if (sf == 1) {
+                            loop=0;
+                            try {
+                                shuffle();
+                            } catch (JavaLayerException ex) {
+                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            next();
+                        }
                     }
                 }
             });
@@ -624,12 +650,12 @@ public class JPanelTopChart extends javax.swing.JPanel {
         }
     }
 
-    public void pause() {        
+    public void pause() {
         if (player != null) {
-            try { 
-                time.stop();            
-                pause = fis.available();              
-                thanhNhac.setValue((int)((total_length-pause)*8)/(128*1024));
+            try {
+                time.stop();
+                pause = fis.available();
+                thanhNhac.setValue((int) ((total_length - pause) * 8) / (128 * 1024));
                 player.close();
             } catch (Exception e) {
             }
@@ -740,6 +766,65 @@ public class JPanelTopChart extends javax.swing.JPanel {
             player.close();
             play = 0;
             next();
+        }
+    }
+
+    void shuffle() throws FileNotFoundException, JavaLayerException, IOException {
+        if (play == 0) {
+            thanhNhac.setValue(0);
+            Random rd = new Random();
+            int random = rd.nextInt(tbl.getRowCount()) + 1;
+            String mabh = (String) tbl.getValueAt(random, 0);
+            Song s = dao.selectById(mabh);
+            fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
+            bis = new BufferedInputStream(fis);
+            player = new javazoom.jl.player.Player(bis);
+            musicPath = XMusic.readPath(s.getMusicpath());
+            total_length = fis.available();
+            //lấy ảnh nhạc
+            if (s.getAnh() != null) {
+                lblAnhNhac.setImage(XImage.read(s.getAnh()));
+            }
+            //tên bài nhạc
+            lblNameMusic.setText(s.getTenbh());
+            lblNguoiHat.setText(s.getNguoitb());
+            tbl.setRowSelectionInterval(random, random);
+            //Tốc độ nhạc
+            try ( FileInputStream fis = new FileInputStream(XMusic.readPath(s.getMusicpath()))) {
+                // lấy kích thước file
+                long size = fis.getChannel().size();
+                //công thức tính tốc độ truyền
+                long bitrate = 128 * 1024;
+                //tính ra tổng thời gian
+                long duration = (size * 8) / bitrate;
+                //chạy thanh processbar
+                time = new Timer(1000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int value = thanhNhac.getValue();
+                        thanhNhac.setMaximum((int) duration + 5);
+                        if (value <= thanhNhac.getMaximum()) {
+                            thanhNhac.setValue(value + 1);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            play = 1;
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+                    } catch (Exception e) {
+                    }
+                }
+            }.start();
+        } else {
+            player.close();
+            play = 0;
+            shuffle();
         }
     }
 
