@@ -21,6 +21,7 @@ public class SongDAO extends MusicDAO<Song, String> {
     String UPDATE_SQL = "UPDATE SONG SET tenbh = ?, theloai = ?, nguoist = ?, nguoitb =?,musicpath = ?, anh = ? WHERE mabh = ?";
     String DELETE_SQL = "DELETE FROM SONG WHERE mabh = ?";
     String SELECT_ALL_SQL = "SELECT * FROM SONG";
+    String SELECT_TOP5 = "select top 5 * from song order by ngaytao desc";
     String SELECT_THELOAI = "SELECT DISTINCT theloai FROM SONG";//câu lệnh lọc thể loại
     String SELECT_BY_ID_SQL = "SELECT * FROM SONG WHERE mabh = ?";
 
@@ -44,6 +45,10 @@ public class SongDAO extends MusicDAO<Song, String> {
     @Override
     public List<Song> selectAll() {
         return this.selectBySql(SELECT_ALL_SQL);
+    }
+
+    public List<Song> select_top5() {
+        return this.selectBySql(SELECT_TOP5);
     }
 
     @Override

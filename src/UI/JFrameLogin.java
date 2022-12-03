@@ -84,7 +84,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         txtUsername.setBackground(new java.awt.Color(37, 44, 70));
         txtUsername.setForeground(new java.awt.Color(204, 204, 204));
-        txtUsername.setText("nhien");
+        txtUsername.setText("nam");
         txtUsername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 44, 70)));
         txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -376,6 +376,8 @@ public class JFrameLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JFrameLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

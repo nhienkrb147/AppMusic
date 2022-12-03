@@ -1,5 +1,7 @@
 package PnSlider;
 
+import DAO.SongDAO;
+import Entity.Song;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +9,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import PnSlider_Scrollbar.ScrollBar;
+import Utils_Pro.XImage;
 import javax.swing.JOptionPane;
 
 public class ImageSlider extends javax.swing.JPanel {
 
     private final MigLayout imageLayout;
+    int i = -1;
 
     public ImageSlider() {
         initComponents();
@@ -20,19 +24,31 @@ public class ImageSlider extends javax.swing.JPanel {
         ScrollBar sb = new ScrollBar();
         sb.setOrientation(ScrollBar.HORIZONTAL);
         sp.setHorizontalScrollBar(sb);
-       testImage();
+        testImage();
+        showNewSong();
     }
     List<Object> list = new ArrayList<Object>();
-    private void testImage() {
-        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
-        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
-        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
-        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
-        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
-        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+
+    void showNewSong() {
+        SongDAO dao = new SongDAO();
+        List<Song> song = dao.select_top5();
+        for (Song s : song) {
+//            XImage.read(s.getAnh());
+            panelItem.add(getItem(new ImageIcon(String.valueOf(XImage.read(s.getAnh())))), "w 150, h 130");
+            System.out.println(s.getAnh());
+        }
     }
 
-    private ImageItem getItem(Icon icon) {   
+    private void testImage() {
+//        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+//        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+//        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+//        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+//        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+//        panelItem.add(getItem(new ImageIcon(getClass().getResource("/Icon/NewSong1.jpg"))), "w 150, h 130");
+    }
+
+    private ImageItem getItem(Icon icon) {
         return new ImageItem(icon, imageLayout);
     }
 
@@ -84,7 +100,8 @@ public class ImageSlider extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelItemMouseClicked
-        JOptionPane.showMessageDialog(this,"ád");
+        JOptionPane.showMessageDialog(this, "ád");
+
     }//GEN-LAST:event_panelItemMouseClicked
 
     @Override

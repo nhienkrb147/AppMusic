@@ -232,11 +232,9 @@ public class JPanelPlayList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
-        if (evt.getClickCount() == 2) {           
-            pnMain.disable();
-            new JPanelPlaylist2().enable();
-            
-//            showPanel(new JPanelPlaylist2());
+        if (evt.getClickCount() == 2) {   
+            JPanelPlayList.this.setVisible(false);
+            new JPanelPlaylist2().setVisible(true);
             JOptionPane.showMessageDialog(this, "hiện playlist2");
         }
     }//GEN-LAST:event_lbl1MouseClicked

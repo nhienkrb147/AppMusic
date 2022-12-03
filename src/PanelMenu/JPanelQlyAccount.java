@@ -29,11 +29,11 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         initComponents();
         Test();
         search();
-        
+
         isEditTable(false);
         fillTable();
         this.tabs.setSelectedIndex(1);
-        
+
         tbl.getColumnModel().getColumn(0).setMaxWidth(450);
         tbl.getColumnModel().getColumn(1).setMaxWidth(250);
         tbl.getColumnModel().getColumn(2).setMaxWidth(250);
@@ -251,11 +251,11 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
                             .addComponent(jLabel7)
                             .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(rdonguoinghe)
-                                .addComponent(rdoadmin)))
+                                .addComponent(rdoadmin))
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,7 +441,7 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
             String keyWord = txtSearch.getText();
             List<User> list = userDAO.selectByKeyword(keyWord);
             for (User user : list) {
-                tableModel.addRow(new Object[]{user.getTennd(), user.getMatkhau(), user.getEmail(), XDate.toString(user.getNgaysinh(), "dd/MM/yyy")});
+                tableModel.addRow(new Object[]{user.getTennd(), user.getMatkhau(), user.getEmail(), XDate.toString(user.getNgaysinh(), "dd/MM/yyyy")});
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy xuất dữ liệu");
@@ -461,9 +461,10 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
         txtMatkhau.setText(user.getMatkhau());
         txtEmail.setText(user.getEmail());
         txtNgaySinh.setText(XDate.toString(user.getNgaysinh(), "dd/MM/yyyy"));
-//        txtChucVu.setText(String.valueOf(user.isChucvu()));
+
         rdoadmin.setSelected(user.isChucvu());
         rdonguoinghe.setSelected(!user.isChucvu());
+
         txtNgayTao.setText(XDate.toString(user.getNgaytao(), "dd/MM/yyyy"));
 
         if (user.getHinh() != null) {
@@ -505,7 +506,5 @@ public class JPanelQlyAccount extends javax.swing.JPanel {
 
     private void timKiem() {
         this.fillTable();
-        this.clearForm();
-        this.index = -1;
     }
 }

@@ -90,7 +90,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        imageSlider1 = new PnSlider.ImageSlider();
+        newSong = new PnSlider.ImageSlider();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         slideshow1 = new ClassSlideShow.Slideshow();
@@ -123,7 +123,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(29, 34, 56));
 
-        imageSlider1.setBackground(new java.awt.Color(29, 34, 56));
+        newSong.setBackground(new java.awt.Color(29, 34, 56));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
@@ -394,7 +394,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(imageSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(newSong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,7 +416,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblNext, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(imageSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newSong, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -559,7 +559,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     private javax.swing.JButton btnVolumeDown;
     private javax.swing.JButton btnVolumeUp;
     private javax.swing.JButton btnnextP;
-    private PnSlider.ImageSlider imageSlider1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
@@ -575,6 +574,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     public javax.swing.JLabel lblpause;
     public javax.swing.JLabel lblresume;
     private javax.swing.JLabel lblvideo;
+    private PnSlider.ImageSlider newSong;
     private ClassSlideShow.Slideshow slideshow1;
     private CustomTable.TableDark tbl;
     public Utils_Pro.ThanhNhac thanhNhac;
@@ -613,6 +613,14 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
+    
+    void showNewSong(){
+        List<Song> song = dao.select_top5();
+        for (Song s : song) {
+            
+        }
+    }
+    
     //thanh nhạc
     public int dung;
     public Player player;
