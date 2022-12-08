@@ -4,17 +4,17 @@
  */
 package PanelMenu;
 
+import DAO.PlaylistDAO;
+import DAO.PlaylistSongDAO;
 import DAO.SongDAO;
 import DAO.UserSongDAO;
+import Entity.PlayList;
+import Entity.PlaylistSong;
 import Entity.Song;
 import Entity.UserSong;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import PanelSlideShow.Slide1;
-import PanelSlideShow.Slide2;
-import PanelSlideShow.Slide3;
+import UI.JFrameMusic;
+import Utils_Pro.Auth;
+import Utils_Pro.MsgBox;
 import Utils_Pro.XImage;
 import Utils_Pro.XMusic;
 import java.awt.event.ActionEvent;
@@ -24,8 +24,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioSystem;
@@ -59,15 +59,15 @@ public class JPanelTopChart extends javax.swing.JPanel {
     }
 
     public void Test() {
-        tbl.fixTable(jScrollPane1);
-        tbl.setColumnAlignment(0, JLabel.CENTER);
-        tbl.setCellAlignment(0, JLabel.CENTER);
-        tbl.setColumnAlignment(2, JLabel.LEFT);
-        tbl.setCellAlignment(2, JLabel.LEFT);
-        tbl.setColumnAlignment(4, JLabel.LEFT);
-        tbl.setCellAlignment(4, JLabel.LEFT);
-        tbl.setColumnWidth(0, 50);
-        tbl.setColumnWidth(2, 100);
+        tblTop.fixTable(jScrollPane1);
+        tblTop.setColumnAlignment(0, JLabel.CENTER);
+        tblTop.setCellAlignment(0, JLabel.CENTER);
+        tblTop.setColumnAlignment(2, JLabel.LEFT);
+        tblTop.setCellAlignment(2, JLabel.LEFT);
+        tblTop.setColumnAlignment(4, JLabel.LEFT);
+        tblTop.setCellAlignment(4, JLabel.LEFT);
+        tblTop.setColumnWidth(0, 50);
+        tblTop.setColumnWidth(2, 100);
 
     }
 
@@ -98,12 +98,13 @@ public class JPanelTopChart extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        MnSieuTo = new javax.swing.JPopupMenu();
+        MnAddPlayList = new javax.swing.JMenu();
+        MnPlayList1 = new javax.swing.JMenuItem();
+        MnPlayList2 = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl = new CustomTable.TableDark();
+        tblTop = new CustomTable.TableDark();
         txtSeach = new swing.TextFieldAnimation();
         LPThanhNhac = new javax.swing.JPanel();
         lblAnhNhac = new Utils_Pro.ImageAvatar();
@@ -119,18 +120,40 @@ public class JPanelTopChart extends javax.swing.JPanel {
         btnVolumeDown = new javax.swing.JButton();
         btnVolumeUp = new javax.swing.JButton();
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        MnSieuTo.setBackground(new java.awt.Color(0, 153, 255));
+        MnSieuTo.setPreferredSize(new java.awt.Dimension(150, 52));
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        MnAddPlayList.setText("AddPlayList");
+        MnAddPlayList.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                MnAddPlayListItemStateChanged(evt);
+            }
+        });
+
+        MnPlayList1.setText("PlayList 1");
+        MnPlayList1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPlayList1ActionPerformed(evt);
+            }
+        });
+        MnAddPlayList.add(MnPlayList1);
+
+        MnPlayList2.setText("PlayList 2");
+        MnPlayList2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPlayList2ActionPerformed(evt);
+            }
+        });
+        MnAddPlayList.add(MnPlayList2);
+
+        MnSieuTo.add(MnAddPlayList);
 
         setPreferredSize(new java.awt.Dimension(805, 527));
 
         jPanel2.setBackground(new java.awt.Color(29, 34, 56));
 
-        tbl.setBackground(new java.awt.Color(29, 34, 56));
-        tbl.setModel(new javax.swing.table.DefaultTableModel(
+        tblTop.setBackground(new java.awt.Color(29, 34, 56));
+        tblTop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -150,12 +173,12 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblTop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMouseClicked(evt);
+                tblTopMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl);
+        jScrollPane1.setViewportView(tblTop);
 
         txtSeach.setAnimationColor(new java.awt.Color(3, 174, 249));
 
@@ -400,11 +423,11 @@ public class JPanelTopChart extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoopMouseReleased
-        loop = 1;
+
     }//GEN-LAST:event_btnLoopMouseReleased
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-        sf = 1;
+
     }//GEN-LAST:event_btnShuffleMouseClicked
 
     private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
@@ -485,12 +508,11 @@ public class JPanelTopChart extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolumeUpActionPerformed
 
-    private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
-        tbl.setDefaultEditor(Object.class, null);
+    private void tblTopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTopMouseClicked
+        tblTop.setDefaultEditor(Object.class, null);
+        tblTop.setComponentPopupMenu(MnSieuTo);
         if (evt.getClickCount() == 2) {
             try {
-                loop = 0;
-                sf = 0;
                 playNhac();
             } catch (JavaLayerException ex) {
                 Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
@@ -498,21 +520,36 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }//GEN-LAST:event_tblTopMouseClicked
 
-    }//GEN-LAST:event_tblMouseClicked
+    private void MnPlayList1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPlayList1ActionPerformed
+        index = 1;
+        AddSongToPlayList();
+    }//GEN-LAST:event_MnPlayList1ActionPerformed
+
+    private void MnPlayList2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPlayList2ActionPerformed
+        index = 2;
+        AddSongToPlayList();
+    }//GEN-LAST:event_MnPlayList2ActionPerformed
+
+    private void MnAddPlayListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MnAddPlayListItemStateChanged
+
+        showMnPlayList();
+    }//GEN-LAST:event_MnAddPlayListItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel LPThanhNhac;
+    private javax.swing.JMenu MnAddPlayList;
+    private javax.swing.JMenuItem MnPlayList1;
+    private javax.swing.JMenuItem MnPlayList2;
+    private javax.swing.JPopupMenu MnSieuTo;
     private javax.swing.JButton btnBackP;
     private javax.swing.JButton btnLoop;
     private javax.swing.JButton btnShuffle;
     private javax.swing.JButton btnVolumeDown;
     private javax.swing.JButton btnVolumeUp;
     private javax.swing.JButton btnnextP;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public Utils_Pro.ImageAvatar lblAnhNhac;
@@ -520,7 +557,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
     private javax.swing.JLabel lblNguoiHat;
     public javax.swing.JLabel lblpause;
     public javax.swing.JLabel lblresume;
-    private CustomTable.TableDark tbl;
+    private CustomTable.TableDark tblTop;
     public Utils_Pro.ThanhNhac thanhNhac;
     private swing.TextFieldAnimation txtSeach;
     // End of variables declaration//GEN-END:variables
@@ -532,7 +569,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
         initTable();
         fillTableTopChart();
     }
-
+    int index = 0;
     int i = -1;
     SongDAO dao = new SongDAO();
     UserSongDAO usdao = new UserSongDAO();
@@ -544,18 +581,20 @@ public class JPanelTopChart extends javax.swing.JPanel {
     public BufferedInputStream bis;
     File musicPath = null;
     int play = 0;
-    int loop = 0;
-    int sf = 0;
     Timer time;
+    PlaylistDAO daoP = new PlaylistDAO();
+    PlaylistSongDAO playlistSongDAO = new PlaylistSongDAO();
+    JFrameMusic m = new JFrameMusic();
+    PlayList ListPlay = daoP.DemSoPlayList(Auth.user.getMatk());
 
     void initTable() {
-        DefaultTableModel tblmodel = (DefaultTableModel) tbl.getModel();
+        DefaultTableModel tblmodel = (DefaultTableModel) tblTop.getModel();
         String[] cols = new String[]{"Mã bài hát", "Tên bài hát", "Người trình bày", "Lượt nghe", "Ngày đăng"};
         tblmodel.setColumnIdentifiers(cols);
     }
 
     void fillTableTopChart() {
-        DefaultTableModel tblmodel = (DefaultTableModel) tbl.getModel();
+        DefaultTableModel tblmodel = (DefaultTableModel) tblTop.getModel();
         tblmodel.setRowCount(0);
         List<Object[]> list = usdao.getTop10();
         for (Object[] row : list) {
@@ -563,11 +602,62 @@ public class JPanelTopChart extends javax.swing.JPanel {
         }
     }
 
+    public void showMnPlayList() {
+
+        List<PlayList> list = new ArrayList<>();
+        list.add(ListPlay);
+        for (PlayList p : list) {
+            if (p.getCounts() == 0) {
+                MnPlayList1.setVisible(false);
+                MnPlayList2.setVisible(false);
+            }
+            if (p.getCounts() == 1) {
+                MnPlayList1.setVisible(true);
+                MnPlayList2.setVisible(false);
+            }
+            if (p.getCounts() == 2) {
+
+                MnPlayList1.setVisible(true);
+                MnPlayList2.setVisible(true);
+            }
+        }
+    }
+
+    void AddSongToPlayList() {
+        List<PlayList> listSong = daoP.selectPlaylistUser(Auth.user.getMatk(), index);
+        int row = tblTop.getSelectedRow();
+
+        for (PlayList ps : listSong) {
+            PlaylistSong ls = new PlaylistSong();
+//                    System.out.println(m.playList1);
+//                    System.out.println(ps.getMaplaylist());
+            ps.setMaplaylist(ps.getMaplaylist());
+            ls.setMaplaylist(ps.getMaplaylist());
+            ls.setMabh((String) tblTop.getValueAt(row, 0));
+            playlistSongDAO.insert(ls);
+            break;
+        }
+        MsgBox.alert(this, "Đã Thêm Thành Công PlayList " + index);
+        fillTableTopChart();
+    }
+
+    UserSong getForm() {
+        UserSong us = new UserSong();
+        i = tblTop.getSelectedRow();
+        String mabh = (String) tblTop.getValueAt(i, 0);
+        us.setMabh(mabh);
+        return us;
+    }
+
     void playNhac() throws FileNotFoundException, JavaLayerException, IOException {
         if (play == 0) {
-            i = tbl.getSelectedRow();
-            String mabh = (String) tbl.getValueAt(i, 0);
+            i = tblTop.getSelectedRow();
+            String mabh = (String) tblTop.getValueAt(i, 0);
             Song s = dao.selectById(mabh);
+
+            UserSong s2 = getForm();
+            usdao.update(s2);
+
             fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
             bis = new BufferedInputStream(fis);
             player = new javazoom.jl.player.Player(bis);
@@ -589,6 +679,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 public void run() {
                     try {
                         player.play();
+
                     } catch (Exception e) {
                     }
                 }
@@ -596,8 +687,6 @@ public class JPanelTopChart extends javax.swing.JPanel {
         } else {
             player.close();
             play = 0;
-            time.stop();
-            thanhNhac.setValue(0);
             playNhac();
         }
     }
@@ -621,27 +710,8 @@ public class JPanelTopChart extends javax.swing.JPanel {
                         thanhNhac.setValue(value + 1);
                     }
                     if (value == thanhNhac.getMaximum()) {
-                        if (loop == 1) {
-                            try {
-                                sf = 0;
-                                playNhac();
-                            } catch (JavaLayerException ex) {
-                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
-                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else if (sf == 1) {
-                            loop=0;
-                            try {
-                                shuffle();
-                            } catch (JavaLayerException ex) {
-                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
-                                Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            next();
-                        }
+                        next();
+
                     }
                 }
             });
@@ -687,8 +757,8 @@ public class JPanelTopChart extends javax.swing.JPanel {
         thanhNhac.setValue(0);
         if (play == 0) {
             try {
-                int s1 = tbl.getSelectedRow() - 1;
-                String mabh = (String) tbl.getValueAt(s1, 0);
+                int s1 = tblTop.getSelectedRow() - 1;
+                String mabh = (String) tblTop.getValueAt(s1, 0);
                 Song s = dao.selectById(mabh);
                 fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
                 bis = new BufferedInputStream(fis);
@@ -702,7 +772,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 lblNguoiHat.setText(s.getNguoitb());
                 lblNameMusic.setText(s.getTenbh());
                 //Tốc độ nhạc
-                tbl.setRowSelectionInterval(s1, s1);
+                tblTop.setRowSelectionInterval(s1, s1);
             } catch (Exception e) {
                 System.out.println("Problem playing file");
                 System.out.println(e);
@@ -730,8 +800,8 @@ public class JPanelTopChart extends javax.swing.JPanel {
         thanhNhac.setValue(0);
         if (play == 0) {
             try {
-                int s1 = tbl.getSelectedRow() + 1;
-                String mabh = (String) tbl.getValueAt(s1, 0);
+                int s1 = tblTop.getSelectedRow() + 1;
+                String mabh = (String) tblTop.getValueAt(s1, 0);
                 Song s = dao.selectById(mabh);
                 fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
                 bis = new BufferedInputStream(fis);
@@ -745,7 +815,7 @@ public class JPanelTopChart extends javax.swing.JPanel {
                 lblNguoiHat.setText(s.getNguoitb());
                 lblNameMusic.setText(s.getTenbh());
                 //Tốc độ nhạc
-                tbl.setRowSelectionInterval(s1, s1);
+                tblTop.setRowSelectionInterval(s1, s1);
             } catch (Exception e) {
                 System.out.println("Problem playing file");
                 System.out.println(e);
@@ -766,65 +836,6 @@ public class JPanelTopChart extends javax.swing.JPanel {
             player.close();
             play = 0;
             next();
-        }
-    }
-
-    void shuffle() throws FileNotFoundException, JavaLayerException, IOException {
-        if (play == 0) {
-            thanhNhac.setValue(0);
-            Random rd = new Random();
-            int random = rd.nextInt(tbl.getRowCount()) + 1;
-            String mabh = (String) tbl.getValueAt(random, 0);
-            Song s = dao.selectById(mabh);
-            fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
-            bis = new BufferedInputStream(fis);
-            player = new javazoom.jl.player.Player(bis);
-            musicPath = XMusic.readPath(s.getMusicpath());
-            total_length = fis.available();
-            //lấy ảnh nhạc
-            if (s.getAnh() != null) {
-                lblAnhNhac.setImage(XImage.read(s.getAnh()));
-            }
-            //tên bài nhạc
-            lblNameMusic.setText(s.getTenbh());
-            lblNguoiHat.setText(s.getNguoitb());
-            tbl.setRowSelectionInterval(random, random);
-            //Tốc độ nhạc
-            try ( FileInputStream fis = new FileInputStream(XMusic.readPath(s.getMusicpath()))) {
-                // lấy kích thước file
-                long size = fis.getChannel().size();
-                //công thức tính tốc độ truyền
-                long bitrate = 128 * 1024;
-                //tính ra tổng thời gian
-                long duration = (size * 8) / bitrate;
-                //chạy thanh processbar
-                time = new Timer(1000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        int value = thanhNhac.getValue();
-                        thanhNhac.setMaximum((int) duration + 5);
-                        if (value <= thanhNhac.getMaximum()) {
-                            thanhNhac.setValue(value + 1);
-                        }
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            play = 1;
-            new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        player.play();
-                    } catch (Exception e) {
-                    }
-                }
-            }.start();
-        } else {
-            player.close();
-            play = 0;
-            shuffle();
         }
     }
 

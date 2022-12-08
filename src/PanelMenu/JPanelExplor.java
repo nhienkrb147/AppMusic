@@ -4,9 +4,17 @@
  */
 package PanelMenu;
 
+import DAO.PlaylistDAO;
+import DAO.PlaylistSongDAO;
 import DAO.SongDAO;
+import DAO.UserSongDAO;
+import Entity.PlayList;
+import Entity.PlaylistSong;
 import Entity.Song;
+import Entity.UserSong;
 import UI.AddMusicJDiaglog;
+import UI.JFrameMusic;
+import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XImage;
 import Utils_Pro.XMusic;
@@ -17,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -93,9 +102,9 @@ public class JPanelExplor extends javax.swing.JPanel {
     private void initComponents() {
 
         MnSieuTo = new javax.swing.JPopupMenu();
-        MnPlay = new javax.swing.JMenuItem();
         MnAddPlayList = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        MnPlayList1 = new javax.swing.JMenuItem();
+        MnPlayList2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         Tabs = new CustomTable.TablePanel();
         jPanel6 = new javax.swing.JPanel();
@@ -138,15 +147,28 @@ public class JPanelExplor extends javax.swing.JPanel {
         MnSieuTo.setBackground(new java.awt.Color(0, 153, 255));
         MnSieuTo.setPreferredSize(new java.awt.Dimension(150, 52));
 
-        MnPlay.setBackground(new java.awt.Color(0, 153, 204));
-        MnPlay.setForeground(new java.awt.Color(204, 204, 204));
-        MnPlay.setText("Play");
-        MnSieuTo.add(MnPlay);
-
         MnAddPlayList.setText("AddPlayList");
+        MnAddPlayList.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                MnAddPlayListItemStateChanged(evt);
+            }
+        });
 
-        jMenuItem1.setText("jMenuItem1");
-        MnAddPlayList.add(jMenuItem1);
+        MnPlayList1.setText("PlayList 1");
+        MnPlayList1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPlayList1ActionPerformed(evt);
+            }
+        });
+        MnAddPlayList.add(MnPlayList1);
+
+        MnPlayList2.setText("PlayList 2");
+        MnPlayList2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPlayList2ActionPerformed(evt);
+            }
+        });
+        MnAddPlayList.add(MnPlayList2);
 
         MnSieuTo.add(MnAddPlayList);
 
@@ -469,7 +491,7 @@ public class JPanelExplor extends javax.swing.JPanel {
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -691,8 +713,8 @@ public class JPanelExplor extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(LPThanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -776,30 +798,31 @@ public class JPanelExplor extends javax.swing.JPanel {
     }//GEN-LAST:event_GamingMouseClicked
 
     private void tblExplorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExplorMouseClicked
-        tblExplor.setDefaultEditor(Object.class, null);
-        if (evt.getClickCount() == 2) {
+        tblExplor.setComponentPopupMenu(MnSieuTo);
+        if (evt.getClickCount() == 1) {
+            i = tblExplor.getSelectedRow();
+        } else {
             try {
-                loop = 0;
-                sf = 0;
                 playNhac();
             } catch (JavaLayerException ex) {
                 Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }//GEN-LAST:event_tblExplorMouseClicked
 
     private void btnLoopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoopMouseReleased
-        loop=1;
+
     }//GEN-LAST:event_btnLoopMouseReleased
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-        
+
     }//GEN-LAST:event_btnShuffleMouseClicked
 
     private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
-        sf=1;
+
     }//GEN-LAST:event_btnShuffleMouseReleased
 
     private void btnShuffleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShuffleActionPerformed
@@ -876,6 +899,21 @@ public class JPanelExplor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolumeUpActionPerformed
 
+    private void MnAddPlayListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MnAddPlayListItemStateChanged
+
+        showMnPlayList();
+    }//GEN-LAST:event_MnAddPlayListItemStateChanged
+
+    private void MnPlayList1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPlayList1ActionPerformed
+        index = 1;
+        AddSongToPlayList();
+    }//GEN-LAST:event_MnPlayList1ActionPerformed
+
+    private void MnPlayList2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPlayList2ActionPerformed
+        index = 2;
+        AddSongToPlayList();
+    }//GEN-LAST:event_MnPlayList2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Gaming;
@@ -883,7 +921,8 @@ public class JPanelExplor extends javax.swing.JPanel {
     private javax.swing.JLabel Jazz;
     public javax.swing.JPanel LPThanhNhac;
     private javax.swing.JMenu MnAddPlayList;
-    private javax.swing.JMenuItem MnPlay;
+    private javax.swing.JMenuItem MnPlayList1;
+    private javax.swing.JMenuItem MnPlayList2;
     private javax.swing.JPopupMenu MnSieuTo;
     private javax.swing.JLabel RB;
     private javax.swing.JLabel Rap;
@@ -897,7 +936,6 @@ public class JPanelExplor extends javax.swing.JPanel {
     private javax.swing.JButton btnVolumeDown;
     private javax.swing.JButton btnVolumeUp;
     private javax.swing.JButton btnnextP;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -923,6 +961,10 @@ public class JPanelExplor extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     SongDAO dao = new SongDAO();
+    PlaylistDAO daoP = new PlaylistDAO();
+    PlaylistSongDAO playlistSongDAO = new PlaylistSongDAO();
+    JFrameMusic m = new JFrameMusic();
+    int index = 0;
 
     void init() throws InterruptedException {
         initTable();
@@ -961,6 +1003,56 @@ public class JPanelExplor extends javax.swing.JPanel {
         }
 
     }
+
+    PlayList ListPlay = daoP.DemSoPlayList(Auth.user.getMatk());
+
+    public void showMnPlayList() {
+
+        List<PlayList> list = new ArrayList<>();
+        list.add(ListPlay);
+        for (PlayList p : list) {
+            if (p.getCounts() == 0) {
+                MnPlayList1.setVisible(false);
+                MnPlayList2.setVisible(false);
+            }
+            if (p.getCounts() == 1) {
+                MnPlayList1.setVisible(true);
+                MnPlayList2.setVisible(false);
+            }
+            if (p.getCounts() == 2) {
+
+                MnPlayList1.setVisible(true);
+                MnPlayList2.setVisible(true);
+            }
+        }
+    }
+
+    void AddSongToPlayList() {
+        List<PlayList> listSong = daoP.selectPlaylistUser(Auth.user.getMatk(), index);
+        int row = tblExplor.getSelectedRow();
+
+        for (PlayList ps : listSong) {
+            PlaylistSong ls = new PlaylistSong();
+//                    System.out.println(m.playList1);
+//                    System.out.println(ps.getMaplaylist());
+            ps.setMaplaylist(ps.getMaplaylist());
+            ls.setMaplaylist(ps.getMaplaylist());
+            ls.setMabh((String) tblExplor.getValueAt(row, 0));
+            playlistSongDAO.insert(ls);
+            break;
+        }
+        MsgBox.alert(this, "Đã Thêm Thành Công PlayList " + index);
+        fillTableExplor(TL);
+    }
+    UserSongDAO usdao = new UserSongDAO();
+
+    UserSong getForm() {
+        UserSong us = new UserSong();
+        i = tblExplor.getSelectedRow();
+        String mabh = (String) tblExplor.getValueAt(i, 0);
+        us.setMabh(mabh);
+        return us;
+    }
     int i = -1;
     public int dung;
     public Player player;
@@ -979,6 +1071,10 @@ public class JPanelExplor extends javax.swing.JPanel {
             i = tblExplor.getSelectedRow();
             String mabh = (String) tblExplor.getValueAt(i, 0);
             Song s = dao.selectById(mabh);
+
+            UserSong s2 = getForm();
+            usdao.update(s2);
+
             fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
             bis = new BufferedInputStream(fis);
             player = new javazoom.jl.player.Player(bis);
@@ -1024,14 +1120,14 @@ public class JPanelExplor extends javax.swing.JPanel {
             //tính ra tổng thời gian
             long duration = (size * 8) / bitrate;
             //chạy thanh processbar
-            time =new Timer(1000, new ActionListener() {
+            time = new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = thanhNhac.getValue();
                     thanhNhac.setMaximum((int) duration);
                     if (value <= thanhNhac.getMaximum()) {
                         thanhNhac.setValue(value + 1);
-                    } 
+                    }
                     if (value == thanhNhac.getMaximum()) {
                         if (loop == 1) {
                             try {
@@ -1043,7 +1139,7 @@ public class JPanelExplor extends javax.swing.JPanel {
                                 Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         } else if (sf == 1) {
-                            loop=0;
+                            loop = 0;
                             try {
                                 shuffle();
                             } catch (JavaLayerException ex) {
@@ -1061,6 +1157,7 @@ public class JPanelExplor extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+
     public void pause() {
         if (player != null) {
             try {
@@ -1178,7 +1275,7 @@ public class JPanelExplor extends javax.swing.JPanel {
             next();
         }
     }
-    
+
     void shuffle() throws FileNotFoundException, JavaLayerException, IOException {
         if (play == 0) {
             thanhNhac.setValue(0);
@@ -1237,7 +1334,7 @@ public class JPanelExplor extends javax.swing.JPanel {
             shuffle();
         }
     }
-    
+
     private void VolumeDown(Double valueToPlusMinus) {
         // lấy Mixer Information từ hệ thống âm thanh
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();

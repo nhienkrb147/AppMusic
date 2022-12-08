@@ -49,6 +49,8 @@ create table PLAYLIST
 	matk int,
 	tieude nvarchar(50),
 	counts int,
+	hinh nvarchar(50),
+	descriptions nvarchar(255),
 	ngaytao date
 	
 	constraint pk_playlist primary key(maplaylist),
@@ -239,10 +241,20 @@ insert into PLAYLIST_SONG(maplaylist,mabh) values
 (2,'USUK7'),
 (5,'USUK8');
 
-select top 10 b.mabh,tenbh,nguoitb, playcount, b.ngaytao
-from USER_SONG a inner join SONG b on a.mabh=b.mabh order by playcount desc
+select top 5 * from song order by ngaytao desc
 
-select * from USER_SONG
+
+select * from PLAYLIST_SONG inner join PLAYLIST on PLAYLIST_SONG.maplaylist = PLAYLIST.maplaylist
+
+select tenbh,theloai,nguoist,nguoitb 
+from PLAYLIST_SONG inner join SONG on PLAYLIST_SONG.mabh = SONG.mabh 
+
+
+select * from SONG
+
+SELECT tenbh,theloai,nguoist,nguoitb  FROM PLAYLIST_SONG
+inner join SONG on PLAYLIST_SONG.mabh = SONG.mabh 
+WHERE maplaylist = 34
 
 go
 create proc sp_Top10Nhac
@@ -255,3 +267,14 @@ as begin
 	from USER_SONG a inner join SONG b 
 	on a.mabh=b.mabh order by playcount desc
 end
+go
+create proc sp_fillPlaylistUser @matk int, @count int 
+as begin 
+	
+	select  Song.mabh, Song.tenbh,Song.theloai,Song.nguoist,Song.nguoitb from USERS inner join PLAYLIST on PLAYLIST.matk = USERS.matk
+										inner join  PLAYLIST_SONG on PLAYLIST.maplaylist = PLAYLIST_SONG.maplaylist
+										inner join SONG on PLAYLIST_SONG.mabh = SONG.mabh
+							where PLAYLIST.matk = @matk and PLAYLIST .counts = @count
+end
+
+exec sp_fillPlaylistUser 1,2

@@ -4,15 +4,17 @@
  */
 package Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author DELL
  */
-public class PlaylistSong {
+public class PlaylistSong extends Song {
     private int trackno;
     private int maplaylist;
     private String mabh;
-
+    
     public int getTrackno() {
         return trackno;
     }
@@ -40,10 +42,15 @@ public class PlaylistSong {
     public PlaylistSong() {
     }
 
+    public PlaylistSong(String mabh, String tenbh, String theloai, String nguoist, String nguoitb, String anh, String musicpath, Date ngaytao) {
+        super(mabh, tenbh, theloai, nguoist, nguoitb, anh, musicpath, ngaytao);
+    }
+
     public PlaylistSong(int trackno, int maplaylist, String mabh) {
         this.trackno = trackno;
         this.maplaylist = maplaylist;
         this.mabh = mabh;
     }
-    
+
+ 
 }

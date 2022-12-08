@@ -5,6 +5,7 @@
 package DAO;
 
 import Entity.PlayList;
+import Entity.PlaylistSong;
 import Utils_Pro.XJdbc;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -29,11 +30,12 @@ public class PlaylistDAO extends MusicDAO<PlayList, String> {
 
     @Override
     public void update(PlayList entity) {
-        String sql = "UPDATE PLAYLIST SET tieude =?, hinh =?, descriptions =? WHERE maplaylist =?";
+        String sql = "UPDATE PLAYLIST SET tieude = ?, hinh = ?, descriptions = ? WHERE maplaylist = ? and counts = ?";
         XJdbc.update(sql, entity.getTieude(),
                 entity.getHinh(),
                 entity.getDescriptions(),
-                entity.getMaplaylist());
+                entity.getMaplaylist(),
+                 entity.getCounts());
     }
 
     public void updateCount(PlayList entity) {
@@ -71,7 +73,7 @@ public class PlaylistDAO extends MusicDAO<PlayList, String> {
 
     public List<PlayList> selectById_matk(Integer key) {
         String sql = "SELECT * FROM PLAYLIST WHERE matk = ?";
-        return this.selectBySql(sql, key);      
+        return this.selectBySql(sql, key);
     }
 
     public PlayList selectById2(Integer key) {
@@ -106,4 +108,109 @@ public class PlaylistDAO extends MusicDAO<PlayList, String> {
         }
     }
 
+    protected List<PlayList> selectByDemPlayList(String sql, Object... args) {
+        List<PlayList> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while (rs.next()) {
+                PlayList entity = new PlayList();
+                entity.setCounts(rs.getInt(1));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected List<PlayList> selectBySoLuongPlayList(String sql, Object... args) {
+        List<PlayList> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while (rs.next()) {
+                PlayList entity = new PlayList();
+                entity.setCounts(rs.getInt(1));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected List<PlayList> selectByTieuDe(String sql, Object... args) {
+        List<PlayList> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while (rs.next()) {
+                PlayList entity = new PlayList();
+                entity.setCounts(rs.getInt(1));
+                entity.setTieude(rs.getString(2));
+                entity.setDescriptions(rs.getString(3));
+                entity.setDescriptions(rs.getString(4));
+                entity.setHinh(rs.getString(5));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public PlayList DemSoPlayList(Integer maTk) {
+        String sql = "select COUNT(counts) from PLAYLIST inner join USERS on PLAYLIST.matk = USERS.matk where PLAYLIST.matk = ?";
+        List<PlayList> list = this.selectByDemPlayList(sql, maTk);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+
+    }
+     public PlayList LayRaSoCounts(Integer maTk) {
+        String sql = "select counts from PLAYLIST inner join USERS on PLAYLIST.matk = USERS.matk where PLAYLIST.matk = ?";
+        List<PlayList> list = this.selectByDemPlayList(sql, maTk);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+
+    }
+    public List<PlayList> SoPlayListDaTao(Integer maTk) {
+        String sql = "select counts from PLAYLIST inner join USERS on PLAYLIST.matk = USERS.matk where PLAYLIST.matk = ?";
+        return this.selectByDemPlayList(sql, maTk);
+
+    }
+
+    public List<PlayList> selectById_TieuDe(Integer key) {
+        String sql = "select counts,tieude,descriptions,tennd,PLAYLIST.hinh from PLAYLIST inner join USERS on PLAYLIST.matk = USERS.matk where PLAYLIST.matk = ?";
+        return this.selectByTieuDe(sql, key);
+    }
+
+    protected List<PlayList> selectByPlaylistUser(String sql, Object... args) {
+        List<PlayList> list = new ArrayList<>();
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while (rs.next()) {
+                PlayList entity = new PlayList();
+                entity.setMatk(rs.getInt(1));
+                entity.setCounts(rs.getInt(2));
+                entity.setMaplaylist(rs.getInt(3));
+
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<PlayList> selectPlaylistUser(Integer matk, Integer count  ) {
+        String sql = "select USERS.matk,counts,maplaylist from USERS inner join PLAYLIST on USERS.matk = PLAYLIST.matk\n" +
+"               	where PLAYLIST.matk = ? and PLAYLIST.counts = ?";
+        return this.selectByPlaylistUser(sql, matk,count);
+    }
 }

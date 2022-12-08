@@ -4,17 +4,21 @@
  */
 package PanelMenu;
 
+import DAO.PlaylistDAO;
+import DAO.PlaylistSongDAO;
 import DAO.SongDAO;
 import DAO.UserSongDAO;
+import Entity.PlayList;
+import Entity.PlaylistSong;
 import Entity.Song;
 import Entity.UserSong;
-import UI.AddMusicJDiaglog;
 import UI.JFrameMusic;
+import UI.PlaylistJDialog;
+import Utils_Pro.Auth;
 import Utils_Pro.MsgBox;
 import Utils_Pro.XImage;
 import Utils_Pro.XMusic;
-import jaco.mp3.player.MP3Player;
-import java.awt.HeadlessException;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -22,9 +26,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import static java.lang.Math.random;
-import java.nio.file.Files;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -35,9 +36,7 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javazoom.jl.decoder.JavaLayerException;
@@ -47,145 +46,163 @@ import swing.EventTextField;
 
 /**
  *
- * @author MSII
+ * @author NAM PC
  */
-public class JPanelQlyNhac extends javax.swing.JPanel {
+public class JPanelPlaylist extends javax.swing.JPanel {
 
     /**
-     * Creates new form ads
+     * Creates new form JPanelPlaylist2
      */
-    public JPanelQlyNhac() {
+    public JPanelPlaylist() {
         initComponents();
-        Test();
-        init();
+
+        tblPlaylist.setDefaultEditor(Object.class, null);
+        tblSearch.setDefaultEditor(Object.class, null);
+
+        cosTomTable();
+        setForm(playList_matk);
+        search();
+        loadTableuser();
+
+        lblpause.setVisible(false);
+        lblpause.setEnabled(false);
+        lblresume.setVisible(true);
+        lblresume.setEnabled(true);
     }
 
-    public void Test() {
-        tblQLN.fixTable(jScrollPane1);
-        tblQLN.setColumnAlignment(0, JLabel.CENTER);
-        tblQLN.setCellAlignment(0, JLabel.CENTER);
-        tblQLN.setColumnAlignment(2, JLabel.CENTER);
-        tblQLN.setCellAlignment(2, JLabel.CENTER);
-        tblQLN.setColumnAlignment(4, JLabel.RIGHT);
-        tblQLN.setCellAlignment(4, JLabel.RIGHT);
-        tblQLN.setColumnWidth(0, 50);
-        tblQLN.setColumnWidth(2, 100);
+    public void cosTomTable() {
+        tblPlaylist.fixTable(jScrollPane3);
+        tblPlaylist.setColumnAlignment(0, JLabel.CENTER);
+        tblPlaylist.setCellAlignment(0, JLabel.CENTER);
+        tblPlaylist.setColumnAlignment(2, JLabel.CENTER);
+        tblPlaylist.setCellAlignment(2, JLabel.CENTER);
+        tblPlaylist.setColumnAlignment(4, JLabel.RIGHT);
+        tblPlaylist.setCellAlignment(4, JLabel.RIGHT);
+        tblPlaylist.setColumnWidth(0, 50);
+        tblPlaylist.setColumnWidth(2, 100);
 
-    }
-
-    void search() {
-        txtSearch.addEvent(new EventTextField() {
-            @Override
-            public void onPressed(EventCallBack call) {
-                //  Test
-                try {
-                    for (int i = 1; i <= 50; i++) {
-
-                        Thread.sleep(10);
-                    }
-                    fillTable();
-                    call.done();
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-        });
+        tblSearch.fixTable(jScrollPane4);
+        tblSearch.setColumnAlignment(0, JLabel.CENTER);
+        tblSearch.setCellAlignment(0, JLabel.CENTER);
+        tblSearch.setColumnAlignment(2, JLabel.CENTER);
+        tblSearch.setCellAlignment(2, JLabel.CENTER);
+        tblSearch.setColumnAlignment(4, JLabel.RIGHT);
+        tblSearch.setCellAlignment(4, JLabel.RIGHT);
+        tblSearch.setColumnWidth(0, 50);
+        tblSearch.setColumnWidth(2, 100);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        lblNameApp = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblQLN = new CustomTable.TableDark();
+        MnSearch = new javax.swing.JPopupMenu();
+        MnAdd = new javax.swing.JMenuItem();
+        MnPlaylist = new javax.swing.JPopupMenu();
+        MnXoaNhac = new javax.swing.JMenuItem();
+        jPanel1 = new javax.swing.JPanel();
         txtSearch = new swing.TextFieldAnimation();
-        btnThem = new rojeru_san.complementos.RSButtonHover();
-        btnXoa = new rojeru_san.complementos.RSButtonHover();
-        btSua = new rojeru_san.complementos.RSButtonHover();
-        LPThanhNhac = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblTenPlaylist = new javax.swing.JLabel();
+        lbldescription = new javax.swing.JLabel();
+        lblhinh = new rojerusan.RSLabelImage();
+        lbltaoboi = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblPlaylist = new CustomTable.TableDark();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblSearch = new CustomTable.TableDark();
+        LPThanhNhac1 = new javax.swing.JPanel();
         lblAnhNhac = new Utils_Pro.ImageAvatar();
         lblNameMusic = new javax.swing.JLabel();
         thanhNhac = new Utils_Pro.ThanhNhac();
         btnLoop = new javax.swing.JButton();
         btnShuffle = new javax.swing.JButton();
-        lblpause = new javax.swing.JLabel();
-        lblresume = new javax.swing.JLabel();
         lblNguoiHat = new javax.swing.JLabel();
         btnBackP = new javax.swing.JButton();
         btnnextP = new javax.swing.JButton();
         btnVolumeDown = new javax.swing.JButton();
         btnVolumeUp = new javax.swing.JButton();
+        lblpause = new javax.swing.JLabel();
+        lblresume = new javax.swing.JLabel();
 
-        jPanel2.setBackground(new java.awt.Color(29, 34, 56));
+        MnAdd.setText("Add Vào PlayList");
+        MnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnAddActionPerformed(evt);
+            }
+        });
+        MnSearch.add(MnAdd);
 
-        lblNameApp.setFont(new java.awt.Font("Brush Script MT", 1, 45)); // NOI18N
-        lblNameApp.setForeground(new java.awt.Color(204, 204, 204));
-        lblNameApp.setText("Manager Music");
+        MnXoaNhac.setText("Xóa Nhạc");
+        MnXoaNhac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnXoaNhacActionPerformed(evt);
+            }
+        });
+        MnPlaylist.add(MnXoaNhac);
 
-        tblQLN.setBackground(new java.awt.Color(29, 34, 56));
-        tblQLN.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel1.setBackground(new java.awt.Color(29, 34, 56));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 520));
+
+        jLabel2.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Playlist");
+
+        lblTenPlaylist.setFont(new java.awt.Font("SimSun", 1, 48)); // NOI18N
+        lblTenPlaylist.setForeground(new java.awt.Color(255, 255, 255));
+        lblTenPlaylist.setText("Ten Playlist");
+        lblTenPlaylist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTenPlaylistMouseClicked(evt);
+            }
+        });
+
+        lbldescription.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        lbldescription.setForeground(new java.awt.Color(255, 255, 255));
+        lbldescription.setText("description");
+
+        lblhinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblhinhMouseClicked(evt);
+            }
+        });
+
+        lbltaoboi.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        lbltaoboi.setForeground(new java.awt.Color(255, 255, 255));
+        lbltaoboi.setText("tao boi ai");
+
+        tblPlaylist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Tên", "Mật Khẩu", "Email", "Ngày Sinh"
+                "Mã bài hát", "Tên bài hát", "Thể loại", "Người sáng tác", "Người trình bày"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblQLN.addMouseListener(new java.awt.event.MouseAdapter() {
+        ));
+        tblPlaylist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblQLNMouseClicked(evt);
+                tblPlaylistMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblQLN);
+        jScrollPane3.setViewportView(tblPlaylist);
 
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
+        tblSearch.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã bài hát", "Tên bài hát", "Thể loại", "Người sáng tác", "Người trình bày"
+            }
+        ));
+        tblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSearchMouseClicked(evt);
             }
         });
+        jScrollPane4.setViewportView(tblSearch);
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btSua.setText("Sửa");
-        btSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSuaActionPerformed(evt);
-            }
-        });
-
-        LPThanhNhac.setBackground(new java.awt.Color(37, 44, 70));
-        LPThanhNhac.setEnabled(false);
+        LPThanhNhac1.setBackground(new java.awt.Color(37, 44, 70));
+        LPThanhNhac1.setEnabled(false);
 
         lblAnhNhac.setBorderSize(0);
         lblAnhNhac.setBorderSpace(0);
@@ -219,33 +236,6 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         btnShuffle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShuffleActionPerformed(evt);
-            }
-        });
-
-        lblpause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
-        lblpause.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblpause.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblpauseMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblpauseMouseReleased(evt);
-            }
-        });
-        lblpause.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                lblpausePropertyChange(evt);
-            }
-        });
-
-        lblresume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
-        lblresume.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblresume.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblresumeMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblresumeMouseReleased(evt);
             }
         });
 
@@ -312,33 +302,60 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout LPThanhNhacLayout = new javax.swing.GroupLayout(LPThanhNhac);
-        LPThanhNhac.setLayout(LPThanhNhacLayout);
-        LPThanhNhacLayout.setHorizontalGroup(
-            LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+        lblpause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/play.png"))); // NOI18N
+        lblpause.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblpause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblpauseMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblpauseMouseReleased(evt);
+            }
+        });
+        lblpause.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                lblpausePropertyChange(evt);
+            }
+        });
+
+        lblresume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/playing.png"))); // NOI18N
+        lblresume.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblresume.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblresumeMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblresumeMouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LPThanhNhac1Layout = new javax.swing.GroupLayout(LPThanhNhac1);
+        LPThanhNhac1.setLayout(LPThanhNhac1Layout);
+        LPThanhNhac1Layout.setHorizontalGroup(
+            LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LPThanhNhac1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNameMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNguoiHat, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LPThanhNhac1Layout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btnBackP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(9, 9, 9)
+                        .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblresume, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblpause))
-                        .addGap(7, 7, 7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnnextP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShuffle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(LPThanhNhac1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(thanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVolumeDown, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,131 +363,125 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                 .addComponent(btnVolumeUp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
-        LPThanhNhacLayout.setVerticalGroup(
-            LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LPThanhNhacLayout.createSequentialGroup()
-                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
+        LPThanhNhac1Layout.setVerticalGroup(
+            LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LPThanhNhac1Layout.createSequentialGroup()
+                .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LPThanhNhac1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(lblNameMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNguoiHat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(LPThanhNhacLayout.createSequentialGroup()
-                        .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(LPThanhNhacLayout.createSequentialGroup()
+                    .addGroup(LPThanhNhac1Layout.createSequentialGroup()
+                        .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(LPThanhNhac1Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LPThanhNhacLayout.createSequentialGroup()
-                                        .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(LPThanhNhacLayout.createSequentialGroup()
-                                                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LPThanhNhac1Layout.createSequentialGroup()
+                                        .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(LPThanhNhac1Layout.createSequentialGroup()
+                                                .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                            .addGroup(LPThanhNhac1Layout.createSequentialGroup()
+                                                .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lblresume, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(lblpause)
                                                     .addComponent(btnBackP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                         .addComponent(btnShuffle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(btnnextP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(8, 8, 8))
-                                            .addGroup(LPThanhNhacLayout.createSequentialGroup()
-                                                .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                                .addGap(8, 8, 8)))
                                         .addComponent(thanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lblAnhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LPThanhNhacLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LPThanhNhac1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(LPThanhNhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(LPThanhNhac1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnVolumeDown, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnVolumeUp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(8, 8, 8))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(lblNameApp, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(14, 14, 14)
-                                    .addComponent(btSua, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(441, 441, 441)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(28, Short.MAX_VALUE))
-            .addComponent(LPThanhNhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lblhinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTenPlaylist)
+                            .addComponent(jLabel2)
+                            .addComponent(lbldescription, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltaoboi, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3)))
+                .addContainerGap())
+            .addComponent(LPThanhNhac1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblNameApp)
-                .addGap(18, 18, 18)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(LPThanhNhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTenPlaylist)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbldescription)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbltaoboi))
+                    .addComponent(lblhinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LPThanhNhac1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 820, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 593, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        them();
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        update();
-    }//GEN-LAST:event_btSuaActionPerformed
-
-    private void tblQLNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLNMouseClicked
-        tblQLN.setDefaultEditor(Object.class, null);
-        if (evt.getClickCount() == 2) {
-            try {
-                loop = 0;
-                sf = 0;
-                playNhac();
-            } catch (JavaLayerException ex) {
-                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_tblQLNMouseClicked
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+    private void lblhinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblhinhMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
+        playlistJDialog.setVisible(true);
+    }//GEN-LAST:event_lblhinhMouseClicked
+
+    private void lblTenPlaylistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTenPlaylistMouseClicked
+        // TODO add your handling code here:
+        playlistJDialog.setVisible(true);
+    }//GEN-LAST:event_lblTenPlaylistMouseClicked
 
     private void btnLoopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoopMouseReleased
         loop = 1;
@@ -482,43 +493,18 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
 
     private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
         sf = 1;
+
     }//GEN-LAST:event_btnShuffleMouseReleased
 
     private void btnShuffleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShuffleActionPerformed
 
     }//GEN-LAST:event_btnShuffleActionPerformed
 
-    private void lblpauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseClicked
-        lblpause.setVisible(false);
-        lblpause.setEnabled(false);
-        lblresume.setVisible(true);
-        lblresume.setEnabled(true);
-    }//GEN-LAST:event_lblpauseMouseClicked
-
-    private void lblpauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseReleased
-        resume();
-    }//GEN-LAST:event_lblpauseMouseReleased
-
-    private void lblpausePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblpausePropertyChange
-
-    }//GEN-LAST:event_lblpausePropertyChange
-
-    private void lblresumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseClicked
-        lblpause.setVisible(true);
-        lblpause.setEnabled(true);
-        lblresume.setVisible(false);
-        lblresume.setEnabled(false);
-    }//GEN-LAST:event_lblresumeMouseClicked
-
-    private void lblresumeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseReleased
-        pause();
-    }//GEN-LAST:event_lblresumeMouseReleased
-
     private void btnBackPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackPMouseReleased
         try {
             previous();
         } catch (JavaLayerException ex) {
-            Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPanelPlaylist.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBackPMouseReleased
 
@@ -558,59 +544,165 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolumeUpActionPerformed
 
+    private void tblPlaylistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPlaylistMouseClicked
+        // TODO add your handling code here:
+        tblPlaylist.setComponentPopupMenu(MnPlaylist);
+        if (evt.getClickCount() == 2) {
+            try {
+                loop = 0;
+                sf = 0;
+                playNhac();
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tblPlaylistMouseClicked
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel LPThanhNhac;
-    public rojeru_san.complementos.RSButtonHover btSua;
-    private javax.swing.JButton btnBackP;
-    private javax.swing.JButton btnLoop;
-    private javax.swing.JButton btnShuffle;
-    public rojeru_san.complementos.RSButtonHover btnThem;
-    private javax.swing.JButton btnVolumeDown;
-    private javax.swing.JButton btnVolumeUp;
-    private rojeru_san.complementos.RSButtonHover btnXoa;
-    private javax.swing.JButton btnnextP;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    public Utils_Pro.ImageAvatar lblAnhNhac;
-    private javax.swing.JLabel lblNameApp;
-    public javax.swing.JLabel lblNameMusic;
-    private javax.swing.JLabel lblNguoiHat;
-    public javax.swing.JLabel lblpause;
-    public javax.swing.JLabel lblresume;
-    public CustomTable.TableDark tblQLN;
-    public Utils_Pro.ThanhNhac thanhNhac;
-    private swing.TextFieldAnimation txtSearch;
-    // End of variables declaration//GEN-END:variables
-    SongDAO dao = new SongDAO();
-    AddMusicJDiaglog addMusic = new AddMusicJDiaglog();
-    int i = -1;
+    private void tblSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSearchMouseClicked
+        // TODO add your handling code here:
+        tblSearch.setComponentPopupMenu(MnSearch);
+//        if (evt.getClickCount() == 2) {
+//            try {
+//                playNhac();
+//            } catch (JavaLayerException ex) {
+//                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IOException ex) {
+//                Logger.getLogger(JPanelQlyNhac.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+    }//GEN-LAST:event_tblSearchMouseClicked
 
-    void init() {
+    private void lblpauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseClicked
         lblpause.setVisible(false);
         lblpause.setEnabled(false);
         lblresume.setVisible(true);
         lblresume.setEnabled(true);
-        initTable();
-        fillTable();
-        search();
+    }//GEN-LAST:event_lblpauseMouseClicked
 
+    private void lblpauseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblpauseMouseReleased
+        resume();
+    }//GEN-LAST:event_lblpauseMouseReleased
+
+    private void lblpausePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblpausePropertyChange
+
+    }//GEN-LAST:event_lblpausePropertyChange
+
+    private void lblresumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseClicked
+        lblpause.setVisible(true);
+        lblpause.setEnabled(true);
+        lblresume.setVisible(false);
+        lblresume.setEnabled(false);
+    }//GEN-LAST:event_lblresumeMouseClicked
+
+    private void lblresumeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblresumeMouseReleased
+        pause();
+    }//GEN-LAST:event_lblresumeMouseReleased
+
+    private void MnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAddActionPerformed
+        // TODO add your handling code here:
+        addSong();
+    }//GEN-LAST:event_MnAddActionPerformed
+
+    private void MnXoaNhacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnXoaNhacActionPerformed
+        deleteSong();
+    }//GEN-LAST:event_MnXoaNhacActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel LPThanhNhac1;
+    private javax.swing.JMenuItem MnAdd;
+    private javax.swing.JPopupMenu MnPlaylist;
+    private javax.swing.JPopupMenu MnSearch;
+    private javax.swing.JMenuItem MnXoaNhac;
+    private javax.swing.JButton btnBackP;
+    private javax.swing.JButton btnLoop;
+    private javax.swing.JButton btnShuffle;
+    private javax.swing.JButton btnVolumeDown;
+    private javax.swing.JButton btnVolumeUp;
+    private javax.swing.JButton btnnextP;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    public Utils_Pro.ImageAvatar lblAnhNhac;
+    public javax.swing.JLabel lblNameMusic;
+    private javax.swing.JLabel lblNguoiHat;
+    private javax.swing.JLabel lblTenPlaylist;
+    private javax.swing.JLabel lbldescription;
+    private rojerusan.RSLabelImage lblhinh;
+    public javax.swing.JLabel lblpause;
+    public javax.swing.JLabel lblresume;
+    private javax.swing.JLabel lbltaoboi;
+    private CustomTable.TableDark tblPlaylist;
+    private CustomTable.TableDark tblSearch;
+    public Utils_Pro.ThanhNhac thanhNhac;
+    private swing.TextFieldAnimation txtSearch;
+    // End of variables declaration//GEN-END:variables
+
+    PlaylistDAO playlistDAO = new PlaylistDAO();
+    PlayList playList_matk = playlistDAO.selectById2(Auth.user.getMatk());
+    PlaylistSong playlistSong = new PlaylistSong();
+    PlaylistSongDAO playlistSongDAO = new PlaylistSongDAO();
+    SongDAO songDAO = new SongDAO();
+    PlaylistJDialog playlistJDialog = new PlaylistJDialog();
+    //  PlayList CreateP = playlistDAO.SoPlayListDaTao(Auth.user.getMatk());
+    List<PlayList> listP = playlistDAO.SoPlayListDaTao(Auth.user.getMatk());
+    List<PlayList> listT = playlistDAO.selectById_TieuDe(Auth.user.getMatk());
+    JFrameMusic m = new JFrameMusic();
+
+    public void setForm(PlayList playList) {
+        for (PlayList s : listT) {
+            if (s.getCounts() == m.playList1) {
+                lblTenPlaylist.setText(s.getTieude());
+                lbldescription.setText(s.getDescriptions());
+                if (playList.getHinh() != null) {
+                    lblhinh.setToolTipText(s.getHinh());
+                    lblhinh.setIcon(XImage.read(s.getHinh()));
+                }
+                lbltaoboi.setText(Auth.user.getTennd());
+            }
+        }
     }
 
-    void initTable() {
-        DefaultTableModel tblmodel = (DefaultTableModel) tblQLN.getModel();
-        String[] cols = new String[]{"Mã bài hát", "Tên bài hát", "Thể loại", "Người sáng tác", "Người trình bày", "Đường dẫn nhạc", "Ảnh", "Ngày tạo"};
-        tblmodel.setColumnIdentifiers(cols);
+    void search() {
+        txtSearch.addEvent(new EventTextField() {
+            @Override
+            public void onPressed(EventCallBack call) {
+                //  Test
+                try {
+                    for (int i = 1; i <= 50; i++) {
+
+                        Thread.sleep(10);
+                    }
+                    timKiem();
+                    call.done();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                tblSearch.setVisible(false);
+            }
+        });
     }
 
-    public void fillTable() {
-        DefaultTableModel tblModel = (DefaultTableModel) tblQLN.getModel();
+    void timKiem() {
+        tblSearch.setVisible(true);
+        fillTableSearch();
+    }
+
+    void fillTableSearch() {
+        DefaultTableModel tblModel = (DefaultTableModel) tblSearch.getModel();
         tblModel.setRowCount(0);
         String keyWords = txtSearch.getText();
         try {
-            List<Song> list = dao.selectByKeyword(keyWords); //Đọc dữ liệu từ csdl
+            List<Song> list = songDAO.selectByKeyword(keyWords); //Đọc dữ liệu từ csdl
             for (Song s : list) {
-                Object[] rows = {s.getMabh(), s.getTenbh(), s.getTheloai(), s.getNguoist(), s.getNguoitb(), s.getMusicpath(), s.getAnh(), s.getNgaytao()};
+                Object[] rows = {s.getMabh(), s.getTenbh(), s.getTheloai(), s.getNguoist(), s.getNguoitb()};
                 tblModel.addRow(rows);
             }
         } catch (Exception e) {
@@ -618,54 +710,67 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         }
     }
 
-    public void them() {
-        addMusic.count = -1;
-        addMusic.clearForm();
-        addMusic.txtMaBH.setEditable(true);
-        addMusic.setVisible(true);
-    }
+    void loadTableuser() {
+        DefaultTableModel tblModel = (DefaultTableModel) tblPlaylist.getModel();
+        tblModel.setRowCount(0);
 
-    public void update() {
-        if (i != -1) {
-            edit();
-            addMusic.count++;
-            addMusic.txtMaBH.setEditable(false);
-            addMusic.setVisible(true);
-        } else {
-            MsgBox.alert(this, "Vui lòng chọn hàng");
-        }
-    }
-
-    void delete() {
-        String mabh = (String) tblQLN.getValueAt(this.i, 0);
-        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa bài hát này?")) {
-            try {
-                dao.delete(mabh);
-                this.fillTable();
-                i = -1;
-                MsgBox.alert(this, "Xóa thành công");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Xóa thất bại");
+        try {
+            List<Object[]> list = playlistSongDAO.getFillPlaylist(Auth.user.getMatk(), m.playList1);
+            for (Object[] row : list) {
+                tblModel.addRow(row);
             }
+
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
         }
     }
+    PlaylistDAO SongDAO = new PlaylistDAO();
+    List<PlayList> listSong = SongDAO.selectPlaylistUser(Auth.user.getMatk(), m.playList1);
 
-    void edit() {
-        String mabh = (String) tblQLN.getValueAt(this.i, 0);
-        Song s = dao.selectById(mabh);
-        addMusic.setForm(s);
+    void addSong() {
+
+        int row = tblSearch.getSelectedRow();
+
+        for (PlayList ps : listSong) {
+            PlaylistSong ls = new PlaylistSong();
+            ps.setMaplaylist(ps.getMaplaylist());
+            ls.setMaplaylist(ps.getMaplaylist());
+            ls.setMabh((String) tblSearch.getValueAt(row, 0));
+            playlistSongDAO.insert(ls);
+            break;
+        }
+        MsgBox.alert(this, "Đã Thêm Thành Công PlayList " + m.playList1);
+        loadTableuser();
+    }
+
+    void deleteSong() {
+
+        int row = tblPlaylist.getSelectedRow();
+        System.out.println((String) tblPlaylist.getValueAt(row, 0));
+        System.out.println(row);
+        for (PlayList ps : listSong) {
+            PlaylistSong ls = new PlaylistSong();
+            ps.setMaplaylist(ps.getMaplaylist());
+            ls.setMaplaylist(ps.getMaplaylist());
+            ls.setMabh((String) tblPlaylist.getValueAt(row, 0));
+
+            playlistSongDAO.delete_mabh(ls.getMabh(), ls.getMaplaylist());
+            break;
+        }
+        MsgBox.alert(this, "Đã Xóa PlayList " + m.playList1);
+        loadTableuser();
     }
     UserSongDAO usdao = new UserSongDAO();
 
     UserSong getForm() {
         UserSong us = new UserSong();
-        i = tblQLN.getSelectedRow();
-        String mabh = (String) tblQLN.getValueAt(i, 0);
+        i = tblPlaylist.getSelectedRow();
+        String mabh = (String) tblPlaylist.getValueAt(i, 0);
         us.setMabh(mabh);
         return us;
     }
-    //thanh nhạc
-    boolean repeat = false;
+    int i = -1;
     public int dung;
     public Player player;
     public long pause;
@@ -680,9 +785,9 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
 
     void playNhac() throws FileNotFoundException, JavaLayerException, IOException {
         if (play == 0) {
-            i = tblQLN.getSelectedRow();
-            String mabh = (String) tblQLN.getValueAt(i, 0);
-            Song s = dao.selectById(mabh);
+            i = tblPlaylist.getSelectedRow();
+            String mabh = (String) tblPlaylist.getValueAt(i, 0);
+            Song s = songDAO.selectById(mabh);
 
             UserSong s2 = getForm();
             usdao.update(s2);
@@ -696,11 +801,12 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
             if (s.getAnh() != null) {
                 lblAnhNhac.setImage(XImage.read(s.getAnh()));
             }
+            //tên bài nhạc
             lblNameMusic.setText(s.getTenbh());
             lblNguoiHat.setText(s.getNguoitb());
             //Tốc độ nhạc
-            time.start();
             duration(s);
+            time.start();
             play = 1;
             new Thread() {
                 @Override
@@ -718,7 +824,6 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
             time.stop();
             thanhNhac.setValue(0);
             playNhac();
-
         }
     }
 
@@ -736,7 +841,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = thanhNhac.getValue();
-                    thanhNhac.setMaximum((int) duration + 5);
+                    thanhNhac.setMaximum((int) duration);
                     if (value <= thanhNhac.getMaximum()) {
                         thanhNhac.setValue(value + 1);
                     }
@@ -806,9 +911,9 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         thanhNhac.setValue(0);
         if (play == 0) {
             try {
-                int s1 = tblQLN.getSelectedRow() - 1;
-                String mabh = (String) tblQLN.getValueAt(s1, 0);
-                Song s = dao.selectById(mabh);
+                int s1 = tblPlaylist.getSelectedRow() - 1;
+                String mabh = (String) tblPlaylist.getValueAt(s1, 0);
+                Song s = songDAO.selectById(mabh);
                 fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
                 bis = new BufferedInputStream(fis);
                 player = new javazoom.jl.player.Player(bis);
@@ -817,14 +922,16 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                 if (s.getAnh() != null) {
                     lblAnhNhac.setImage(XImage.read(s.getAnh()));
                 }
+                //tên bài nhạc
                 lblNguoiHat.setText(s.getNguoitb());
                 lblNameMusic.setText(s.getTenbh());
                 //Tốc độ nhạc
-                tblQLN.setRowSelectionInterval(s1, s1);
+                tblPlaylist.setRowSelectionInterval(s1, s1);
             } catch (Exception e) {
                 System.out.println("Problem playing file");
                 System.out.println(e);
             }
+
             new Thread() {
                 @Override
                 public void run() {
@@ -835,6 +942,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                     }
                 }
             }.start();
+
         } else {
             player.close();
             play = 0;
@@ -846,9 +954,9 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         thanhNhac.setValue(0);
         if (play == 0) {
             try {
-                int s1 = tblQLN.getSelectedRow() + 1;
-                String mabh = (String) tblQLN.getValueAt(s1, 0);
-                Song s = dao.selectById(mabh);
+                int s1 = tblPlaylist.getSelectedRow() + 1;
+                String mabh = (String) tblPlaylist.getValueAt(s1, 0);
+                Song s = songDAO.selectById(mabh);
                 fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
                 bis = new BufferedInputStream(fis);
                 player = new javazoom.jl.player.Player(bis);
@@ -857,13 +965,16 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                 if (s.getAnh() != null) {
                     lblAnhNhac.setImage(XImage.read(s.getAnh()));
                 }
+                //tên bài nhạc
                 lblNguoiHat.setText(s.getNguoitb());
                 lblNameMusic.setText(s.getTenbh());
-                tblQLN.setRowSelectionInterval(s1, s1);
+                //Tốc độ nhạc
+                tblPlaylist.setRowSelectionInterval(s1, s1);
             } catch (Exception e) {
                 System.out.println("Problem playing file");
                 System.out.println(e);
             }
+
             new Thread() {
                 @Override
                 public void run() {
@@ -874,6 +985,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
                     }
                 }
             }.start();
+
         } else {
             player.close();
             play = 0;
@@ -885,9 +997,9 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
         if (play == 0) {
             thanhNhac.setValue(0);
             Random rd = new Random();
-            int random = rd.nextInt(tblQLN.getRowCount()) + 1;
-            String mabh = (String) tblQLN.getValueAt(random, 0);
-            Song s = dao.selectById(mabh);
+            int random = rd.nextInt(tblPlaylist.getRowCount()) + 1;
+            String mabh = (String) tblPlaylist.getValueAt(random, 0);
+            Song s = songDAO.selectById(mabh);
             fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
             bis = new BufferedInputStream(fis);
             player = new javazoom.jl.player.Player(bis);
@@ -900,7 +1012,7 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
             //tên bài nhạc
             lblNameMusic.setText(s.getTenbh());
             lblNguoiHat.setText(s.getNguoitb());
-            tblQLN.setRowSelectionInterval(random, random);
+            tblPlaylist.setRowSelectionInterval(random, random);
             //Tốc độ nhạc
             try ( FileInputStream fis = new FileInputStream(XMusic.readPath(s.getMusicpath()))) {
                 // lấy kích thước file
@@ -1033,4 +1145,5 @@ public class JPanelQlyNhac extends javax.swing.JPanel {
             }
         }
     }
+
 }

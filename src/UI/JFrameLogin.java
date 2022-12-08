@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Map;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -28,7 +29,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
         gachChanText();
-
+        rememberMe();
     }
 
     /**
@@ -49,7 +50,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         txtPassword = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        cbRemember = new javax.swing.JCheckBox();
         lblQuenPass = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         rSButtonHover2 = new rojerusan.RSButtonHover();
@@ -117,11 +118,11 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
 
-        jCheckBox2.setBackground(new java.awt.Color(37, 44, 70));
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(204, 204, 204));
-        jCheckBox2.setText("Remember me?");
-        jCheckBox2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbRemember.setBackground(new java.awt.Color(37, 44, 70));
+        cbRemember.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        cbRemember.setForeground(new java.awt.Color(204, 204, 204));
+        cbRemember.setText("Remember me?");
+        cbRemember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lblQuenPass.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         lblQuenPass.setForeground(new java.awt.Color(204, 204, 204));
@@ -211,7 +212,7 @@ public class JFrameLogin extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(rSButtonHover2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jCheckBox2)
+                                                .addComponent(cbRemember)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(lblQuenPass)))
                                         .addGap(17, 17, 17)))
@@ -250,7 +251,7 @@ public class JFrameLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuenPass, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2))
+                    .addComponent(cbRemember))
                 .addGap(55, 55, 55)
                 .addComponent(rSButtonHover2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -390,7 +391,7 @@ public class JFrameLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox cbRemember;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -421,6 +422,18 @@ public class JFrameLogin extends javax.swing.JFrame {
         lblTaoAcc.setFont(font.deriveFont(attributes));
     }
     UserDAO dao = new UserDAO();
+    Preferences preferences;
+    boolean remember;
+
+    void rememberMe() {
+        preferences = Preferences.userNodeForPackage(this.getClass());
+        remember = preferences.getBoolean("rememberMe", Boolean.valueOf(""));
+        if (remember) {
+            txtUsername.setText(preferences.get("User", ""));
+            txtPassword.setText(preferences.get("Password", ""));
+            cbRemember.setSelected(remember);
+        }
+    }
 
     private void dangNhap() {
         String tennd = txtUsername.getText();
@@ -432,6 +445,15 @@ public class JFrameLogin extends javax.swing.JFrame {
         } else if (!pass.equals(us.getMatkhau())) {
             MsgBox.alert(this, "Sai mật khẩu!");
         } else {
+            if (cbRemember.isSelected() && !remember) {
+                preferences.put("User", txtUsername.getText() );
+                preferences.put("Password", txtPassword.getText());
+                preferences.putBoolean("rememberMe", true);
+            } else if (!cbRemember.isSelected() && remember) {
+                preferences.put("User", "");
+                preferences.put("Password", "");
+                preferences.putBoolean("rememberMe", false);
+            }
             Auth.user = us;
             this.dispose();
             new JFrameMusic().setVisible(true);

@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import Entity.PlaylistSong;
 import Entity.Song;
 import Utils_Pro.XJdbc;
 import java.sql.ResultSet;
@@ -49,6 +50,17 @@ public class SongDAO extends MusicDAO<Song, String> {
 
     public List<Song> select_top5() {
         return this.selectBySql(SELECT_TOP5);
+    }
+
+    public List<Song> selectAll2() {
+        String sql = "select tenbh,theloai,nguoist,nguoitb \n"
+                + "from PLAYLIST_SONG inner join SONG on PLAYLIST_SONG.mabh = SONG.mabh";
+        return this.selectBySql(sql);
+    }
+
+    public List<Song> selectByTrackno(String key) {
+        String sql = "SELECT * FROM PLAYLIST_SONG WHERE mabh =?";
+        return this.selectBySql(sql, key);
     }
 
     @Override

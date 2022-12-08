@@ -5,7 +5,9 @@
 package PanelMenu;
 
 import DAO.SongDAO;
+import DAO.UserSongDAO;
 import Entity.Song;
+import Entity.UserSong;
 import PanelSlideShow.Slide1;
 import PanelSlideShow.Slide2;
 import PanelSlideShow.Slide3;
@@ -14,6 +16,7 @@ import Utils_Pro.MsgBox;
 import Utils_Pro.XImage;
 import Utils_Pro.XMusic;
 import jaco.mp3.player.MP3Player;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -31,6 +34,7 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -47,19 +51,19 @@ public class JPanelTrangChu extends javax.swing.JPanel {
      * Creates new form Pn
      */
     public JPanelTrangChu() {
-
+        
         initComponents();
         slideshow1.initSlideshow(new Slide1(), new Slide2(), new Slide3());
         Test();
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
-
+        
         for (int i = 0; i <= 10; i++) {
             model.addRow(new Object[]{i, "nhien", "fffff", "n001"});
         }
         init();
-
+//        lbl1.setIcon(ResizeImage("D:\\fPTPolytechnic\\FALL22_KY4\\DuAn1\\AppMusic\\src\\Icon\\NewSong1.jpg"));
     }
-
+    
     public void Test() {
         tbl.fixTable(jScrollPane1);
         tbl.setColumnAlignment(0, JLabel.CENTER);
@@ -70,9 +74,9 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         tbl.setCellAlignment(4, JLabel.RIGHT);
         tbl.setColumnWidth(0, 50);
         tbl.setColumnWidth(2, 100);
-
+        
     }
-
+    
     public void initPlay() {
         try {
             new MP3Player(new File("D:\\laptrinh\\java\\test\\runVideo\\aka.mp3")).play();
@@ -81,7 +85,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,7 +94,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        newSong = new PnSlider.ImageSlider();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         slideshow1 = new ClassSlideShow.Slideshow();
@@ -112,6 +115,16 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         btnnextP = new javax.swing.JButton();
         btnVolumeDown = new javax.swing.JButton();
         btnVolumeUp = new javax.swing.JButton();
+        panelRound1 = new Utils_Pro.PanelRound();
+        lbl1 = new javax.swing.JLabel();
+        panelRound2 = new Utils_Pro.PanelRound();
+        lbl2 = new javax.swing.JLabel();
+        panelRound3 = new Utils_Pro.PanelRound();
+        lbl5 = new javax.swing.JLabel();
+        panelRound4 = new Utils_Pro.PanelRound();
+        lbl3 = new javax.swing.JLabel();
+        panelRound5 = new Utils_Pro.PanelRound();
+        lbl4 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -122,8 +135,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(805, 527));
 
         jPanel1.setBackground(new java.awt.Color(29, 34, 56));
-
-        newSong.setBackground(new java.awt.Color(29, 34, 56));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
@@ -376,10 +387,97 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 .addGap(8, 8, 8))
         );
 
+        panelRound1.setRoundBottomLeft(30);
+        panelRound1.setRoundBottomRight(30);
+        panelRound1.setRoundTopLeft(30);
+        panelRound1.setRoundTopRight(30);
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelRound2.setRoundBottomLeft(30);
+        panelRound2.setRoundBottomRight(30);
+        panelRound2.setRoundTopLeft(30);
+        panelRound2.setRoundTopRight(30);
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        panelRound3.setRoundBottomLeft(30);
+        panelRound3.setRoundBottomRight(30);
+        panelRound3.setRoundTopLeft(30);
+        panelRound3.setRoundTopRight(30);
+
+        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
+        panelRound3.setLayout(panelRound3Layout);
+        panelRound3Layout.setHorizontalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl5, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        );
+        panelRound3Layout.setVerticalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        panelRound4.setRoundBottomLeft(30);
+        panelRound4.setRoundBottomRight(30);
+        panelRound4.setRoundTopLeft(30);
+        panelRound4.setRoundTopRight(30);
+
+        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
+        panelRound4.setLayout(panelRound4Layout);
+        panelRound4Layout.setHorizontalGroup(
+            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        );
+        panelRound4Layout.setVerticalGroup(
+            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        panelRound5.setRoundBottomLeft(30);
+        panelRound5.setRoundBottomRight(30);
+        panelRound5.setRoundTopLeft(30);
+        panelRound5.setRoundTopRight(30);
+
+        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
+        panelRound5.setLayout(panelRound5Layout);
+        panelRound5Layout.setHorizontalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl4, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        );
+        panelRound5Layout.setVerticalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LPThanhNhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,12 +488,6 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNext)
                         .addGap(122, 122, 122))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(newSong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
@@ -403,21 +495,46 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(slideshow1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addComponent(LPThanhNhac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(474, 474, 474)
+                                        .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(slideshow1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblNext, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(newSong, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(slideshow1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblNext, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelRound3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -435,9 +552,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -469,7 +584,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoopMouseReleased
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-        
+
     }//GEN-LAST:event_btnShuffleMouseClicked
 
     private void btnShuffleMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseReleased
@@ -566,6 +681,11 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
     public Utils_Pro.ImageAvatar lblAnhNhac;
     private javax.swing.JLabel lblBack;
     public javax.swing.JLabel lblNameMusic;
@@ -574,14 +694,18 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     public javax.swing.JLabel lblpause;
     public javax.swing.JLabel lblresume;
     private javax.swing.JLabel lblvideo;
-    private PnSlider.ImageSlider newSong;
+    private Utils_Pro.PanelRound panelRound1;
+    private Utils_Pro.PanelRound panelRound2;
+    private Utils_Pro.PanelRound panelRound3;
+    private Utils_Pro.PanelRound panelRound4;
+    private Utils_Pro.PanelRound panelRound5;
     private ClassSlideShow.Slideshow slideshow1;
     private CustomTable.TableDark tbl;
     public Utils_Pro.ThanhNhac thanhNhac;
     // End of variables declaration//GEN-END:variables
     int i = -1;
     SongDAO dao = new SongDAO();
-
+    
     private void init() {
         initTable();
         fillTable();
@@ -593,13 +717,13 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             this.disable();
         }
     }
-
+    
     void initTable() {
         DefaultTableModel tblmodel = (DefaultTableModel) tbl.getModel();
         String[] cols = new String[]{"Mã bài hát", "Tên bài hát", "Người trình bày", "Ngày tạo"};
         tblmodel.setColumnIdentifiers(cols);
     }
-
+    
     public void fillTable() {
         DefaultTableModel tblModel = (DefaultTableModel) tbl.getModel();
         tblModel.setRowCount(0);
@@ -614,13 +738,29 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         }
     }
     
-    void showNewSong(){
+    public ImageIcon ResizeImage(String path) {
+        ImageIcon imageIcon = new ImageIcon(path);
+        Image img = imageIcon.getImage();
+        Image new_img = img.getScaledInstance(lbl1.getWidth(), lbl1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon imageIcon2 = new ImageIcon(new_img);
+        return imageIcon2;
+    }
+    
+    void showNewSong() {
         List<Song> song = dao.select_top5();
         for (Song s : song) {
             
         }
     }
+    UserSongDAO usdao = new UserSongDAO();
     
+    UserSong getForm() {
+        UserSong us = new UserSong();
+        i = tbl.getSelectedRow();
+        String mabh = (String) tbl.getValueAt(i, 0);
+        us.setMabh(mabh);
+        return us;
+    }
     //thanh nhạc
     public int dung;
     public Player player;
@@ -633,12 +773,16 @@ public class JPanelTrangChu extends javax.swing.JPanel {
     int loop = 0;
     int sf = 0;
     Timer time;
-
+    
     void playNhac() throws FileNotFoundException, JavaLayerException, IOException {
         if (play == 0) {
             i = tbl.getSelectedRow();
             String mabh = (String) tbl.getValueAt(i, 0);
             Song s = dao.selectById(mabh);
+            
+            UserSong s2 = getForm();
+            usdao.update(s2);
+            
             fis = new FileInputStream(XMusic.readPath(s.getMusicpath()));
             bis = new BufferedInputStream(fis);
             player = new javazoom.jl.player.Player(bis);
@@ -653,14 +797,14 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             lblNameMusic.setText(s.getTenbh());
             //Tốc độ nhạc
             duration(s);
-            time.start();  
+            time.start();
             play = 1;
             new Thread() {
                 @Override
                 public void run() {
                     try {
                         player.play();
-
+                        
                     } catch (Exception e) {
                     }
                 }
@@ -673,7 +817,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             playNhac();
         }
     }
-
+    
     void duration(Song s) {
         //128kps birate cơ bản của file mp3
         try ( FileInputStream fis = new FileInputStream(XMusic.readPath(s.getMusicpath()))) {
@@ -684,14 +828,15 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             //tính ra tổng thời gian
             long duration = (size * 8) / bitrate;
             //chạy thanh processbar
-            time =new Timer(1000, new ActionListener() {
+            time = new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = thanhNhac.getValue();
                     thanhNhac.setMaximum((int) duration);
                     if (value <= thanhNhac.getMaximum()) {
                         thanhNhac.setValue(value + 1);
-                    } if (value == thanhNhac.getMaximum()) {
+                    }
+                    if (value == thanhNhac.getMaximum()) {
                         if (loop == 1) {
                             try {
                                 sf = 0;
@@ -702,7 +847,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                                 Logger.getLogger(JPanelTopChart.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         } else if (sf == 1) {
-                            loop=0;
+                            loop = 0;
                             try {
                                 shuffle();
                             } catch (JavaLayerException ex) {
@@ -731,7 +876,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
             }
         }
     }
-
+    
     public void resume() {
         try {
             fis = new FileInputStream(musicPath);
@@ -744,7 +889,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 public void run() {
                     try {
                         player.play();
-
+                        
                     } catch (Exception e) {
                     }
                 }
@@ -752,7 +897,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     private void previous() throws JavaLayerException {
         thanhNhac.setValue(0);
         if (play == 0) {
@@ -777,25 +922,25 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 System.out.println("Problem playing file");
                 System.out.println(e);
             }
-
+            
             new Thread() {
                 @Override
                 public void run() {
                     try {
                         player.play();
-
+                        
                     } catch (Exception e) {
                     }
                 }
             }.start();
-
+            
         } else {
             player.close();
             play = 0;
             previous();
         }
     }
-
+    
     private void next() {
         thanhNhac.setValue(0);
         if (play == 0) {
@@ -820,18 +965,18 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                 System.out.println("Problem playing file");
                 System.out.println(e);
             }
-
+            
             new Thread() {
                 @Override
                 public void run() {
                     try {
                         player.play();
-
+                        
                     } catch (Exception e) {
                     }
                 }
             }.start();
-
+            
         } else {
             player.close();
             play = 0;
@@ -932,7 +1077,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                     float changedCalc = (float) ((float) currentVolume - (double) volumeToCut);
                     // Now Set This Changed Value Into Volume Line.
                     volControl.setValue(changedCalc);
-
+                    
                 } catch (LineUnavailableException lineException) {
                 } catch (IllegalArgumentException illException) {
                 } finally {
@@ -980,7 +1125,7 @@ public class JPanelTrangChu extends javax.swing.JPanel {
                     float changedCalc = (float) ((float) currentVolume + (double) volumeToCut);
                     // Now Set This Changed Value Into Volume Line.
                     volControl.setValue(changedCalc);
-
+                    
                 } catch (LineUnavailableException lineException) {
                 } catch (IllegalArgumentException illException) {
                 } finally {
